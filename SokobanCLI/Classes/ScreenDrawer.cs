@@ -33,7 +33,7 @@ namespace SokobanCLI
             }
         }
 
-        private static void DrawMainMenu()
+        static void DrawMainMenu()
         {
             Console.Clear();
 
@@ -52,12 +52,12 @@ namespace SokobanCLI
             Console.WriteLine("3) Exit");
         }
 
-        private static void DrawLevelStarting()
+        static void DrawLevelStarting()
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Clear();
 
-            string message = "Press any key to start the level ...";
+            const string message = "Press any key to start the level ...";
 
             for (int i = 0; i < (Console.BufferHeight - 1) / 2; i++)
                 Console.WriteLine();
@@ -68,7 +68,7 @@ namespace SokobanCLI
             Console.Write(message);
         }
 
-        private static void DrawLevelCompleted()
+        static void DrawLevelCompleted()
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Clear();
@@ -80,7 +80,7 @@ namespace SokobanCLI
             Console.WriteLine("Progress saved...");
         }
 
-        private static void DrawGameFinished()
+        static void DrawGameFinished()
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Clear();

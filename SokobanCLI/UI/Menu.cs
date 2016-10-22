@@ -8,75 +8,40 @@ namespace SokobanCLI.UI
 {
     public class Menu
     {
-        string name;
-        int activeItem;
-        ConsoleColor activeItemColor;
-        ConsoleColor titleColor;
-        ConsoleKey key;
-        ConsoleKey keyExit;
-        List<string> menuHelpList;
+        public string Name { get; set; }
 
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public int ActiveItem
-        {
-            get { return activeItem; }
-            set { activeItem = value; }
-        }
+        public int ActiveItem { get; set; }
 
         public int TotalItems
         {
-            get { return menuHelpList.Count; }
+            get { return MenuHelpList.Count; }
         }
 
-        public ConsoleColor ActiveItemColor
-        {
-            get { return activeItemColor; }
-            set { activeItemColor = value; }
-        }
+        public ConsoleColor ActiveItemColor { get; set; }
 
-        public ConsoleColor TitleColor
-        {
-            get { return titleColor; }
-            set { titleColor = value; }
-        }
+        public ConsoleColor TitleColor { get; set; }
 
-        protected ConsoleKey CurrentKey
-        {
-            get { return key; }
-        }
+        protected ConsoleKey CurrentKey { get; private set; }
 
-        public ConsoleKey ExitKey
-        {
-            get { return keyExit; }
-            set { keyExit = value; }
-        }
+        public ConsoleKey ExitKey { get; set; }
 
-        public List<string> MenuHelpList
-        {
-            get { return menuHelpList; }
-            set { menuHelpList = value; }
-        }
+        public List<string> MenuHelpList { get; set; }
 
         public Menu()
         {
-            activeItem = 0;
+            ActiveItem = 0;
 
-            activeItemColor = ConsoleColor.Cyan;
-            titleColor = ConsoleColor.Green;
+            ActiveItemColor = ConsoleColor.Cyan;
+            TitleColor = ConsoleColor.Green;
 
-            keyExit = ConsoleKey.Escape;
-            menuHelpList = new List<string>();
+            ExitKey = ConsoleKey.Escape;
+            MenuHelpList = new List<string>();
         }
 
         public Menu(string name)
             : this()
         {
-            this.name = name;
+            Name = name;
         }
 
         public virtual string Input(string prompt)
@@ -119,24 +84,24 @@ namespace SokobanCLI.UI
 
         public void Show()
         {
-            while (key != keyExit)
+            while (CurrentKey != ExitKey)
             {
                 Console.Clear();
 
                 Write("-===< ", ConsoleColor.Yellow);
-                Write(name, titleColor);
+                Write(Name, TitleColor);
                 Write(" >===-", ConsoleColor.Yellow);
                 WriteLine();
 
-                for (int i = 0; i < menuHelpList.Count; i++)
-                    if (activeItem == i)
-                        WriteLine("► " + menuHelpList[i] + " ◄", activeItemColor);
+                for (int i = 0; i < MenuHelpList.Count; i++)
+                    if (ActiveItem == i)
+                        WriteLine("► " + MenuHelpList[i] + " ◄", ActiveItemColor);
                     else
-                        WriteLine("  " + menuHelpList[i] + "  ");
+                        WriteLine("  " + MenuHelpList[i] + "  ");
                 
                 //Console.WriteLine("Use '" + keyExit + "' to exit this menu");
 
-                key = Console.ReadKey().Key;
+                CurrentKey = Console.ReadKey().Key;
 
                 HandleCommand();
             }

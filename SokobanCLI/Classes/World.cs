@@ -5,70 +5,58 @@ namespace SokobanCLI
 {
     public class World
     {
-        public int PlayerPosX
-        {
-            get { return playerX; }
-            set { playerX = value; }
-        }
+        readonly Tile[,] tile;
 
-        public int PlayerPosY
-        {
-            get { return playerY; }
-            set { playerY = value; }
-        }
+        public int PlayerPosX { get; set; }
+
+        public int PlayerPosY { get; set; }
+
+        public int SizeX { get; private set; }
+
+        public int SizeY { get; private set; }
+
+        public int Moves { get; private set; }
+
+        public int Level { get; private set; }
 
         public bool Completed
         {
             get
             {
-                for (int i = 0; i < sizeX; i++)
-                    for (int j = 0; j < sizeY; j++)
+                for (int i = 0; i < SizeX; i++)
+                    for (int j = 0; j < SizeY; j++)
                         if (tile[i, j].ID == 3)
                             return false;
                 return true;
             }
         }
 
-        public int SizeX { get { return sizeX; } }
-
-        public int SizeY { get { return sizeY; } }
-
-        public int Level { get { return level; } }
-
-        public int Moves { get { return moves; } }
-
-        Tile[,] tile;
-        int playerX, playerY;
-        int sizeX, sizeY;
-        int level;
-        int moves;
-
         public World(int level)
         {
             string[] rows = File.ReadAllLines(@"Levels/" + level + ".lvl");
-            sizeX = 14;
-            sizeY = 14;
-            moves = 0;
+            SizeX = 14;
+            SizeY = 14;
+            Moves = 0;
 
-            tile = new Tile[sizeX, sizeY];
-            this.level = level;
+            tile = new Tile[SizeX, SizeY];
+            Level = level;
 
-            for (int x = 0; x < sizeX; x++)
+            for (int x = 0; x < SizeX; x++)
             {
-                for (int y = 0; y < sizeY; y++)
+                for (int y = 0; y < SizeY; y++)
                 {
                     tile[x, y] = Tiles.ByID((int)Char.GetNumericValue(rows[x][y]));
 
                     if (tile[x, y].ID == 4)
                     {
-                        playerX = x;
-                        playerY = y;
+                        PlayerPosX = x;
+                        PlayerPosY = y;
                         tile[x, y] = Tiles.ByID(0);
                     }
                     else if (tile[x, y].ID == 6)
                     {
-                        playerX = x;
-                        playerY = y;
+                        PlayerPosX = x;
+                        PlayerPosY = y;
                         tile[x, y] = Tiles.ByID(3);
                     }
                 }
@@ -77,8 +65,8 @@ namespace SokobanCLI
 
         public void MovePlayer(int x, int y)
         {
-            int dirX = x - playerX;
-            int dirY = y - playerY;
+            int dirX = x - PlayerPosX;
+            int dirY = y - PlayerPosY;
             bool moved = false;
 
             if (x >= 0 && y >= 0 && x < 14 && y < 14)
@@ -90,35 +78,35 @@ namespace SokobanCLI
                         break;
 			
                     case 2:
-                        if (playerX >= 2 && playerX <= 12 && playerY >= 2 && playerY <= 12)
-                            switch (tile[playerX + dirX * 2, playerY + dirY * 2].ID)
+                        if (PlayerPosX >= 2 && PlayerPosX <= 12 && PlayerPosY >= 2 && PlayerPosY <= 12)
+                            switch (tile[PlayerPosX + dirX * 2, PlayerPosY + dirY * 2].ID)
                             {
                                 case 0:
-                                    tile[playerX + dirX * 2, playerY + dirY * 2] = Tiles.ByID(2);
-                                    tile[playerX + dirX, playerY + dirY] = Tiles.ByID(0);
+                                    tile[PlayerPosX + dirX * 2, PlayerPosY + dirY * 2] = Tiles.ByID(2);
+                                    tile[PlayerPosX + dirX, PlayerPosY + dirY] = Tiles.ByID(0);
                                     moved = true;
                                     break;
 				
                                 case 3:
-                                    tile[playerX + dirX * 2, playerY + dirY * 2] = Tiles.ByID(5);
-                                    tile[playerX + dirX, playerY + dirY] = Tiles.ByID(0);
+                                    tile[PlayerPosX + dirX * 2, PlayerPosY + dirY * 2] = Tiles.ByID(5);
+                                    tile[PlayerPosX + dirX, PlayerPosY + dirY] = Tiles.ByID(0);
                                     moved = true;
                                     break;
                             }
                         break;
                     case 5:
-                        if (playerX >= 2 && playerX <= 12 && playerY >= 2 && playerY <= 12)
-                            switch (tile[playerX + dirX * 2, playerY + dirY * 2].ID)
+                        if (PlayerPosX >= 2 && PlayerPosX <= 12 && PlayerPosY >= 2 && PlayerPosY <= 12)
+                            switch (tile[PlayerPosX + dirX * 2, PlayerPosY + dirY * 2].ID)
                             {
                                 case 0:
-                                    tile[playerX + dirX * 2, playerY + dirY * 2] = Tiles.ByID(2);
-                                    tile[playerX + dirX, playerY + dirY] = Tiles.ByID(3);
+                                    tile[PlayerPosX + dirX * 2, PlayerPosY + dirY * 2] = Tiles.ByID(2);
+                                    tile[PlayerPosX + dirX, PlayerPosY + dirY] = Tiles.ByID(3);
                                     moved = true;
                                     break;
 				
                                 case 3:
-                                    tile[playerX + dirX * 2, playerY + dirY * 2] = Tiles.ByID(5);
-                                    tile[playerX + dirX, playerY + dirY] = Tiles.ByID(3);
+                                    tile[PlayerPosX + dirX * 2, PlayerPosY + dirY * 2] = Tiles.ByID(5);
+                                    tile[PlayerPosX + dirX, PlayerPosY + dirY] = Tiles.ByID(3);
                                     moved = true;
                                     break;
                             }
@@ -127,9 +115,9 @@ namespace SokobanCLI
 
             if (moved)
             {
-                playerX = x;
-                playerY = y;
-                moves += 1;
+                PlayerPosX = x;
+                PlayerPosY = y;
+                Moves += 1;
             }
         }
 
@@ -138,15 +126,15 @@ namespace SokobanCLI
             //Console.Clear();
             Console.SetCursorPosition(destX, destY);
 
-            for (int x = 0; x < sizeX; x++)
+            for (int x = 0; x < SizeX; x++)
             {
-                for (int y = 0; y < sizeY; y++)
+                for (int y = 0; y < SizeY; y++)
                 {
-                    if (x == playerX && y == playerY)
+                    if (x == PlayerPosX && y == PlayerPosY)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-                        if (tile[playerX, playerY].ID == 3)
+                        if (tile[PlayerPosX, PlayerPosY].ID == 3)
                             Console.Write('☻');
                         else
                             Console.Write('☺');
@@ -172,7 +160,7 @@ namespace SokobanCLI
             return tile[x, y];
         }
 
-        private char GetWallShape(int x, int y)
+        char GetWallShape(int x, int y)
         {
             char c = '?';
 
@@ -188,12 +176,12 @@ namespace SokobanCLI
             else
                 w = false;
 
-            if (y < sizeY - 1)
+            if (y < SizeY - 1)
                 e = (tile[x, y + 1].ID == 1);
             else
                 e = false;
 
-            if (x < sizeX - 1)
+            if (x < SizeX - 1)
                 s = (tile[x + 1, y].ID == 1);
             else
                 s = false;

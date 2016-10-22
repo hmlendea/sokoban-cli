@@ -1,21 +1,7 @@
-﻿using System;
-using System.Globalization;
-
-namespace SokobanCLI.UI
+﻿namespace SokobanCLI.UI
 {
     public class MenuItem
     {
-        string text;
-
-        public string Text
-        {
-            get { return text; }
-            set { text = value; }
-        }
-
-        public MenuItem()
-        {
-        }
+        public string Text { get; set; }
     }
 }
-
