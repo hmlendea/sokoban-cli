@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 
+using SokobanCLI.Models;
+
 namespace SokobanCLI
 {
     class Program
@@ -79,7 +81,7 @@ namespace SokobanCLI
             Console.WriteLine("Game details");
             Console.ResetColor();
             Console.WriteLine("Level: " + world.Level);
-            Console.WriteLine("Player Coordinates: " + world.PlayerPosX.ToString().PadLeft(2) + "," + world.PlayerPosY.ToString().PadLeft(2));
+            Console.WriteLine("Player Coordinates: " + world.PlayerPosition.X.ToString().PadLeft(2) + "," + world.PlayerPosition.Y.ToString().PadLeft(2));
             Console.WriteLine("Moves: " + world.Moves);
             Console.WriteLine();
             
@@ -99,22 +101,22 @@ namespace SokobanCLI
             {
                 case ConsoleKey.W:
                 case ConsoleKey.UpArrow:
-                    world.MovePlayer(world.PlayerPosX - 1, world.PlayerPosY);
+                    world.MovePlayer(world.PlayerPosition.X - 1, world.PlayerPosition.Y);
                     break;
 
                 case ConsoleKey.A:
                 case ConsoleKey.LeftArrow:
-                    world.MovePlayer(world.PlayerPosX, world.PlayerPosY - 1);
+                    world.MovePlayer(world.PlayerPosition.X, world.PlayerPosition.Y - 1);
                     break;
 
                 case ConsoleKey.S:
                 case ConsoleKey.DownArrow:
-                    world.MovePlayer(world.PlayerPosX + 1, world.PlayerPosY);
+                    world.MovePlayer(world.PlayerPosition.X + 1, world.PlayerPosition.Y);
                     break;
 
                 case ConsoleKey.D:
                 case ConsoleKey.RightArrow:
-                    world.MovePlayer(world.PlayerPosX, world.PlayerPosY + 1);
+                    world.MovePlayer(world.PlayerPosition.X, world.PlayerPosition.Y + 1);
                     break;
 
                 case ConsoleKey.R:

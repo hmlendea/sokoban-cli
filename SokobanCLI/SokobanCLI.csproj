@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -32,24 +32,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Classes\Tile.cs" />
     <Compile Include="Classes\ScreenDrawer.cs" />
-    <Compile Include="Classes\World.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="UI\Menu.cs" />
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\MenuItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Classes\" />
-    <Folder Include="UI\" />
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Levels\0.lvl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -114,5 +109,11 @@
     <None Include="Levels\9.lvl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SokobanCLI.Models\SokobanCLI.Models.csproj">
+      <Project>{3e8ed8cb-bcf8-4889-837e-5739e8d3ace4}</Project>
+      <Name>SokobanCLI.Models</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
