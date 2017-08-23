@@ -6,34 +6,15 @@ namespace SokobanCLI.Models
 {
     public class World
     {
-        readonly Tile[,] tile;
+        public readonly Tile[,] Tiles;
 
         public Point PlayerPosition { get; set; }
 
         public Size Size { get; set; }
 
-        public int Moves { get; private set; }
+        public int Moves { get; set; }
 
         public int Level { get; private set; }
-
-        public bool Completed
-        {
-            get
-            {
-                for (int y = 0; y < Size.Height; y++)
-                {
-                    for (int x = 0; x < Size.Width; x++)
-                    {
-                        if (tile[x, y].Id == 3)
-                        {
-                            return false;
-                        }
-                    }
-                }
-
-                return true;
-            }
-        }
 
         public World(int level)
         {
@@ -41,93 +22,29 @@ namespace SokobanCLI.Models
             Size = new Size(14, 14);
             Moves = 0;
 
-            tile = new Tile[Size.Width, Size.Height];
+            Tiles = new Tile[Size.Width, Size.Height];
             Level = level;
 
             for (int y = 0; y < Size.Height; y++)
             {
                 for (int x = 0; x < Size.Width; x++)
                 {
-                    tile[x, y] = Tiles.ById((int)Char.GetNumericValue(rows[x][y]));
+                    Tiles[x, y] = Models.Tiles.ById((int)char.GetNumericValue(rows[x][y]));
 
-                    if (tile[x, y].Id == 4)
+                    if (Tiles[x, y].Id == 4)
                     {
                         PlayerPosition = new Point(x, y);
-                        tile[x, y] = Tiles.ById(0);
+                        Tiles[x, y] = Models.Tiles.ById(0);
                     }
-                    else if (tile[x, y].Id == 6)
+                    else if (Tiles[x, y].Id == 6)
                     {
                         PlayerPosition = new Point(x, y);
-                        tile[x, y] = Tiles.ById(3);
+                        Tiles[x, y] = Models.Tiles.ById(3);
                     }
                 }
             }
         }
-
-        public void MovePlayer(int x, int y)
-        {
-            int dirX = x - PlayerPosition.X;
-            int dirY = y - PlayerPosition.Y;
-            bool moved = false;
-
-            if (x >= 0 && y >= 0 && x < 14 && y < 14)
-            {
-                switch (tile[x, y].Id)
-                {
-                    case 0:
-                    case 3:
-                        moved = true;
-                        break;
-
-                    case 2:
-                        if (PlayerPosition.X >= 2 && PlayerPosition.X <= 12 &&
-                            PlayerPosition.Y >= 2 && PlayerPosition.Y <= 12)
-                        {
-                            switch (tile[PlayerPosition.X + dirX * 2, PlayerPosition.Y + dirY * 2].Id)
-                            {
-                                case 0:
-                                    tile[PlayerPosition.X + dirX * 2, PlayerPosition.Y + dirY * 2] = Tiles.ById(2);
-                                    tile[PlayerPosition.X + dirX, PlayerPosition.Y + dirY] = Tiles.ById(0);
-                                    moved = true;
-                                    break;
-
-                                case 3:
-                                    tile[PlayerPosition.X + dirX * 2, PlayerPosition.Y + dirY * 2] = Tiles.ById(5);
-                                    tile[PlayerPosition.X + dirX, PlayerPosition.Y + dirY] = Tiles.ById(0);
-                                    moved = true;
-                                    break;
-                            }
-                        }
-                        break;
-                    case 5:
-                        if (PlayerPosition.X >= 2 && PlayerPosition.X <= 12 && PlayerPosition.Y >= 2 && PlayerPosition.Y <= 12)
-                        {
-                            switch (tile[PlayerPosition.X + dirX * 2, PlayerPosition.Y + dirY * 2].Id)
-                            {
-                                case 0:
-                                    tile[PlayerPosition.X + dirX * 2, PlayerPosition.Y + dirY * 2] = Tiles.ById(2);
-                                    tile[PlayerPosition.X + dirX, PlayerPosition.Y + dirY] = Tiles.ById(3);
-                                    moved = true;
-                                    break;
-
-                                case 3:
-                                    tile[PlayerPosition.X + dirX * 2, PlayerPosition.Y + dirY * 2] = Tiles.ById(5);
-                                    tile[PlayerPosition.X + dirX, PlayerPosition.Y + dirY] = Tiles.ById(3);
-                                    moved = true;
-                                    break;
-                            }
-                        }
-                        break;
-                }
-            }
-
-            if (moved)
-            {
-                PlayerPosition = new Point(x, y);
-                Moves += 1;
-            }
-        }
-
+        
         public void DrawLevel(int destX, int destY)
         {
             //Console.Clear();
@@ -141,7 +58,7 @@ namespace SokobanCLI.Models
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-                        if (tile[PlayerPosition.X, PlayerPosition.Y].Id == 3)
+                        if (Tiles[PlayerPosition.X, PlayerPosition.Y].Id == 3)
                         {
                             Console.Write('☻');
                         }
@@ -152,15 +69,15 @@ namespace SokobanCLI.Models
                     }
                     else
                     {
-                        Console.ForegroundColor = tile[x, y].Colour;
+                        Console.ForegroundColor = Tiles[x, y].Colour;
 
-                        if (tile[x, y].Id == 1)
+                        if (Tiles[x, y].Id == 1)
                         {
                             Console.Write(GetWallShape(x, y));
                         }
                         else
                         {
-                            Console.Write(tile[x, y].Character);
+                            Console.Write(Tiles[x, y].Character);
                         }
                     }
                 }
@@ -172,7 +89,7 @@ namespace SokobanCLI.Models
 
         public Tile GetTile(int x, int y)
         {
-            return tile[x, y];
+            return Tiles[x, y];
         }
 
         char GetWallShape(int x, int y)
@@ -183,7 +100,7 @@ namespace SokobanCLI.Models
 
             if (x > 0)
             {
-                n = (tile[x - 1, y].Id == 1);
+                n = (Tiles[x - 1, y].Id == 1);
             }
             else
             {
@@ -192,7 +109,7 @@ namespace SokobanCLI.Models
 
             if (y > 0)
             {
-                w = (tile[x, y - 1].Id == 1);
+                w = (Tiles[x, y - 1].Id == 1);
             }
             else
             {
@@ -201,7 +118,7 @@ namespace SokobanCLI.Models
 
             if (y < Size.Height - 1)
             {
-                e = (tile[x, y + 1].Id == 1);
+                e = (Tiles[x, y + 1].Id == 1);
             }
             else
             {
@@ -210,7 +127,7 @@ namespace SokobanCLI.Models
 
             if (x < Size.Width - 1)
             {
-                s = (tile[x + 1, y].Id == 1);
+                s = (Tiles[x + 1, y].Id == 1);
             }
             else
             {

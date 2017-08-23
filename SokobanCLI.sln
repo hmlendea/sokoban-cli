@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanCLI", "SokobanCLI\So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanCLI.Models", "SokobanCLI.Models\SokobanCLI.Models.csproj", "{3E8ED8CB-BCF8-4889-837E-5739E8D3ACE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanCLI.GameLogic", "SokobanCLI.GameLogic\SokobanCLI.GameLogic.csproj", "{48FE1072-51BC-43F0-B485-B73AEA520000}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,14 @@ Global
 		{3E8ED8CB-BCF8-4889-837E-5739E8D3ACE4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E8ED8CB-BCF8-4889-837E-5739E8D3ACE4}.Release|x86.ActiveCfg = Release|Any CPU
 		{3E8ED8CB-BCF8-4889-837E-5739E8D3ACE4}.Release|x86.Build.0 = Release|Any CPU
+		{48FE1072-51BC-43F0-B485-B73AEA520000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48FE1072-51BC-43F0-B485-B73AEA520000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48FE1072-51BC-43F0-B485-B73AEA520000}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48FE1072-51BC-43F0-B485-B73AEA520000}.Debug|x86.Build.0 = Debug|Any CPU
+		{48FE1072-51BC-43F0-B485-B73AEA520000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48FE1072-51BC-43F0-B485-B73AEA520000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48FE1072-51BC-43F0-B485-B73AEA520000}.Release|x86.ActiveCfg = Release|Any CPU
+		{48FE1072-51BC-43F0-B485-B73AEA520000}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,19 +1,22 @@
 ﻿using System;
 using System.IO;
 
-using SokobanCLI.Models;
+using SokobanCLI.GameLogic.Managers;
+using SokobanCLI.GameLogic.Managers.Interfaces;
 
 namespace SokobanCLI
 {
     class Program
     {
-        static bool isRunning;
-        static World world;
         static ScreenType currentScreenType;
+
+        static IGameManager game;
 
         static void Main()
         {
             Console.Clear();
+
+            game = new GameManager();
 
             MainMenu();
 
@@ -57,17 +60,16 @@ namespace SokobanCLI
 
         static void Start(int level)
         {
-            isRunning = true;
-            world = new World(level);
+            game.Start(level);
 
             SwitchScreen(ScreenType.LevelStarting);
 
             Console.ReadKey();
             Console.Clear();
 
-            while (isRunning)
+            while (game.IsRunning)
             {
-                world.DrawLevel(0, 0);
+                game.World.DrawLevel(0, 0);
                 DrawMenu();
 
                 CheckInput();
@@ -80,9 +82,9 @@ namespace SokobanCLI
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("Game details");
             Console.ResetColor();
-            Console.WriteLine("Level: " + world.Level);
-            Console.WriteLine("Player Coordinates: " + world.PlayerPosition.X.ToString().PadLeft(2) + "," + world.PlayerPosition.Y.ToString().PadLeft(2));
-            Console.WriteLine("Moves: " + world.Moves);
+            Console.WriteLine("Level: " + game.World.Level);
+            Console.WriteLine("Player Coordinates: " + game.World.PlayerPosition.X.ToString().PadLeft(2) + "," + game.World.PlayerPosition.Y.ToString().PadLeft(2));
+            Console.WriteLine("Moves: " + game.World.Moves);
             Console.WriteLine();
             
             Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -101,26 +103,26 @@ namespace SokobanCLI
             {
                 case ConsoleKey.W:
                 case ConsoleKey.UpArrow:
-                    world.MovePlayer(world.PlayerPosition.X - 1, world.PlayerPosition.Y);
+                    game.MovePlayer(-1, 0);
                     break;
 
                 case ConsoleKey.A:
                 case ConsoleKey.LeftArrow:
-                    world.MovePlayer(world.PlayerPosition.X, world.PlayerPosition.Y - 1);
+                    game.MovePlayer(0, -1);
                     break;
 
                 case ConsoleKey.S:
                 case ConsoleKey.DownArrow:
-                    world.MovePlayer(world.PlayerPosition.X + 1, world.PlayerPosition.Y);
+                    game.MovePlayer(1, 0);
                     break;
 
                 case ConsoleKey.D:
                 case ConsoleKey.RightArrow:
-                    world.MovePlayer(world.PlayerPosition.X, world.PlayerPosition.Y + 1);
+                    game.MovePlayer(0, 1);
                     break;
 
                 case ConsoleKey.R:
-                    Start(world.Level);
+                    Start(game.World.Level);
                     break;
 
                 case ConsoleKey.Escape:
@@ -131,16 +133,16 @@ namespace SokobanCLI
 
         static void CheckCompletion()
         {
-            if (world.Completed)
+            if (game.GetCompletion())
             {
-                isRunning = false;
+                game.Stop();
 
                 Console.ReadKey();
 
-                if (File.Exists("Levels/" + (world.Level + 1) + ".lvl"))
+                if (File.Exists("Levels/" + (game.World.Level + 1) + ".lvl"))
                 {
-                    SaveProgress(world.Level + 1);
-                    Start(world.Level + 1);
+                    SaveProgress(game.World.Level + 1);
+                    Start(game.World.Level + 1);
                 }
                 else
                 {
