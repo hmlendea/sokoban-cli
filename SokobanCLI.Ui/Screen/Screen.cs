@@ -2,7 +2,8 @@
 using System.IO;
 using System.Xml.Serialization;
 
-using SokobanCLI.Ui;
+using SokobanCLI.Input;
+using SokobanCLI.Input.Events;
 
 namespace SokobanCLI.Ui.Screens
 {
@@ -48,6 +49,11 @@ namespace SokobanCLI.Ui.Screens
         public string[] ScreenArgs { get; set; }
 
         /// <summary>
+        /// Occurs when the a kew is pressed while this <see cref="Screen"/> has input focus.
+        /// </summary>
+        public event ConsoleKeyEventHandler KeyPressed;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Screen"/> class.
         /// </summary>
         public Screen()
@@ -68,6 +74,8 @@ namespace SokobanCLI.Ui.Screens
         public virtual void LoadContent()
         {
             UiManager.Instance.LoadContent();
+
+            RegisterEvents();
         }
 
         /// <summary>
@@ -76,6 +84,8 @@ namespace SokobanCLI.Ui.Screens
         public virtual void UnloadContent()
         {
             UiManager.Instance.UnloadContent();
+
+            UnregisterEvents();
         }
 
         /// <summary>
@@ -92,10 +102,25 @@ namespace SokobanCLI.Ui.Screens
         /// </summary>
         public virtual void Draw()
         {
-            //Console.BackgroundColor = BackgroundColour;
-            //Console.Clear();
+            Console.BackgroundColor = BackgroundColour;
+            Console.Clear();
 
             UiManager.Instance.Draw();
+        }
+
+        protected virtual void RegisterEvents()
+        {
+            InputManager.Instance.KeyboardKeyPressed += OnKeyPressed;
+        }
+
+        protected virtual void UnregisterEvents()
+        {
+            InputManager.Instance.KeyboardKeyPressed -= OnKeyPressed;
+        }
+
+        protected virtual void OnKeyPressed(object sender, ConsoleKeyEventArgs e)
+        {
+            KeyPressed?.Invoke(sender, e);
         }
     }
 }

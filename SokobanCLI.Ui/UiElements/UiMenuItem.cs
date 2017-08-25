@@ -1,6 +1,7 @@
 ﻿using System;
 
 using SokobanCLI.Graphics.Geometry;
+using SokobanCLI.Input.Events;
 
 namespace SokobanCLI.Ui.UiElements
 {
@@ -72,7 +73,17 @@ namespace SokobanCLI.Ui.UiElements
                 text.ForegroundColour = ForegroundColour;
             }
         }
-        
+
+        protected override void OnKeyPressed(object sender, ConsoleKeyEventArgs e)
+        {
+            base.OnKeyPressed(sender, e);
+
+            if (e.Key == ConsoleKey.Enter || e.Key == ConsoleKey.E)
+            {
+                OnActivated(this, null);
+            }
+        }
+
         /// <summary>
         /// Fired by the Activated event.
         /// </summary>

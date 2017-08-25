@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
 
 using SokobanCLI.Graphics.Geometry;
+using SokobanCLI.Input.Events;
 using SokobanCLI.Ui.UiElements;
 
 namespace SokobanCLI.Ui.Screens
@@ -127,6 +129,34 @@ namespace SokobanCLI.Ui.Screens
 
                 dimensions += new Size2D(item.Size.Width + Spacing / 2,
                                          item.Size.Height + Spacing / 2);
+            }
+        }
+
+        protected override void OnKeyPressed(object sender, ConsoleKeyEventArgs e)
+        {
+            base.OnKeyPressed(sender, e);
+
+            if ("Yy".Contains(Axis))
+            {
+                if (e.Key == ConsoleKey.W || e.Key == ConsoleKey.UpArrow)
+                {
+                    ItemNumber -= 1;
+                }
+                else if (e.Key == ConsoleKey.S || e.Key == ConsoleKey.DownArrow)
+                {
+                    ItemNumber += 1;
+                }
+            }
+            else if ("Xx".Contains(Axis))
+            {
+                if (e.Key == ConsoleKey.D || e.Key == ConsoleKey.RightArrow)
+                {
+                    ItemNumber -= 1;
+                }
+                else if (e.Key == ConsoleKey.A || e.Key == ConsoleKey.LeftArrow)
+                {
+                    ItemNumber += 1;
+                }
             }
         }
     }

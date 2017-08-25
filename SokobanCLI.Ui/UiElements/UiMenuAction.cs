@@ -26,7 +26,6 @@ namespace SokobanCLI.Ui.UiElements
             {
                 case "Exit":
                     // TODO: Close the game somehow...
-                    //Program.Game.Exit();
                     break;
             }
         }

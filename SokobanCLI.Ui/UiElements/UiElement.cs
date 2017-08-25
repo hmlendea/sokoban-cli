@@ -5,6 +5,8 @@ using System.Linq;
 using System.Xml.Serialization;
 
 using SokobanCLI.Graphics.Geometry;
+using SokobanCLI.Input;
+using SokobanCLI.Input.Events;
 
 namespace SokobanCLI.Ui.UiElements
 {
@@ -150,6 +152,11 @@ namespace SokobanCLI.Ui.UiElements
         /// Occurs when the BackgroundColour property was changed.
         /// </summary>
         public event EventHandler BackgroundColourChanged;
+
+        /// <summary>
+        /// Occurs when a key is pressed while this <see cref="UiElement"/> has input focus.
+        /// </summary>
+        public event ConsoleKeyEventHandler KeyPressed;
 
         /// <summary>
         /// Occurs when this <see cref="UiElement"/> was disposed.
@@ -301,12 +308,12 @@ namespace SokobanCLI.Ui.UiElements
 
         protected virtual void RegisterEvents()
         {
-
+            InputManager.Instance.KeyboardKeyPressed += OnInputManagerKeyboardKeyPressed;
         }
 
         protected virtual void UnregisterEvents()
         {
-
+            InputManager.Instance.KeyboardKeyPressed -= OnInputManagerKeyboardKeyPressed;
         }
 
         protected virtual void RaiseEvents()
@@ -414,6 +421,27 @@ namespace SokobanCLI.Ui.UiElements
         protected virtual void OnSizeChanged(object sender, EventArgs e)
         {
             SizeChanged?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Raised by the KeyPressed event.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        protected virtual void OnKeyPressed(object sender, ConsoleKeyEventArgs e)
+        {
+            KeyPressed?.Invoke(sender, e);
+        }
+
+        void OnInputManagerKeyboardKeyPressed(object sender, ConsoleKeyEventArgs e)
+        {
+            if (!Enabled || !Visible ||
+                !CanRaiseEvents || !InputFocus)
+            {
+                return;
+            }
+
+            OnKeyPressed(sender, e);
         }
     }
 }

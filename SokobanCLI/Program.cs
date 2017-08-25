@@ -3,6 +3,7 @@ using System.IO;
 
 using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.Input;
 using SokobanCLI.Ui;
 
 namespace SokobanCLI
@@ -17,10 +18,11 @@ namespace SokobanCLI
 
         static void Main()
         {
+            Console.CursorVisible = false;
             Console.Clear();
 
             game = new GameManager();
-
+            
             /*
             LoadContent();
 
@@ -53,6 +55,7 @@ namespace SokobanCLI
 
         static void Update()
         {
+            InputManager.Instance.Update();
             ScreenManager.Instance.Update(gameTime);
 
             gameTime += 1;
