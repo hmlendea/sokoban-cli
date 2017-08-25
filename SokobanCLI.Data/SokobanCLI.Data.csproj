@@ -109,6 +109,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Screens\GameScreen.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Screens\ScreenManager.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -50,6 +50,10 @@
       <Project>{48fe1072-51bc-43f0-b485-b73aea520000}</Project>
       <Name>SokobanCLI.GameLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SokobanCLI.Graphics\SokobanCLI.Graphics.csproj">
+      <Project>{a58957be-6baf-46af-b20d-0489c5c85950}</Project>
+      <Name>SokobanCLI.Graphics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SokobanCLI.Input\SokobanCLI.Input.csproj">
       <Project>{8959146e-7083-4c49-a2a4-7c129ee0bb7d}</Project>
       <Name>SokobanCLI.Input</Name>

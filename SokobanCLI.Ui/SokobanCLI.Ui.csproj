@@ -42,21 +42,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ScreenManager.cs" />
-    <Compile Include="Screen\MenuScreen.cs" />
-    <Compile Include="Screen\Screen.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Screens\MenuScreen.cs" />
+    <Compile Include="Screens\Screen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Screen\TitleScreen.cs" />
+    <Compile Include="Screens\TitleScreen.cs" />
     <Compile Include="UiElements\UiElement.cs" />
     <Compile Include="UiElements\UiMenuAction.cs" />
     <Compile Include="UiElements\UiMenuItem.cs" />
     <Compile Include="UiElements\UiMenuLink.cs" />
     <Compile Include="UiElements\UiText.cs" />
+    <Compile Include="UiElements\UiWorldmap.cs" />
     <Compile Include="UiManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SokobanCLI.Common\SokobanCLI.Common.csproj">
       <Project>{25c58216-de26-48b9-8892-5e79492c6df3}</Project>
       <Name>SokobanCLI.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SokobanCLI.GameLogic\SokobanCLI.GameLogic.csproj">
+      <Project>{48fe1072-51bc-43f0-b485-b73aea520000}</Project>
+      <Name>SokobanCLI.GameLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\SokobanCLI.Graphics\SokobanCLI.Graphics.csproj">
       <Project>{a58957be-6baf-46af-b20d-0489c5c85950}</Project>
@@ -65,6 +71,10 @@
     <ProjectReference Include="..\SokobanCLI.Input\SokobanCLI.Input.csproj">
       <Project>{8959146e-7083-4c49-a2a4-7c129ee0bb7d}</Project>
       <Name>SokobanCLI.Input</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SokobanCLI.Models\SokobanCLI.Models.csproj">
+      <Project>{3e8ed8cb-bcf8-4889-837e-5739e8d3ace4}</Project>
+      <Name>SokobanCLI.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

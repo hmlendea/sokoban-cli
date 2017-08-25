@@ -1,7 +1,5 @@
 ﻿using System;
 
-using SokobanCLI.Ui.Screens;
-
 namespace SokobanCLI.Ui.UiElements
 {
     /// <summary>
@@ -37,7 +35,7 @@ namespace SokobanCLI.Ui.UiElements
                 args = LinkArgs.Split(' ');
             }
 
-            // TODO: ScreenManager.Instance.ChangeScreens(LinkId, args);
+            ScreenManager.Instance.ChangeScreens(LinkId, args);
         }
     }
 }

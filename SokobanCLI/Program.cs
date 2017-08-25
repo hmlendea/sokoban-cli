@@ -23,7 +23,7 @@ namespace SokobanCLI
 
             game = new GameManager();
             
-            /*
+            
             LoadContent();
 
             while (true)
@@ -35,7 +35,7 @@ namespace SokobanCLI
             UnloadContent();
 
             Console.ReadKey();
-            */
+            
             
             MainMenu();
 
@@ -111,7 +111,6 @@ namespace SokobanCLI
 
             while (game.IsRunning)
             {
-                game.World.DrawLevel(0, 0);
                 DrawMenu();
 
                 CheckInput();

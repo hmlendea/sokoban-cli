@@ -3,7 +3,7 @@
   <Axis>Y</Axis>
   <Link>
     <Text>New Game</Text>
-    <LinkId>NewGameScreen</LinkId>
+    <LinkId>GameScreen</LinkId>
   </Link>
   <Action>
     <Text>Exit</Text>

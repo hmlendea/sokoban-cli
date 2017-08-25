@@ -33,12 +33,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SokobanCLI.Graphics\SokobanCLI.Graphics.csproj">
+      <Project>{a58957be-6baf-46af-b20d-0489c5c85950}</Project>
+      <Name>SokobanCLI.Graphics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SokobanCLI.Models\SokobanCLI.Models.csproj">
       <Project>{3e8ed8cb-bcf8-4889-837e-5739e8d3ace4}</Project>
       <Name>SokobanCLI.Models</Name>

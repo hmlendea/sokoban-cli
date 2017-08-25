@@ -1,6 +1,5 @@
-﻿using System.Drawing;
-
-using SokobanCLI.GameLogic.Managers.Interfaces;
+﻿using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Models;
 
 namespace SokobanCLI.GameLogic.Managers
@@ -88,7 +87,7 @@ namespace SokobanCLI.GameLogic.Managers
 
             if (moved)
             {
-                World.PlayerPosition = new Point(x, y);
+                World.PlayerPosition = new Point2D(x, y);
                 World.Moves += 1;
             }
         }
