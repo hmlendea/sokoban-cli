@@ -53,7 +53,7 @@ namespace SokobanCLI.Models
                     return new Tile
                     {
                         Id = id,
-                        Character = 'O',
+                        Character = '@',
                         Colour = ConsoleColor.DarkGreen
                     };
             }
