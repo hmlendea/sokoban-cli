@@ -3,6 +3,7 @@ using System.IO;
 
 using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.Ui;
 
 namespace SokobanCLI
 {
@@ -11,6 +12,8 @@ namespace SokobanCLI
         static ScreenType currentScreenType;
 
         static IGameManager game;
+        
+        static float gameTime;
 
         static void Main()
         {
@@ -18,10 +21,46 @@ namespace SokobanCLI
 
             game = new GameManager();
 
+            /*
+            LoadContent();
+
+            while (true)
+            {
+                Update();
+                Draw();
+            }
+
+            UnloadContent();
+
+            Console.ReadKey();
+            */
+            
             MainMenu();
 
             //MainMenu mainMenu = new MainMenu();
             //mainMenu.Show();
+        }
+
+        static void LoadContent()
+        {
+            ScreenManager.Instance.LoadContent();
+        }
+
+        static void UnloadContent()
+        {
+            ScreenManager.Instance.UnloadContent();
+        }
+
+        static void Update()
+        {
+            ScreenManager.Instance.Update(gameTime);
+
+            gameTime += 1;
+        }
+
+        static void Draw()
+        {
+            ScreenManager.Instance.Draw();
         }
 
         static void MainMenu()

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SokobanCLI.GameLogic")]
+[assembly: AssemblyTitle("SokobanCLI.Common")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SokobanCLI.GameLogic")]
+[assembly: AssemblyProduct("SokobanCLI.Common")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following UID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("48fe1072-51bc-43f0-b485-b73aea520000")]
+[assembly: Guid("25c58216-de26-48b9-8892-5e79492c6df3")]
 
 // Version information for an assembly consists of the following four values:
 //

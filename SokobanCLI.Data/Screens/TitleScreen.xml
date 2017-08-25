@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TitleScreen>
+  <Axis>Y</Axis>
+  <Link>
+    <Text>New Game</Text>
+    <LinkId>NewGameScreen</LinkId>
+  </Link>
+  <Action>
+    <Text>Exit</Text>
+    <ActionId>Exit</ActionId>
+  </Action>
+</TitleScreen>

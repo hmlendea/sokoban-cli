@@ -54,5 +54,9 @@
       <Project>{3e8ed8cb-bcf8-4889-837e-5739e8d3ace4}</Project>
       <Name>SokobanCLI.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SokobanCLI.Ui\SokobanCLI.Ui.csproj">
+      <Project>{f1250888-f04b-4603-870d-d8408200170c}</Project>
+      <Name>SokobanCLI.Ui</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

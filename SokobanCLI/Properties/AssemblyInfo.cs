@@ -14,8 +14,8 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCulture ("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
-// The form "{Major}.{Minor}.*" will automatically update the build and revision,
-// and "{Major}.{Minor}.{Build}.*" will update just the revision.
+// The form "{Major}.{Minor}.*" will Utomatically update the Uild and revision,
+// and "{Major}.{Minor}.{Build}.*" will update Ust the revision.
 
 [assembly: AssemblyVersion ("1.0.*")]
 
