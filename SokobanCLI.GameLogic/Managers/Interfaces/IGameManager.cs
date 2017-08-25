@@ -1,4 +1,5 @@
-﻿using SokobanCLI.Models;
+﻿using SokobanCLI.GameLogic.Events;
+using SokobanCLI.Models;
 
 namespace SokobanCLI.GameLogic.Managers.Interfaces
 {
@@ -7,6 +8,8 @@ namespace SokobanCLI.GameLogic.Managers.Interfaces
         World World { get; }
 
         bool IsRunning { get; }
+
+        PlayerMovementEventHandler PlayerMoved { get; set; }
 
         void Start(int level);
 

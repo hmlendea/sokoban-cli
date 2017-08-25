@@ -1,5 +1,6 @@
 ﻿using System;
 
+using SokobanCLI.GameLogic.Events;
 using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.GameLogic.Managers.Interfaces;
 using SokobanCLI.Graphics.Geometry;
@@ -61,6 +62,20 @@ namespace SokobanCLI.Ui.Screens
             }
         }
 
+        protected override void RegisterEvents()
+        {
+            base.RegisterEvents();
+
+            game.PlayerMoved += OnGamePlayerMoved;
+        }
+
+        protected override void UnregisterEvents()
+        {
+            base.UnregisterEvents();
+
+            game.PlayerMoved -= OnGamePlayerMoved;
+        }
+
         protected override void OnKeyPressed(object sender, ConsoleKeyEventArgs e)
         {
             switch (e.Key)
@@ -114,6 +129,11 @@ namespace SokobanCLI.Ui.Screens
             GameDetails.Text = $"Level: {game.World.Level}" + Environment.NewLine +
                                $"Player coordinates: {game.World.PlayerPosition.X},{game.World.PlayerPosition.Y}" + Environment.NewLine +
                                $"Moves: {game.World.Moves}";
+        }
+
+        void OnGamePlayerMoved(object sender, PlayerMovementEventArgs e)
+        {
+            ScreenManager.Instance.Draw();
         }
     }
 }

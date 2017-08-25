@@ -22,7 +22,6 @@ namespace SokobanCLI.Input.Events
         /// Initializes a new instance of the <see cref="ConsoleKeyEventArgs"/> class.
         /// </summary>
         /// <param name="key">Key.</param>
-        /// <param name="keyState">Key state.</param>
         public ConsoleKeyEventArgs(ConsoleKey key)
         {
             Key = key;

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\PlayerMovementEvent.cs" />
     <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Managers\Interfaces\IGameManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

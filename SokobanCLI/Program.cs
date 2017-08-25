@@ -25,11 +25,12 @@ namespace SokobanCLI
             
             
             LoadContent();
+            Draw();
 
             while (true)
             {
                 Update();
-                Draw();
+                //Draw();
             }
 
             UnloadContent();
@@ -46,6 +47,7 @@ namespace SokobanCLI
         static void LoadContent()
         {
             ScreenManager.Instance.LoadContent();
+            InputManager.Instance.KeyboardKeyPressed += delegate { ScreenManager.Instance.Draw(); };
         }
 
         static void UnloadContent()
