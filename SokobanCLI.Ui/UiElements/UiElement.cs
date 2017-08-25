@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Xml.Serialization;
 
+using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Input;
 using SokobanCLI.Input.Events;
@@ -197,7 +198,7 @@ namespace SokobanCLI.Ui.UiElements
             ForegroundColour = ConsoleColor.White;
 
             Id = Guid.NewGuid().ToString();
-
+            
             Children = new List<UiElement>();
         }
 
@@ -247,9 +248,10 @@ namespace SokobanCLI.Ui.UiElements
         /// <summary>
         /// Draw the content.
         /// </summary>
-        public virtual void Draw()
+        /// <param name="spriteBatch">Sprite batch.</param>
+        public virtual void Draw(AsciiSpriteBatch spriteBatch)
         {
-            Children.Where(e => e.Visible).ToList().ForEach(e => e.Draw());
+            Children.Where(e => e.Visible).ToList().ForEach(e => e.Draw(spriteBatch));
         }
 
         /// <summary>

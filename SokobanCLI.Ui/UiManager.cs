@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using SokobanCLI.Graphics;
 using SokobanCLI.Ui.UiElements;
 
 namespace SokobanCLI.Ui
@@ -78,9 +79,10 @@ namespace SokobanCLI.Ui
         /// <summary>
         /// Draws the content.
         /// </summary>
-        public virtual void Draw()
+        /// <param name="spriteBatch">Sprite batch.</param>
+        public virtual void Draw(AsciiSpriteBatch spriteBatch)
         {
-            UiElements.Where(e => e.Visible).ToList().ForEach(e => e.Draw());
+            UiElements.Where(e => e.Visible).ToList().ForEach(e => e.Draw(spriteBatch));
         }
 
         /// <summary>

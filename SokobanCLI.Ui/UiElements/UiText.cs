@@ -1,7 +1,7 @@
 ﻿using System;
 
+using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Enumerations;
-using SokobanCLI.Graphics.Geometry;
 
 namespace SokobanCLI.Ui.UiElements
 {
@@ -33,12 +33,16 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <value>The margins.</value>
         public int Margins { get; set; }
+
+        AsciiSprite text;
         
         /// <summary>
         /// Initializes a new instance of the <see cref="GuiText"/> class.
         /// </summary>
         public UiText()
         {
+            Text = string.Empty;
+
             ForegroundColour = ConsoleColor.White;
             BackgroundColour = ConsoleColor.Black;
 
@@ -46,10 +50,18 @@ namespace SokobanCLI.Ui.UiElements
             HorizontalAlignment = HorizontalAlignment.Centre;
         }
 
+        public override void LoadContent()
+        {
+            text = new AsciiSprite();
+
+            base.LoadContent();
+        }
+
         /// <summary>
         /// Draws the content.
         /// </summary>
-        public override void Draw()
+        /// <param name="spriteBatch">Sprite batch.</param>
+        public override void Draw(AsciiSpriteBatch spriteBatch)
         {
             int cursorX = Location.X;
             int cursorY = Location.Y;
@@ -69,13 +81,20 @@ namespace SokobanCLI.Ui.UiElements
                     break;
             }
 
-            Console.SetCursorPosition(cursorX, cursorY);
-            Console.BackgroundColor = BackgroundColour;
-            Console.ForegroundColor = ForegroundColour;
+            // TODO: Margins
 
-            // TODO: Align it based on the properties
-            // TOOD: Take the Margins property into consideration
-            Console.Write(Text);
+            text.Draw(spriteBatch);
+        }
+
+        protected override void SetChildrenProperties()
+        {
+            base.SetChildrenProperties();
+
+            text.Location = Location;
+            text.Size = Size;
+            text.Text = Text;
+            text.HorizontalAlignment = HorizontalAlignment;
+            text.VerticalAlignment = VerticalAlignment;
         }
     }
 }

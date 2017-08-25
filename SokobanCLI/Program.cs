@@ -2,6 +2,7 @@
 
 using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.Graphics;
 using SokobanCLI.Input;
 using SokobanCLI.Ui;
 
@@ -9,6 +10,8 @@ namespace SokobanCLI
 {
     class Program
     {
+        static AsciiSpriteBatch spriteBatch;
+
         static IGameManager game;
         
         static float gameTime;
@@ -21,13 +24,12 @@ namespace SokobanCLI
             game = new GameManager();
             
             LoadContent();
-            Draw();
 
             // TODO: Have an end to this
             while (true)
             {
                 Update();
-                //Draw();
+                Draw();
             }
 
             UnloadContent();
@@ -35,8 +37,12 @@ namespace SokobanCLI
 
         static void LoadContent()
         {
+            spriteBatch = new AsciiSpriteBatch();
+            spriteBatch.LoadContent();
+
+            GraphicsManager.Instance.SpriteBatch = spriteBatch;
             ScreenManager.Instance.LoadContent();
-            InputManager.Instance.KeyboardKeyPressed += delegate { ScreenManager.Instance.Draw(); };
+            InputManager.Instance.KeyboardKeyPressed += delegate { ScreenManager.Instance.Draw(spriteBatch); };
         }
 
         static void UnloadContent()
@@ -46,6 +52,8 @@ namespace SokobanCLI
 
         static void Update()
         {
+            spriteBatch.Update();
+
             InputManager.Instance.Update();
             ScreenManager.Instance.Update(gameTime);
 
@@ -54,7 +62,19 @@ namespace SokobanCLI
 
         static void Draw()
         {
-            ScreenManager.Instance.Draw();
+            ScreenManager.Instance.Draw(spriteBatch);
+            
+            for (int y = 0; y < spriteBatch.Size.Height; y++)
+            {
+                for (int x = 0; x <spriteBatch.Size.Width; x++)
+                {
+                    Console.SetCursorPosition(x, y);
+                    Console.BackgroundColor = spriteBatch.BackgroundColourArray[x, y];
+                    Console.ForegroundColor = spriteBatch.ForegroundColourArray[x, y];
+
+                    Console.Write(spriteBatch.CharArray[x, y]);
+                }
+            }
         }
     }
 }

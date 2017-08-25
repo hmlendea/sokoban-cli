@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 
+using SokobanCLI.Graphics;
 using SokobanCLI.Input;
 using SokobanCLI.Input.Events;
 
@@ -100,12 +101,13 @@ namespace SokobanCLI.Ui.Screens
         /// <summary>
         /// Draws the content.
         /// </summary>
-        public virtual void Draw()
+        /// <param name="spriteBatch">Sprite batch.</param>
+        public virtual void Draw(AsciiSpriteBatch spriteBatch)
         {
             Console.BackgroundColor = BackgroundColour;
             Console.Clear();
 
-            UiManager.Instance.Draw();
+            UiManager.Instance.Draw(spriteBatch);
         }
 
         protected virtual void RegisterEvents()

@@ -1,4 +1,5 @@
-﻿
+﻿using SokobanCLI.Graphics;
+
 namespace SokobanCLI.Ui.Screens
 {
     /// <summary>
@@ -34,9 +35,10 @@ namespace SokobanCLI.Ui.Screens
         /// <summary>
         /// Draw the content.
         /// </summary>
-        public override void Draw()
+        /// <param name="spriteBatch">Sprite batch.</param>
+        public override void Draw(AsciiSpriteBatch spriteBatch)
         {
-            base.Draw();
+            base.Draw(spriteBatch);
         }
     }
 }

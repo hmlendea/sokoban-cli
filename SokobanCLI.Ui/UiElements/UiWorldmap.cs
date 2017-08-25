@@ -1,6 +1,8 @@
 ﻿using System;
 
 using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.Graphics;
+using SokobanCLI.Graphics.Geometry;
 
 namespace SokobanCLI.Ui.UiElements
 {
@@ -10,14 +12,28 @@ namespace SokobanCLI.Ui.UiElements
     public class UiWorldmap : UiElement
     {
         IGameManager game;
-        
+
+        UiText text;
+
+        public override void LoadContent()
+        {
+            text = new UiText
+            {
+                Size = new Size2D(14, 14)
+            };
+
+            Children.Add(text);
+
+            base.LoadContent();
+        }
+
         /// <summary>
         /// Draw the content.
         /// </summary>
-        /// <returns>The draw.</returns>
-        public override void Draw()
+        /// <param name="spriteBatch">Sprite batch.</param>
+        public override void Draw(AsciiSpriteBatch spriteBatch)
         {
-            Console.SetCursorPosition(Location.X, Location.Y);
+            text.Text = string.Empty;
             
             for (int x = 0; x < game.World.Size.Width; x++)
             {
@@ -25,37 +41,39 @@ namespace SokobanCLI.Ui.UiElements
                 {
                     if (x == game.World.PlayerPosition.X && y == game.World.PlayerPosition.Y)
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        // ConsoleColor.DarkGreen;
 
                         if (game.World.Tiles[game.World.PlayerPosition.X, game.World.PlayerPosition.Y].Id == 3)
                         {
-                            Console.Write('☻');
+                            text.Text += '☻';
                         }
                         else
                         {
-                            Console.Write('☺');
+                            text.Text += '☺';
                         }
                     }
                     else
                     {
-                        Console.ForegroundColor = game.World.Tiles[x, y].Colour;
+                       // game.World.Tiles[x, y].Colour;
 
                         if (game.World.Tiles[x, y].Id == 1)
                         {
-                            Console.Write(GetWallShape(x, y));
+                            text.Text += GetWallShape(x, y);
                         }
                         else
                         {
-                            Console.Write(game.World.Tiles[x, y].Character);
+                            text.Text += game.World.Tiles[x, y].Character;
                         }
                     }
                 }
-                Console.WriteLine();
+
+                text.Text += Environment.NewLine;
             }
 
-            Console.ResetColor();
+            // Console.ResetColor();
 
-            base.Draw();
+            // TODO: Draw
+            base.Draw(spriteBatch);
         }
 
         // TODO: Handle this better

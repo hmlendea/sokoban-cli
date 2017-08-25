@@ -3,6 +3,7 @@
 using SokobanCLI.GameLogic.Events;
 using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Input.Events;
 using SokobanCLI.Ui.UiElements;
@@ -117,13 +118,13 @@ namespace SokobanCLI.Ui.Screens
             GameDetailsLabel.Location = new Point2D(0, Worldmap.ClientRectangle.Bottom + 1);
             GameDetailsLabel.Size = new Size2D(GameDetailsLabel.Text.Length, 1);
 
-            GameDetails.Location = new Point2D(0, GameDetailsLabel.ClientRectangle.Bottom + 1);
+            GameDetails.Location = new Point2D(0, GameDetailsLabel.ClientRectangle.Bottom);
             GameDetails.Size = new Size2D(Console.WindowWidth, 3);
 
             GameControlsLabel.Location = new Point2D(0, GameDetails.ClientRectangle.Bottom + 1);
             GameControlsLabel.Size = new Size2D(GameControlsLabel.Text.Length, 1);
 
-            GameControls.Location = new Point2D(0, GameControlsLabel.ClientRectangle.Bottom + 1);
+            GameControls.Location = new Point2D(0, GameControlsLabel.ClientRectangle.Bottom);
             GameControls.Size = new Size2D(Console.WindowWidth, 1);
 
             GameDetails.Text = $"Level: {game.World.Level}" + Environment.NewLine +
@@ -133,7 +134,7 @@ namespace SokobanCLI.Ui.Screens
 
         void OnGamePlayerMoved(object sender, PlayerMovementEventArgs e)
         {
-            ScreenManager.Instance.Draw();
+            ScreenManager.Instance.Draw(GraphicsManager.Instance.SpriteBatch);
         }
     }
 }

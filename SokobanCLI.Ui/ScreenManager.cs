@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml.Serialization;
 
 using SokobanCLI.Common.Helpers;
+using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Ui.Screens;
 
@@ -97,9 +98,10 @@ namespace SokobanCLI.Ui
         /// <summary>
         /// Draw the content.
         /// </summary>
-        public void Draw()
+        /// <param name="spriteBatch">Sprite batch.</param>
+        public void Draw(AsciiSpriteBatch spriteBatch)
         {
-            currentScreen.Draw();
+            currentScreen.Draw(spriteBatch);
         }
 
         /// <summary>
