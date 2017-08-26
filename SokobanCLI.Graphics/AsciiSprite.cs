@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using SokobanCLI.Graphics.Enumerations;
+﻿using SokobanCLI.Graphics.Enumerations;
 using SokobanCLI.Graphics.Geometry;
 
 namespace SokobanCLI.Graphics

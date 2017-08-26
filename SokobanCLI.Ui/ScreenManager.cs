@@ -51,7 +51,7 @@ namespace SokobanCLI.Ui
         /// <value>The size.</value>
         [XmlIgnore]
         public Size2D Size { get; private set; }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ScreenManager"/> class.
         /// </summary>
@@ -59,7 +59,7 @@ namespace SokobanCLI.Ui
         {
             currentScreen = new TitleScreen();
 
-            xmlScreenManager = new XmlManager<Screen>()
+            xmlScreenManager = new XmlManager<Screen>
             {
                 Type = currentScreen.Type
             };
@@ -130,7 +130,7 @@ namespace SokobanCLI.Ui
             }
 
             newScreen.ScreenArgs = screenArgs;
-            
+
             currentScreen.UnloadContent();
             currentScreen = newScreen;
             currentScreen.LoadContent();

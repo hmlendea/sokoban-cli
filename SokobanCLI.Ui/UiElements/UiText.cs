@@ -15,7 +15,7 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <value>The text.</value>
         public string Text { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the vertical alignment of the text.
         /// </summary>
@@ -35,9 +35,9 @@ namespace SokobanCLI.Ui.UiElements
         public int Margins { get; set; }
 
         AsciiSprite text;
-        
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuiText"/> class.
+        /// Initializes a new instance of the <see cref="UiText"/> class.
         /// </summary>
         public UiText()
         {
@@ -66,7 +66,7 @@ namespace SokobanCLI.Ui.UiElements
             int cursorX = Location.X;
             int cursorY = Location.Y;
 
-            switch(VerticalAlignment)
+            switch (VerticalAlignment)
             {
                 case VerticalAlignment.Left:
                     cursorX = 0;

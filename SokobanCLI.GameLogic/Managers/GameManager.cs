@@ -13,11 +13,6 @@ namespace SokobanCLI.GameLogic.Managers
 
         public PlayerMovementEventHandler PlayerMoved { get; set; }
 
-        public GameManager()
-        {
-
-        }
-
         public void Start(int level)
         {
             IsRunning = true;
