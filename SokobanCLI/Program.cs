@@ -35,6 +35,9 @@ namespace SokobanCLI
             UnloadContent();
         }
 
+        /// <summary>
+        /// Loads the content.
+        /// </summary>
         static void LoadContent()
         {
             spriteBatch = new AsciiSpriteBatch();
@@ -47,12 +50,18 @@ namespace SokobanCLI
             InputManager.Instance.KeyboardKeyPressed += delegate { ScreenManager.Instance.Draw(spriteBatch); };
         }
 
+        /// <summary>
+        /// Unloads the content.
+        /// </summary>
         static void UnloadContent()
         {
             ScreenManager.Instance.UnloadContent();
             GraphicsManager.Instance.UnloadContent();
         }
 
+        /// <summary>
+        /// Updates the content.
+        /// </summary>
         static void Update()
         {
             spriteBatch.Update();
@@ -64,6 +73,9 @@ namespace SokobanCLI
             gameTime += 1;
         }
 
+        /// <summary>
+        /// Draws the content.
+        /// </summary>
         static void Draw()
         {
             ScreenManager.Instance.Draw(spriteBatch);

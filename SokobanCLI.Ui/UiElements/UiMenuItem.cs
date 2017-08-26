@@ -50,12 +50,15 @@ namespace SokobanCLI.Ui.UiElements
         public override void LoadContent()
         {
             text = new UiText();
-            
+
             Children.Add(text);
 
             base.LoadContent();
         }
 
+        /// <summary>
+        /// Sets the children properties.
+        /// </summary>
         protected override void SetChildrenProperties()
         {
             base.SetChildrenProperties();

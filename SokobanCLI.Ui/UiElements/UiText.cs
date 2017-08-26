@@ -1,6 +1,4 @@
-﻿using System;
-
-using SokobanCLI.Graphics;
+﻿using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Enumerations;
 
 namespace SokobanCLI.Ui.UiElements
@@ -47,6 +45,9 @@ namespace SokobanCLI.Ui.UiElements
             HorizontalAlignment = HorizontalAlignment.Centre;
         }
 
+        /// <summary>
+        /// Loads the content.
+        /// </summary>
         public override void LoadContent()
         {
             text = new AsciiSprite();
@@ -83,6 +84,9 @@ namespace SokobanCLI.Ui.UiElements
             text.Draw(spriteBatch);
         }
 
+        /// <summary>
+        /// Sets the children properties.
+        /// </summary>
         protected override void SetChildrenProperties()
         {
             base.SetChildrenProperties();

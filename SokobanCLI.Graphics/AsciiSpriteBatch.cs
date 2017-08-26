@@ -12,14 +12,34 @@ namespace SokobanCLI.Graphics
     /// </summary>
     public class AsciiSpriteBatch
     {
+        /// <summary>
+        /// Gets the size.
+        /// </summary>
+        /// <value>The size.</value>
         public Size2D Size { get; private set; }
 
+        /// <summary>
+        /// Gets the char array.
+        /// </summary>
+        /// <value>The char array.</value>
         public char[,] CharArray { get; private set; }
 
+        /// <summary>
+        /// Gets the background colour array.
+        /// </summary>
+        /// <value>The background colour array.</value>
         public ConsoleColor[,] BackgroundColourArray { get; private set; }
 
+        /// <summary>
+        /// Gets the foreground colour array.
+        /// </summary>
+        /// <value>The foreground colour array.</value>
         public ConsoleColor[,] ForegroundColourArray { get; private set; }
 
+        /// <summary>
+        /// DEBUG: Gets a preview of the screen.
+        /// </summary>
+        /// <value>The screen preview.</value>
         public string ScreenPreview
         {
             get
@@ -70,6 +90,9 @@ namespace SokobanCLI.Graphics
 
         }
 
+        /// <summary>
+        /// Updates the content.
+        /// </summary>
         public virtual void Update()
         {
             if (GraphicsManager.Instance.Resolution == Size)

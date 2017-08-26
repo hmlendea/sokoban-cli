@@ -49,36 +49,42 @@ namespace SokobanCLI.Graphics
 
         AsciiSpriteBatch drawnData;
 
+        /// <summary>
+        /// Loads the content.
+        /// </summary>
         public void LoadContent()
         {
             drawnData = new AsciiSpriteBatch();
             drawnData.LoadContent();
         }
 
+        /// <summary>
+        /// Unloads the content.
+        /// </summary>
         public void UnloadContent()
         {
             SpriteBatch.UnloadContent();
             drawnData.UnloadContent();
         }
 
+        /// <summary>
+        /// Update the content.
+        /// </summary>
+        /// <returns>The update.</returns>
+        /// <param name="gameTime">Game time.</param>
         public void Update(float gameTime)
         {
         }
 
+        /// <summary>
+        /// Draw the content.
+        /// </summary>
         public void Draw()
         {
             for (int y = 0; y < SpriteBatch.Size.Height; y++)
             {
                 for (int x = 0; x < SpriteBatch.Size.Width; x++)
                 {
-                    if (SpriteBatch.CharArray[x, y] != ' ')
-                    {
-                        char a = SpriteBatch.CharArray[x, y];
-                        char b = drawnData.CharArray[x, y];
-
-                        var z = 1;
-                    }
-
                     if (drawnData.CharArray[x, y] == SpriteBatch.CharArray[x, y] &&
                         drawnData.BackgroundColourArray[x, y] == SpriteBatch.BackgroundColourArray[x, y] &&
                         drawnData.ForegroundColourArray[x, y] == SpriteBatch.ForegroundColourArray[x, y])
@@ -102,6 +108,10 @@ namespace SokobanCLI.Graphics
             Console.SetCursorPosition(0, 0);
         }
 
+        /// <summary>
+        /// Clear the console screen.
+        /// </summary>
+        /// <param name="colour">Fill colour.</param>
         public void Clear(ConsoleColor colour)
         {
             Console.BackgroundColor = colour;

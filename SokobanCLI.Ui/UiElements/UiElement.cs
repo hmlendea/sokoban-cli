@@ -16,6 +16,10 @@ namespace SokobanCLI.Ui.UiElements
     /// </summary>
     public class UiElement : IComponent, IDisposable
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
         public string Id { get; set; }
 
         /// <summary>
@@ -100,7 +104,7 @@ namespace SokobanCLI.Ui.UiElements
         /// <value><c>true</c> if it has input focus; otherwise, <c>false</c>.</value>
         [XmlIgnore]
         public bool InputFocus { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the children GUI elements.
         /// </summary>
@@ -115,12 +119,24 @@ namespace SokobanCLI.Ui.UiElements
         [XmlIgnore]
         public bool IsDisposed { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the site.
+        /// </summary>
+        /// <value>The site.</value>
         [XmlIgnore]
         public ISite Site { get; set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="UiElement"/> can raise events.
+        /// </summary>
+        /// <value><c>true</c> if can raise events; otherwise, <c>false</c>.</value>
         [XmlIgnore]
         protected virtual bool CanRaiseEvents => true;
 
+        /// <summary>
+        /// Gets the container.
+        /// </summary>
+        /// <value>The container.</value>
         [XmlIgnore]
         public IContainer Container
         {
@@ -135,6 +151,10 @@ namespace SokobanCLI.Ui.UiElements
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="UiElement"/> is in design mode.
+        /// </summary>
+        /// <value><c>true</c> if in design mode; otherwise, <c>false</c>.</value>
         [XmlIgnore]
         protected bool DesignMode
         {
@@ -198,7 +218,7 @@ namespace SokobanCLI.Ui.UiElements
             ForegroundColour = ConsoleColor.White;
 
             Id = Guid.NewGuid().ToString();
-            
+
             Children = new List<UiElement>();
         }
 
@@ -308,16 +328,25 @@ namespace SokobanCLI.Ui.UiElements
             Visible = false;
         }
 
+        /// <summary>
+        /// Registers the events.
+        /// </summary>
         protected virtual void RegisterEvents()
         {
             InputManager.Instance.KeyboardKeyPressed += OnInputManagerKeyboardKeyPressed;
         }
 
+        /// <summary>
+        /// Unregisters the events.
+        /// </summary>
         protected virtual void UnregisterEvents()
         {
             InputManager.Instance.KeyboardKeyPressed -= OnInputManagerKeyboardKeyPressed;
         }
 
+        /// <summary>
+        /// Raises the events.
+        /// </summary>
         protected virtual void RaiseEvents()
         {
             if (!CanRaiseEvents)
@@ -346,6 +375,9 @@ namespace SokobanCLI.Ui.UiElements
             }
         }
 
+        /// <summary>
+        /// Sets the children properties.
+        /// </summary>
         protected virtual void SetChildrenProperties()
         {
             _oldBackgroundColour = BackgroundColour;
@@ -355,6 +387,11 @@ namespace SokobanCLI.Ui.UiElements
             _oldSize = Size;
         }
 
+        /// <summary>
+        /// Gets the service.
+        /// </summary>
+        /// <returns>The service.</returns>
+        /// <param name="service">Service.</param>
         protected virtual object GetService(Type service)
         {
             if (Site == null)
@@ -365,6 +402,10 @@ namespace SokobanCLI.Ui.UiElements
             return Site.GetService(service);
         }
 
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="UiElement"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="UiElement"/>.</returns>
         public override string ToString()
         {
             if (Site == null)
@@ -374,7 +415,7 @@ namespace SokobanCLI.Ui.UiElements
 
             return $"{Site.Name} [{GetType().FullName}]";
         }
-        
+
         /// <summary>
         /// Raised by the BackgroundColourChanged event.
         /// </summary>
@@ -384,7 +425,7 @@ namespace SokobanCLI.Ui.UiElements
         {
             BackgroundColourChanged?.Invoke(sender, e);
         }
-        
+
         /// <summary>
         /// Fired by the Disposed event.
         /// </summary>
@@ -404,7 +445,7 @@ namespace SokobanCLI.Ui.UiElements
         {
             ForegroundColourChanged?.Invoke(sender, e);
         }
-        
+
         /// <summary>
         /// Raised by the LocationChanged event.
         /// </summary>

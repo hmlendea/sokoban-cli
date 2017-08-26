@@ -10,17 +10,46 @@ using SokobanCLI.Ui.UiElements;
 
 namespace SokobanCLI.Ui.Screens
 {
+    /// <summary>
+    /// Game screen.
+    /// </summary>
     public class GameScreen : Screen
     {
+        /// <summary>
+        /// Gets or sets the worldmap.
+        /// </summary>
+        /// <value>The worldmap.</value>
         public UiWorldmap Worldmap { get; set; }
 
+        /// <summary>
+        /// Gets or sets the game details label.
+        /// </summary>
+        /// <value>The game details label.</value>
         public UiText GameDetailsLabel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the game details.
+        /// </summary>
+        /// <value>The game details.</value>
         public UiText GameDetails { get; set; }
+
+        /// <summary>
+        /// Gets or sets the game controls label.
+        /// </summary>
+        /// <value>The game controls label.</value>
         public UiText GameControlsLabel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the game controls.
+        /// </summary>
+        /// <value>The game controls.</value>
         public UiText GameControls { get; set; }
 
         IGameManager game;
 
+        /// <summary>
+        /// Loads the content.
+        /// </summary>
         public override void LoadContent()
         {
             game = new GameManager();
@@ -46,6 +75,10 @@ namespace SokobanCLI.Ui.Screens
             base.LoadContent();
         }
 
+        /// <summary>
+        /// Updates the content.
+        /// </summary>
+        /// <param name="gameTime">Game time.</param>
         public override void Update(float gameTime)
         {
             base.Update(gameTime);
@@ -63,6 +96,9 @@ namespace SokobanCLI.Ui.Screens
             }
         }
 
+        /// <summary>
+        /// Registers the events.
+        /// </summary>
         protected override void RegisterEvents()
         {
             base.RegisterEvents();
@@ -70,6 +106,9 @@ namespace SokobanCLI.Ui.Screens
             game.PlayerMoved += OnGamePlayerMoved;
         }
 
+        /// <summary>
+        /// Unregisters the events.
+        /// </summary>
         protected override void UnregisterEvents()
         {
             base.UnregisterEvents();

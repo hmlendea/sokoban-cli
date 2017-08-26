@@ -43,9 +43,12 @@ namespace SokobanCLI.Ui
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UiManager"/> class.
+        /// </summary>
         public UiManager()
         {
-           UiElements = new List<UiElement>();
+            UiElements = new List<UiElement>();
         }
 
 
@@ -54,7 +57,7 @@ namespace SokobanCLI.Ui
         /// </summary>
         public void LoadContent()
         {
-           UiElements.ToList().ForEach(w => w.LoadContent());
+            UiElements.ToList().ForEach(w => w.LoadContent());
         }
 
         /// <summary>
@@ -62,8 +65,8 @@ namespace SokobanCLI.Ui
         /// </summary>
         public virtual void UnloadContent()
         {
-           UiElements.ForEach(w => w.UnloadContent());
-           UiElements.Clear();
+            UiElements.ForEach(w => w.UnloadContent());
+            UiElements.Clear();
         }
 
         /// <summary>
@@ -91,8 +94,8 @@ namespace SokobanCLI.Ui
         /// <param name="id">Element identifier.</param>
         public void FocusElement(string id)
         {
-           UiElements.ForEach(e => e.InputFocus = false);
-           UiElements.FirstOrDefault(e => e.Id == id).InputFocus = true;
+            UiElements.ForEach(e => e.InputFocus = false);
+            UiElements.FirstOrDefault(e => e.Id == id).InputFocus = true;
         }
 
         /// <summary>

@@ -15,6 +15,9 @@ namespace SokobanCLI.Ui.UiElements
 
         UiText text;
 
+        /// <summary>
+        /// Loads the content.
+        /// </summary>
         public override void LoadContent()
         {
             text = new UiText
@@ -34,7 +37,7 @@ namespace SokobanCLI.Ui.UiElements
         public override void Draw(AsciiSpriteBatch spriteBatch)
         {
             text.Text = string.Empty;
-            
+
             for (int x = 0; x < game.World.Size.Width; x++)
             {
                 for (int y = 0; y < game.World.Size.Height; y++)
@@ -54,7 +57,7 @@ namespace SokobanCLI.Ui.UiElements
                     }
                     else
                     {
-                       // game.World.Tiles[x, y].Colour;
+                        // game.World.Tiles[x, y].Colour;
 
                         if (game.World.Tiles[x, y].Id == 1)
                         {

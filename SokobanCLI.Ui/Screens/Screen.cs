@@ -8,8 +8,15 @@ using SokobanCLI.Input.Events;
 
 namespace SokobanCLI.Ui.Screens
 {
+    /// <summary>
+    /// Screen.
+    /// </summary>
     public class Screen
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
         public string Id { get; set; }
 
         /// <summary>
@@ -107,11 +114,17 @@ namespace SokobanCLI.Ui.Screens
             UiManager.Instance.Draw(spriteBatch);
         }
 
+        /// <summary>
+        /// Registers the events.
+        /// </summary>
         protected virtual void RegisterEvents()
         {
             InputManager.Instance.KeyboardKeyPressed += OnKeyPressed;
         }
 
+        /// <summary>
+        /// Unregisters the events.
+        /// </summary>
         protected virtual void UnregisterEvents()
         {
             InputManager.Instance.KeyboardKeyPressed -= OnKeyPressed;
