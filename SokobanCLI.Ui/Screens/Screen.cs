@@ -104,9 +104,6 @@ namespace SokobanCLI.Ui.Screens
         /// <param name="spriteBatch">Sprite batch.</param>
         public virtual void Draw(AsciiSpriteBatch spriteBatch)
         {
-            Console.BackgroundColor = BackgroundColour;
-            Console.Clear();
-
             UiManager.Instance.Draw(spriteBatch);
         }
 

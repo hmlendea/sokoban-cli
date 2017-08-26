@@ -46,5 +46,74 @@ namespace SokobanCLI.Graphics
         /// </summary>
         /// <value>The resolution.</value>
         public Size2D Resolution => new Size2D(Console.WindowWidth, Console.WindowHeight);
+
+        AsciiSpriteBatch drawnData;
+
+        public void LoadContent()
+        {
+            drawnData = new AsciiSpriteBatch();
+            drawnData.LoadContent();
+        }
+
+        public void UnloadContent()
+        {
+            SpriteBatch.UnloadContent();
+            drawnData.UnloadContent();
+        }
+
+        public void Update(float gameTime)
+        {
+        }
+
+        public void Draw()
+        {
+            for (int y = 0; y < SpriteBatch.Size.Height; y++)
+            {
+                for (int x = 0; x < SpriteBatch.Size.Width; x++)
+                {
+                    if (SpriteBatch.CharArray[x, y] != ' ')
+                    {
+                        char a = SpriteBatch.CharArray[x, y];
+                        char b = drawnData.CharArray[x, y];
+
+                        var z = 1;
+                    }
+
+                    if (drawnData.CharArray[x, y] == SpriteBatch.CharArray[x, y] &&
+                        drawnData.BackgroundColourArray[x, y] == SpriteBatch.BackgroundColourArray[x, y] &&
+                        drawnData.ForegroundColourArray[x, y] == SpriteBatch.ForegroundColourArray[x, y])
+                    {
+                        continue;
+                    }
+
+                    Console.SetCursorPosition(x, y);
+                    Console.BackgroundColor = SpriteBatch.BackgroundColourArray[x, y];
+                    Console.ForegroundColor = SpriteBatch.ForegroundColourArray[x, y];
+
+                    Console.Write(SpriteBatch.CharArray[x, y]);
+
+                    drawnData.CharArray[x, y] = SpriteBatch.CharArray[x, y];
+                    drawnData.BackgroundColourArray[x, y] = SpriteBatch.BackgroundColourArray[x, y];
+                    drawnData.ForegroundColourArray[x, y] = SpriteBatch.ForegroundColourArray[x, y];
+                }
+            }
+        }
+
+        public void Clear(ConsoleColor colour)
+        {
+            Console.BackgroundColor = colour;
+            Console.ForegroundColor = colour;
+            Console.Clear();
+
+            for (int y = 0; y < drawnData.Size.Height; y++)
+            {
+                for (int x = 0; x < drawnData.Size.Width; x++)
+                {
+                    drawnData.CharArray[x, y] = ' ';
+                    drawnData.BackgroundColourArray[x, y] = colour;
+                    drawnData.ForegroundColourArray[x, y] = colour;
+                }
+            }
+        }
     }
 }
