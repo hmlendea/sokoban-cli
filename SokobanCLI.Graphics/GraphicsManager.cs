@@ -1,4 +1,8 @@
-﻿namespace SokobanCLI.Graphics
+﻿using System;
+
+using SokobanCLI.Graphics.Geometry;
+
+namespace SokobanCLI.Graphics
 {
     /// <summary>
     /// Graphics Manager.
@@ -30,11 +34,17 @@
                 return instance;
             }
         }
-        
+
         /// <summary>
         /// Gets or sets the sprite batch.
         /// </summary>
         /// <value>The sprite batch.</value>
         public AsciiSpriteBatch SpriteBatch { get; set; }
+
+        /// <summary>
+        /// Gets the resolution.
+        /// </summary>
+        /// <value>The resolution.</value>
+        public Size2D Resolution => new Size2D(Console.WindowWidth, Console.WindowHeight);
     }
 }

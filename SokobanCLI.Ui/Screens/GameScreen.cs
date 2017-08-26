@@ -24,8 +24,8 @@ namespace SokobanCLI.Ui.Screens
         public override void LoadContent()
         {
             game = new GameManager();
-            int level = 0;  
-            
+            int level = 0;
+
             if (ScreenArgs != null && ScreenArgs.Length >= 1)
             {
                 level = int.Parse(ScreenArgs[0]);
@@ -51,11 +51,11 @@ namespace SokobanCLI.Ui.Screens
             base.Update(gameTime);
 
             SetChildrenProperties();
-            
+
             if (game.GetCompletion())
             {
                 game.Stop();
-                
+
                 // TODO: Save progress
                 // TODO: What if this is the last level?
                 // TODO: Switch to a transition screen before starting
@@ -119,13 +119,13 @@ namespace SokobanCLI.Ui.Screens
             GameDetailsLabel.Size = new Size2D(GameDetailsLabel.Text.Length, 1);
 
             GameDetails.Location = new Point2D(0, GameDetailsLabel.ClientRectangle.Bottom);
-            GameDetails.Size = new Size2D(Console.WindowWidth, 3);
+            GameDetails.Size = new Size2D(GraphicsManager.Instance.Resolution.Width, 3);
 
             GameControlsLabel.Location = new Point2D(0, GameDetails.ClientRectangle.Bottom + 1);
             GameControlsLabel.Size = new Size2D(GameControlsLabel.Text.Length, 1);
 
             GameControls.Location = new Point2D(0, GameControlsLabel.ClientRectangle.Bottom);
-            GameControls.Size = new Size2D(Console.WindowWidth, 1);
+            GameControls.Size = new Size2D(GraphicsManager.Instance.Resolution.Width, 1);
 
             GameDetails.Text = $"Level: {game.World.Level}" + Environment.NewLine +
                                $"Player coordinates: {game.World.PlayerPosition.X},{game.World.PlayerPosition.Y}" + Environment.NewLine +

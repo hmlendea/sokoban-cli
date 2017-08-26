@@ -45,7 +45,7 @@ namespace SokobanCLI.Graphics
         /// </summary>
         public void LoadContent()
         {
-            Size = new Size2D(Console.WindowWidth, Console.WindowHeight);
+            Size = GraphicsManager.Instance.Resolution;
 
             CharArray = new char[Size.Width, Size.Height];
             BackgroundColourArray = new ConsoleColor[Size.Width, Size.Height];
@@ -72,14 +72,14 @@ namespace SokobanCLI.Graphics
 
         public virtual void Update()
         {
-            if (Console.WindowWidth == Size.Width && Console.WindowHeight == Size.Height)
+            if (GraphicsManager.Instance.Resolution == Size)
             {
                 return;
             }
 
             LoadContent();
         }
-        
+
         /// <summary>
         /// Draws the content.
         /// </summary>
@@ -90,7 +90,7 @@ namespace SokobanCLI.Graphics
 
             int firstRow = 0;
 
-            switch(sprite.HorizontalAlignment)
+            switch (sprite.HorizontalAlignment)
             {
                 case HorizontalAlignment.Centre:
                     firstRow = (sprite.Size.Height - lines.Count) / 2;

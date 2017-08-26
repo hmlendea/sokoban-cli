@@ -72,7 +72,7 @@ namespace SokobanCLI.Ui
         /// </summary>
         public void LoadContent()
         {
-            Size = new Size2D(Console.WindowWidth, Console.WindowHeight);
+            Size = GraphicsManager.Instance.Resolution;
             currentScreen.LoadContent();
         }
 
@@ -90,7 +90,7 @@ namespace SokobanCLI.Ui
         /// <param name="gameTime">Game time.</param>
         public void Update(float gameTime)
         {
-            Size = new Size2D(Console.WindowWidth, Console.WindowHeight);
+            Size = GraphicsManager.Instance.Resolution;
 
             currentScreen.Update(gameTime);
         }
