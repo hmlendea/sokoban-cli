@@ -1,4 +1,6 @@
-﻿using SokobanCLI.Graphics.Enumerations;
+﻿using System;
+
+using SokobanCLI.Graphics.Enumerations;
 using SokobanCLI.Graphics.Geometry;
 
 namespace SokobanCLI.Graphics
@@ -14,6 +16,10 @@ namespace SokobanCLI.Graphics
         public HorizontalAlignment HorizontalAlignment { get; set; }
 
         public VerticalAlignment VerticalAlignment { get; set; }
+
+        public ConsoleColor BackgroundColour { get; set; }
+
+        public ConsoleColor ForegroundColour { get; set; }
 
         public void LoadContent()
         {

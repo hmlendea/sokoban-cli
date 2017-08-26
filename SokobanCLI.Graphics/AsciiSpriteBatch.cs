@@ -128,6 +128,8 @@ namespace SokobanCLI.Graphics
                     int destY = sprite.Location.Y + y;
 
                     CharArray[destX, destY] = lines[row][col];
+                    BackgroundColourArray[destX, destY] = sprite.BackgroundColour;
+                    ForegroundColourArray[destX, destY] = sprite.ForegroundColour;
                 }
             }
         }

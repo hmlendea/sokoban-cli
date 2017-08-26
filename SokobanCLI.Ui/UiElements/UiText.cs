@@ -43,9 +43,6 @@ namespace SokobanCLI.Ui.UiElements
         {
             Text = string.Empty;
 
-            ForegroundColour = ConsoleColor.White;
-            BackgroundColour = ConsoleColor.Black;
-
             VerticalAlignment = VerticalAlignment.Center;
             HorizontalAlignment = HorizontalAlignment.Centre;
         }
@@ -95,6 +92,8 @@ namespace SokobanCLI.Ui.UiElements
             text.Text = Text;
             text.HorizontalAlignment = HorizontalAlignment;
             text.VerticalAlignment = VerticalAlignment;
+            text.BackgroundColour = BackgroundColour;
+            text.ForegroundColour = ForegroundColour;
         }
     }
 }

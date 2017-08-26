@@ -95,8 +95,11 @@ namespace SokobanCLI.Graphics
                     drawnData.CharArray[x, y] = SpriteBatch.CharArray[x, y];
                     drawnData.BackgroundColourArray[x, y] = SpriteBatch.BackgroundColourArray[x, y];
                     drawnData.ForegroundColourArray[x, y] = SpriteBatch.ForegroundColourArray[x, y];
+
                 }
             }
+
+            Console.SetCursorPosition(0, 0);
         }
 
         public void Clear(ConsoleColor colour)
@@ -112,6 +115,10 @@ namespace SokobanCLI.Graphics
                     drawnData.CharArray[x, y] = ' ';
                     drawnData.BackgroundColourArray[x, y] = colour;
                     drawnData.ForegroundColourArray[x, y] = colour;
+
+                    SpriteBatch.CharArray[x, y] = ' ';
+                    SpriteBatch.BackgroundColourArray[x, y] = ConsoleColor.Black;
+                    SpriteBatch.ForegroundColourArray[x, y] = ConsoleColor.White;
                 }
             }
         }

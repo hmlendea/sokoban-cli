@@ -1,35 +1,34 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <GameScreen>
-  <Worldmap>
-    <Location>
-      <X>0</X>
-      <Y>0</Y>
-    </Location>
-    <Size>
-      <Width>14</Width>
-      <Height>14</Height>
-    </Size>
-  </Worldmap>
-  <GameDetailsLabel>
-    <ForegroundColor>Green</ForegroundColor>
-    <Text>Game details</Text>
-    <VerticalAlignment>Left</VerticalAlignment>
-    <VerticalAlignment>Top</VerticalAlignment>
-  </GameDetailsLabel>
-  <GameDetails>
-    <VerticalAlignment>Left</VerticalAlignment>
-    <VerticalAlignment>Top</VerticalAlignment>
-  </GameDetails>
-  <GameControlsLabel>
-    <ForegroundColor>Green</ForegroundColor>
-    <Text>Game controls</Text>
-    <VerticalAlignment>Left</VerticalAlignment>
-    <VerticalAlignment>Top</VerticalAlignment>
-  </GameControlsLabel>
-  <GameControls>
-    <ForegroundColor>Green</ForegroundColor>
-    <Text>WASD, Arrows, R, ESC</Text>
-    <VerticalAlignment>Left</VerticalAlignment>
-    <VerticalAlignment>Top</VerticalAlignment>
-  </GameControls>
+	<Worldmap>
+		<Location>
+			<X>0</X>
+			<Y>0</Y>
+		</Location>
+		<Size>
+			<Width>14</Width>
+			<Height>14</Height>
+		</Size>
+	</Worldmap>
+	<GameDetailsLabel>
+		<ForegroundColour>Green</ForegroundColour>
+		<Text>Game details</Text>
+		<VerticalAlignment>Left</VerticalAlignment>
+		<VerticalAlignment>Top</VerticalAlignment>
+	</GameDetailsLabel>
+	<GameDetails>
+		<VerticalAlignment>Left</VerticalAlignment>
+		<VerticalAlignment>Top</VerticalAlignment>
+	</GameDetails>
+	<GameControlsLabel>
+		<ForegroundColour>Green</ForegroundColour>
+		<Text>Game controls</Text>
+		<VerticalAlignment>Left</VerticalAlignment>
+		<VerticalAlignment>Top</VerticalAlignment>
+	</GameControlsLabel>
+	<GameControls>
+		<Text>WASD, Arrows, R, ESC</Text>
+		<VerticalAlignment>Left</VerticalAlignment>
+		<VerticalAlignment>Top</VerticalAlignment>
+	</GameControls>
 </GameScreen>

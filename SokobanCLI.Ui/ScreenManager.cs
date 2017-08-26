@@ -120,6 +120,8 @@ namespace SokobanCLI.Ui
         /// <param name="screenArgs">Screen arguments.</param>
         public void ChangeScreens(string screenName, string[] screenArgs)
         {
+            GraphicsManager.Instance.Clear(currentScreen.BackgroundColour);
+
             newScreen = (Screen)Activator.CreateInstance(Type.GetType($"{typeof(Screen).Namespace}.{screenName}"));
 
             xmlScreenManager.Type = newScreen.Type;
