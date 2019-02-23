@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/hmlendea/sokobancli.svg?branch=master)](https://travis-ci.com/hmlendea/sokobancli)
+[![Build Status](https://travis-ci.com/hmlendea/sokoban-cli.svg?branch=master)](https://travis-ci.com/hmlendea/sokoban-cli)
 
 # SokobanCLI
 
