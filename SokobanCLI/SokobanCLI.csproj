@@ -1,69 +1,44 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{915B5EC3-8261-4F11-A070-8B212C1A8FEC}</ProjectGuid>
     <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>SokobanCLI</RootNamespace>
-    <AssemblyName>SokobanCLI</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
-    <Commandlineparameters>-rv</Commandlineparameters>
-    <Externalconsole>true</Externalconsole>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Externalconsole>true</Externalconsole>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
+    <ProjectReference Include="..\SokobanCLI.GameLogic\SokobanCLI.GameLogic.csproj" />
+    <ProjectReference Include="..\SokobanCLI.Graphics\SokobanCLI.Graphics.csproj" />
+    <ProjectReference Include="..\SokobanCLI.Input\SokobanCLI.Input.csproj" />
+    <ProjectReference Include="..\SokobanCLI.Models\SokobanCLI.Models.csproj" />
+    <ProjectReference Include="..\SokobanCLI.Ui\SokobanCLI.Ui.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
+    <None Update="Levels\0.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\1.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\2.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\3.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\4.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\5.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\6.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\7.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\8.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\9.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\10.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\11.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\12.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\13.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\14.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\15.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\16.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\17.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\18.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\19.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Levels\20.lvl"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Screens\GameScreen.xml"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Screens\ScreenManager.xml"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+    <None Update="Screens\TitleScreen.xml"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\SokobanCLI.Data\SokobanCLI.Data.csproj">
-      <Project>{02b996a4-5ac2-4575-a737-0a194dec70ba}</Project>
-      <Name>SokobanCLI.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SokobanCLI.GameLogic\SokobanCLI.GameLogic.csproj">
-      <Project>{48fe1072-51bc-43f0-b485-b73aea520000}</Project>
-      <Name>SokobanCLI.GameLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SokobanCLI.Graphics\SokobanCLI.Graphics.csproj">
-      <Project>{a58957be-6baf-46af-b20d-0489c5c85950}</Project>
-      <Name>SokobanCLI.Graphics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SokobanCLI.Input\SokobanCLI.Input.csproj">
-      <Project>{8959146e-7083-4c49-a2a4-7c129ee0bb7d}</Project>
-      <Name>SokobanCLI.Input</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SokobanCLI.Models\SokobanCLI.Models.csproj">
-      <Project>{3e8ed8cb-bcf8-4889-837e-5739e8d3ace4}</Project>
-      <Name>SokobanCLI.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SokobanCLI.Ui\SokobanCLI.Ui.csproj">
-      <Project>{f1250888-f04b-4603-870d-d8408200170c}</Project>
-      <Name>SokobanCLI.Ui</Name>
-    </ProjectReference>
-  </ItemGroup>
+
 </Project>
