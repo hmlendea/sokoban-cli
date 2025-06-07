@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Xml.Serialization;
 
-using SokobanCLI.Common.Helpers;
+using NuciDAL.IO;
 using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Ui.Screens;
@@ -20,7 +20,7 @@ namespace SokobanCLI.Ui
 
         Screen currentScreen, newScreen;
 
-        readonly XmlManager<Screen> xmlScreenManager;
+        readonly XmlFileObject<Screen> xmlScreenManager;
 
         /// <summary>
         /// Gets the instance.
@@ -36,8 +36,8 @@ namespace SokobanCLI.Ui
                     {
                         if (instance == null)
                         {
-                            XmlManager<ScreenManager> xmlManager = new();
-                            instance = xmlManager.Load(Path.Combine("Screens", $"{nameof(ScreenManager)}.xml"));
+                            XmlFileObject<ScreenManager> xmlManager = new();
+                            instance = xmlManager.Read(Path.Combine("Screens", $"{nameof(ScreenManager)}.xml"));
                         }
                     }
                 }
@@ -60,12 +60,12 @@ namespace SokobanCLI.Ui
         {
             currentScreen = new TitleScreen();
 
-            xmlScreenManager = new XmlManager<Screen>
+            xmlScreenManager = new XmlFileObject<Screen>
             {
                 Type = currentScreen.Type
             };
 
-            currentScreen = xmlScreenManager.Load(currentScreen.XmlPath);
+            currentScreen = xmlScreenManager.Read(currentScreen.XmlPath);
         }
 
         /// <summary>
@@ -80,10 +80,7 @@ namespace SokobanCLI.Ui
         /// <summary>
         /// Unloads the content.
         /// </summary>
-        public void UnloadContent()
-        {
-            currentScreen.UnloadContent();
-        }
+        public void UnloadContent() => currentScreen.UnloadContent();
 
         /// <summary>
         /// Updates the content.
@@ -100,19 +97,13 @@ namespace SokobanCLI.Ui
         /// Draw the content.
         /// </summary>
         /// <param name="spriteBatch">Sprite batch.</param>
-        public void Draw(AsciiSpriteBatch spriteBatch)
-        {
-            currentScreen.Draw(spriteBatch);
-        }
+        public void Draw(AsciiSpriteBatch spriteBatch) => currentScreen.Draw(spriteBatch);
 
         /// <summary>
         /// Changes the screen.
         /// </summary>
         /// <param name="screenName">Screen name.</param>
-        public void ChangeScreens(string screenName)
-        {
-            ChangeScreens(screenName, null);
-        }
+        public void ChangeScreens(string screenName) => ChangeScreens(screenName, null);
 
         /// <summary>
         /// Changes the screen.
@@ -129,7 +120,7 @@ namespace SokobanCLI.Ui
 
             if (File.Exists(currentScreen.XmlPath))
             {
-                newScreen = xmlScreenManager.Load(newScreen.XmlPath);
+                newScreen = xmlScreenManager.Read(newScreen.XmlPath);
             }
 
             newScreen.ScreenArgs = screenArgs;
