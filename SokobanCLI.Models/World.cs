@@ -45,10 +45,6 @@ namespace SokobanCLI.Models
             }
         }
 
-        public Tile GetTile(int x, int y)
-        {
-            return Tiles[x, y];
-        }
+        public Tile GetTile(int x, int y) => Tiles[x, y];
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading;
 using SokobanCLI.Graphics.Geometry;
 
 namespace SokobanCLI.Graphics
@@ -10,7 +10,7 @@ namespace SokobanCLI.Graphics
     public class GraphicsManager
     {
         static volatile GraphicsManager instance;
-        static object syncRoot = new object();
+        static readonly Lock syncRoot = new();
 
         /// <summary>
         /// Gets the instance.
@@ -20,14 +20,11 @@ namespace SokobanCLI.Graphics
         {
             get
             {
-                if (instance == null)
+                if (instance is null)
                 {
                     lock (syncRoot)
                     {
-                        if (instance == null)
-                        {
-                            instance = new GraphicsManager();
-                        }
+                        instance ??= new GraphicsManager();
                     }
                 }
 
@@ -45,7 +42,7 @@ namespace SokobanCLI.Graphics
         /// Gets the resolution.
         /// </summary>
         /// <value>The resolution.</value>
-        public Size2D Resolution => new Size2D(Console.WindowWidth, Console.WindowHeight);
+        public Size2D Resolution => new(Console.WindowWidth, Console.WindowHeight);
 
         AsciiSpriteBatch drawnData;
 
@@ -72,9 +69,7 @@ namespace SokobanCLI.Graphics
         /// </summary>
         /// <returns>The update.</returns>
         /// <param name="gameTime">Game time.</param>
-        public void Update(float gameTime)
-        {
-        }
+        public void Update(float gameTime) { }
 
         /// <summary>
         /// Draw the content.

@@ -55,7 +55,7 @@ namespace SokobanCLI.Ui.Screens
             game = new GameManager();
             int level = 0;
 
-            if (ScreenArgs != null && ScreenArgs.Length >= 1)
+            if (ScreenArgs is not null && ScreenArgs.Length >= 1)
             {
                 level = int.Parse(ScreenArgs[0]);
             }
@@ -172,8 +172,6 @@ namespace SokobanCLI.Ui.Screens
         }
 
         void OnGamePlayerMoved(object sender, PlayerMovementEventArgs e)
-        {
-            ScreenManager.Instance.Draw(GraphicsManager.Instance.SpriteBatch);
-        }
+            => ScreenManager.Instance.Draw(GraphicsManager.Instance.SpriteBatch);
     }
 }

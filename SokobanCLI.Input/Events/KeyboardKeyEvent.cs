@@ -10,21 +10,13 @@ namespace SokobanCLI.Input.Events
     /// <summary>
     /// Keyboard key event arguments.
     /// </summary>
-    public class ConsoleKeyEventArgs
+    /// <param name="key">Key.</param>
+    public class ConsoleKeyEventArgs(ConsoleKey key)
     {
         /// <summary>
         /// Gets the key.
         /// </summary>
         /// <value>The key.</value>
-        public ConsoleKey Key { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleKeyEventArgs"/> class.
-        /// </summary>
-        /// <param name="key">Key.</param>
-        public ConsoleKeyEventArgs(ConsoleKey key)
-        {
-            Key = key;
-        }
+        public ConsoleKey Key { get; private set; } = key;
     }
 }

@@ -101,38 +101,28 @@ namespace SokobanCLI.Ui.Screens
         /// </summary>
         /// <param name="gameTime">Game time.</param>
         public virtual void Update(float gameTime)
-        {
-            UiManager.Instance.Update(gameTime);
-        }
+            => UiManager.Instance.Update(gameTime);
 
         /// <summary>
         /// Draws the content.
         /// </summary>
         /// <param name="spriteBatch">Sprite batch.</param>
         public virtual void Draw(AsciiSpriteBatch spriteBatch)
-        {
-            UiManager.Instance.Draw(spriteBatch);
-        }
+            => UiManager.Instance.Draw(spriteBatch);
 
         /// <summary>
         /// Registers the events.
         /// </summary>
         protected virtual void RegisterEvents()
-        {
-            InputManager.Instance.KeyboardKeyPressed += OnKeyPressed;
-        }
+            => InputManager.Instance.KeyboardKeyPressed += OnKeyPressed;
 
         /// <summary>
         /// Unregisters the events.
         /// </summary>
         protected virtual void UnregisterEvents()
-        {
-            InputManager.Instance.KeyboardKeyPressed -= OnKeyPressed;
-        }
+            => InputManager.Instance.KeyboardKeyPressed -= OnKeyPressed;
 
         protected virtual void OnKeyPressed(object sender, ConsoleKeyEventArgs e)
-        {
-            KeyPressed?.Invoke(sender, e);
-        }
+            => KeyPressed?.Invoke(sender, e);
     }
 }

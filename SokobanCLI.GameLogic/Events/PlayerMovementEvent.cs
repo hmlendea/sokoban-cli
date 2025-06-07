@@ -10,21 +10,13 @@ namespace SokobanCLI.GameLogic.Events
     /// <summary>
     /// Player movement event arguments.
     /// </summary>
-    public class PlayerMovementEventArgs
+    /// <param name="playerLocation">Key.</param>
+    public class PlayerMovementEventArgs(Point2D playerLocation)
     {
         /// <summary>
         /// Gets the player location.
         /// </summary>
         /// <value>The player location.</value>
-        public Point2D PlayerLocation { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerMovementEventArgs"/> class.
-        /// </summary>
-        /// <param name="playerLocation">Key.</param>
-        public PlayerMovementEventArgs(Point2D playerLocation)
-        {
-            PlayerLocation = playerLocation;
-        }
+        public Point2D PlayerLocation { get; private set; } = playerLocation;
     }
 }

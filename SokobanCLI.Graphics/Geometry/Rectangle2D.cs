@@ -100,7 +100,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// Gets an empty rectangle, whose location and size are equal to zero.
         /// </summary>
         /// <value>The empty rectangle.</value>
-       public static Rectangle2D Empty => new Rectangle2D(0, 0, 0, 0);
+       public static Rectangle2D Empty => new(0, 0, 0, 0);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Rectangle2D"/> structure.

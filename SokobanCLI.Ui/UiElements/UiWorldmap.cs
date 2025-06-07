@@ -85,9 +85,7 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <param name="game">Game.</param>
         public void AssociateGameManager(ref IGameManager game)
-        {
-            this.game = game;
-        }
+            => this.game = game;
 
         char GetWallShape(int x, int y)
         {
@@ -97,7 +95,7 @@ namespace SokobanCLI.Ui.UiElements
 
             if (x > 0)
             {
-                n = (game.World.Tiles[x - 1, y].Id == 1);
+                n = game.World.Tiles[x - 1, y].Id == 1;
             }
             else
             {
@@ -106,7 +104,7 @@ namespace SokobanCLI.Ui.UiElements
 
             if (y > 0)
             {
-                w = (game.World.Tiles[x, y - 1].Id == 1);
+                w = game.World.Tiles[x, y - 1].Id == 1;
             }
             else
             {
@@ -115,7 +113,7 @@ namespace SokobanCLI.Ui.UiElements
 
             if (y < Size.Height - 1)
             {
-                e = (game.World.Tiles[x, y + 1].Id == 1);
+                e = game.World.Tiles[x, y + 1].Id == 1;
             }
             else
             {
@@ -124,7 +122,7 @@ namespace SokobanCLI.Ui.UiElements
 
             if (x < Size.Width - 1)
             {
-                s = (game.World.Tiles[x + 1, y].Id == 1);
+                s = game.World.Tiles[x + 1, y].Id == 1;
             }
             else
             {

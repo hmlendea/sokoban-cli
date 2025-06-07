@@ -29,13 +29,13 @@ namespace SokobanCLI.Graphics.Geometry
         /// Gets a scale of zero.
         /// </summary>
         /// <value>The scale of zero.</value>
-        public static Scale2D Empty => new Scale2D(0, 0);
+        public static Scale2D Empty => new(0, 0);
 
         /// <summary>
         /// Gets a scale of one.
         /// </summary>
         /// <value>The scale of one.</value>
-        public static Scale2D One => new Scale2D(1, 1);
+        public static Scale2D One => new(1, 1);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Scale2D"/> structure.
@@ -124,7 +124,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <param name="other">The second <see cref="Scale2D"/> to add.</param>
         /// <returns>The <see cref="Scale2D"/> that is the Um of the values of <c>source</c> and <c>other</c>.</returns>
         public static Scale2D operator +(Scale2D source, Scale2D other)
-        => new Scale2D(source.Horizontal + other.Horizontal,
+        => new(source.Horizontal + other.Horizontal,
                        source.Vertical + other.Vertical);
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <param name="other">The second <see cref="Scale2D"/> to Ubtract.</param>
         /// <returns>The <see cref="Scale2D"/> that is the Ubtraction of the values of <c>other</c> from <c>source</c>.</returns>
         public static Scale2D operator -(Scale2D source, Scale2D other)
-        => new Scale2D(source.Horizontal - other.Horizontal,
+        => new(source.Horizontal - other.Horizontal,
                        source.Vertical - other.Vertical);
 
         /// <summary>

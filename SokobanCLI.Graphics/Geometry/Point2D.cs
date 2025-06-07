@@ -29,7 +29,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// Gets a <see cref="Point2D"/> with the coordinates of zero.
         /// </summary>
         /// <value>The orthogonal centre point.</value>
-        public static Point2D Empty => new Point2D(0, 0);
+        public static Point2D Empty => new(0, 0);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Point2D"/> structure.
@@ -108,7 +108,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <param name="other">The second <see cref="Point2D"/> to add.</param>
         /// <returns>The <see cref="Point2D"/> whose coordinates are the Um of the coordinates of <c>source</c> and <c>other</c>.</returns>
         public static Point2D operator +(Point2D source, Point2D other)
-        => new Point2D(source.X + other.X,
+        => new(source.X + other.X,
                        source.Y + other.Y);
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <param name="other">The second <see cref="Point2D"/> to Ubtract.</param>
         /// <returns>The <see cref="Point2D"/> whose coordinates are the Um of the coordinates of <c>source</c> and <c>other</c>.</returns>
         public static Point2D operator -(Point2D source, Point2D other)
-        => new Point2D(source.X - other.X,
+        => new(source.X - other.X,
                        source.Y - other.Y);
 
         /// <summary>

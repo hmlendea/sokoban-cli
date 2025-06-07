@@ -60,29 +60,7 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <param name="spriteBatch">Sprite batch.</param>
         public override void Draw(AsciiSpriteBatch spriteBatch)
-        {
-            int cursorX = Location.X;
-            int cursorY = Location.Y;
-
-            switch (VerticalAlignment)
-            {
-                case VerticalAlignment.Left:
-                    cursorX = 0;
-                    break;
-
-                case VerticalAlignment.Center:
-                    cursorX = Location.X + (Size.Width - Text.Length) / 2;
-                    break;
-
-                case VerticalAlignment.Right:
-                    cursorX = Location.X + Size.Width - Text.Length;
-                    break;
-            }
-
-            // TODO: Margins
-
-            text.Draw(spriteBatch);
-        }
+            => text.Draw(spriteBatch);
 
         /// <summary>
         /// Sets the children properties.
