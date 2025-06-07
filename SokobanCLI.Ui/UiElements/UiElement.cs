@@ -258,7 +258,7 @@ namespace SokobanCLI.Ui.UiElements
 
             lock (this)
             {
-                if (Site != null && Site.Container != null)
+                if (Site is not null && Site.Container is not null)
                 {
                     Site.Container.Remove(this);
                 }

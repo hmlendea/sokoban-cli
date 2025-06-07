@@ -52,48 +52,23 @@ namespace SokobanCLI.Graphics
         /// <summary>
         /// Loads the content.
         /// </summary>
-        public void LoadContent()
-        {
-            Text = string.Empty;
-        }
+        public void LoadContent() => Text = string.Empty;
 
         /// <summary>
         /// Unloads the content.
         /// </summary>
-        public void UnloadContent()
-        {
-            Text = string.Empty;
-        }
+        public void UnloadContent() => Text = string.Empty;
 
         /// <summary>
         /// Updates the content.
         /// </summary>
         /// <param name="gameTime">Game time.</param>
-        public void Update(float gameTime)
-        {
-            /*
-            List<string> lines = Text.Split('\n').ToList();
-            int maxWidth = 0;
-
-            foreach(string line in lines)
-            {
-                if (line.Length > maxWidth)
-                {
-                    maxWidth = line.Length;
-                }
-            }
-
-            Size = new Size2D(maxWidth, lines.Count);
-            */
-        }
+        public void Update(float gameTime) { }
 
         /// <summary>
         /// Draw content.
         /// </summary>
         /// <param name="spriteBatch">Sprite batch.</param>
-        public void Draw(AsciiSpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(this);
-        }
+        public void Draw(AsciiSpriteBatch spriteBatch) => spriteBatch.Draw(this);
     }
 }

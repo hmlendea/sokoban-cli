@@ -30,11 +30,11 @@ namespace SokobanCLI.Ui
         {
             get
             {
-                if (instance == null)
+                if (instance is null)
                 {
                     lock (syncRoot)
                     {
-                        if (instance == null)
+                        if (instance is null)
                         {
                             XmlFileObject<ScreenManager> xmlManager = new();
                             instance = xmlManager.Read(Path.Combine("Screens", $"{nameof(ScreenManager)}.xml"));

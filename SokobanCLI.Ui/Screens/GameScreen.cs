@@ -55,7 +55,7 @@ namespace SokobanCLI.Ui.Screens
             game = new GameManager();
             int level = 0;
 
-            if (ScreenArgs != null && ScreenArgs.Length >= 1)
+            if (ScreenArgs is not null && ScreenArgs.Length >= 1)
             {
                 level = int.Parse(ScreenArgs[0]);
             }

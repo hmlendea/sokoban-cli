@@ -19,10 +19,7 @@ namespace SokobanCLI.GameLogic.Managers
             World = new World(level);
         }
 
-        public void Stop()
-        {
-            IsRunning = false;
-        }
+        public void Stop() => IsRunning = false;
 
         public void MovePlayer(int deltaX, int deltaY)
         {

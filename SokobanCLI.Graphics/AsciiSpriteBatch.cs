@@ -85,10 +85,7 @@ namespace SokobanCLI.Graphics
         /// <summary>
         /// Unloads the content.
         /// </summary>
-        public virtual void UnloadContent()
-        {
-
-        }
+        public virtual void UnloadContent() { }
 
         /// <summary>
         /// Updates the content.
@@ -109,8 +106,6 @@ namespace SokobanCLI.Graphics
         public virtual void Draw(AsciiSprite sprite)
         {
             List<string> lines = sprite.Text.Split('\n').ToList();
-            string[,] spriteData = new string[sprite.Size.Width, sprite.Size.Height];
-
             int firstRow = 0;
 
             switch (sprite.HorizontalAlignment)

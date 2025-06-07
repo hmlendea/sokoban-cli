@@ -20,7 +20,7 @@ namespace SokobanCLI.Graphics
         {
             get
             {
-                if (instance == null)
+                if (instance is null)
                 {
                     lock (syncRoot)
                     {
@@ -69,9 +69,7 @@ namespace SokobanCLI.Graphics
         /// </summary>
         /// <returns>The update.</returns>
         /// <param name="gameTime">Game time.</param>
-        public void Update(float gameTime)
-        {
-        }
+        public void Update(float gameTime) { }
 
         /// <summary>
         /// Draw the content.

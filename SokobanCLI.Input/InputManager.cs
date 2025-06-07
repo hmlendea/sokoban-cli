@@ -25,7 +25,7 @@ namespace SokobanCLI.Input
         {
             get
             {
-                if (instance == null)
+                if (instance is null)
                 {
                     lock (syncRoot)
                     {

@@ -28,7 +28,7 @@ namespace SokobanCLI.Ui
         {
             get
             {
-                if (instance == null)
+                if (instance is null)
                 {
                     lock (syncRoot)
                     {
