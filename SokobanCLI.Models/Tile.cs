@@ -15,48 +15,39 @@ namespace SokobanCLI.Models
     {
         public static Tile ById(int id)
         {
-            switch (id)
+            return id switch
             {
-                default:
-                    return new Tile
-                    {
-                        Id = id,
-                        Character = ' ',
-                        Colour = ConsoleColor.Black
-                    };
-
-                case 1:
-                    return new Tile
-                    {
-                        Id = id,
-                        Character = '█',
-                        Colour = ConsoleColor.Gray
-                    };
-
-                case 2:
-                    return new Tile
-                    {
-                        Id = id,
-                        Character = 'O',
-                        Colour = ConsoleColor.DarkYellow
-                    };
-
-                case 3:
-                    return new Tile
-                    {
-                        Id = id,
-                        Character = '+',
-                        Colour = ConsoleColor.DarkRed
-                    };
-
-                case 5:
-                    return new Tile
-                    {
-                        Id = id,
-                        Character = '@',
-                        Colour = ConsoleColor.DarkGreen
-                    };
-            }
+                1 => new Tile
+                {
+                    Id = id,
+                    Character = '█',
+                    Colour = ConsoleColor.Gray
+                },
+                2 => new Tile
+                {
+                    Id = id,
+                    Character = 'O',
+                    Colour = ConsoleColor.DarkYellow
+                },
+                3 => new Tile
+                {
+                    Id = id,
+                    Character = '+',
+                    Colour = ConsoleColor.DarkRed
+                },
+                5 => new Tile
+                {
+                    Id = id,
+                    Character = '@',
+                    Colour = ConsoleColor.DarkGreen
+                },
+                _ => new Tile
+                {
+                    Id = id,
+                    Character = ' ',
+                    Colour = ConsoleColor.Black
+                },
+            };
         }
     }
 }

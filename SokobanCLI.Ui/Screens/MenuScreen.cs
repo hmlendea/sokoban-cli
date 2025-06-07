@@ -45,8 +45,8 @@ namespace SokobanCLI.Ui.Screens
         /// </summary>
         /// <value>The items.</value>
         [XmlIgnore]
-        public List<UiMenuItem> Items => Links.Select(x => (UiMenuItem)x).Concat(
-                                         Actions.Select(x => (UiMenuItem)x)).ToList();
+        public List<UiMenuItem> Items =>
+            Links.Select(x => (UiMenuItem)x).Concat(Actions.Select(x => (UiMenuItem)x)).ToList();
 
         /// <summary>
         /// Gets the item number.
@@ -65,8 +65,8 @@ namespace SokobanCLI.Ui.Screens
             Axis = "Y";
             Spacing = 1;
 
-            Links = new List<UiMenuLink>();
-            Actions = new List<UiMenuAction>();
+            Links = [];
+            Actions = [];
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace SokobanCLI.Ui.Screens
 
             base.Update(gameTime);
         }
-        
+
         void AlignMenuItems()
         {
             Size2D dimensions = Size2D.Empty;
@@ -113,8 +113,8 @@ namespace SokobanCLI.Ui.Screens
             Items.ForEach(item => dimensions += new Size2D(item.Size.Width + Spacing / 2,
                                                            item.Size.Height + Spacing / 2));
 
-            dimensions = new Size2D((ScreenManager.Instance.Size.Width - dimensions.Width) / 2,
-                                    (ScreenManager.Instance.Size.Height - dimensions.Height) / 2);
+            dimensions = new((ScreenManager.Instance.Size.Width - dimensions.Width) / 2,
+                            (ScreenManager.Instance.Size.Height - dimensions.Height) / 2);
 
             foreach (UiMenuItem item in Items)
             {
@@ -138,22 +138,22 @@ namespace SokobanCLI.Ui.Screens
 
             if ("Yy".Contains(Axis))
             {
-                if (e.Key == ConsoleKey.W || e.Key == ConsoleKey.UpArrow)
+                if (e.Key is ConsoleKey.W || e.Key is ConsoleKey.UpArrow)
                 {
                     ItemNumber -= 1;
                 }
-                else if (e.Key == ConsoleKey.S || e.Key == ConsoleKey.DownArrow)
+                else if (e.Key is ConsoleKey.S || e.Key is ConsoleKey.DownArrow)
                 {
                     ItemNumber += 1;
                 }
             }
             else if ("Xx".Contains(Axis))
             {
-                if (e.Key == ConsoleKey.D || e.Key == ConsoleKey.RightArrow)
+                if (e.Key is ConsoleKey.D || e.Key is ConsoleKey.RightArrow)
                 {
                     ItemNumber -= 1;
                 }
-                else if (e.Key == ConsoleKey.A || e.Key == ConsoleKey.LeftArrow)
+                else if (e.Key is ConsoleKey.A || e.Key is ConsoleKey.LeftArrow)
                 {
                     ItemNumber += 1;
                 }

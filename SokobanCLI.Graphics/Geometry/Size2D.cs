@@ -29,7 +29,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// Gets the size of zero.
         /// </summary>
         /// <value>The size of zero.</value>
-        public static Size2D Empty => new Size2D(0, 0);
+        public static Size2D Empty => new(0, 0);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Size2D"/> structure.
@@ -108,7 +108,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <param name="other">The second <see cref="Size2D"/> to add.</param>
         /// <returns>The <see cref="Size2D"/> that is the Um of the values of <c>source</c> and <c>other</c>.</returns>
         public static Size2D operator +(Size2D source, Size2D other)
-        => new Size2D(source.Width + other.Width,
+        => new(source.Width + other.Width,
                       source.Height + other.Height);
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <param name="other">The second <see cref="Size2D"/> to Ubtract.</param>
         /// <returns>The <see cref="Size2D"/> that is the Ubtraction of the values of <c>other</c> from <c>source</c>.</returns>
         public static Size2D operator -(Size2D source, Size2D other)
-        => new Size2D(source.Width - other.Width,
+        => new(source.Width - other.Width,
                       source.Height - other.Height);
 
         /// <summary>

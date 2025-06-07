@@ -38,7 +38,7 @@ namespace SokobanCLI.Ui.UiElements
         /// Gets the screen area covered by this <see cref="UiElement"/>.
         /// </summary>
         /// <value>The screen area.</value>
-        public Rectangle2D ClientRectangle => new Rectangle2D(Location, Size);
+        public Rectangle2D ClientRectangle => new(Location, Size);
 
         /// <summary>
         /// Gets or sets the opacity.
@@ -46,25 +46,8 @@ namespace SokobanCLI.Ui.UiElements
         /// <value>The opacity.</value>
         public float Opacity
         {
-            get
-            {
-                return _opacity;
-            }
-            set
-            {
-                if (value > 1.0f)
-                {
-                    _opacity = 1.0f;
-                }
-                else if (value < 0.0f)
-                {
-                    _opacity = 0.0f;
-                }
-                else
-                {
-                    _opacity = value;
-                }
-            }
+            get => _opacity;
+            set => _opacity = Math.Max(0.0f, Math.Min(value, 1.0f));
         }
 
         /// <summary>
@@ -138,36 +121,14 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <value>The container.</value>
         [XmlIgnore]
-        public IContainer Container
-        {
-            get
-            {
-                if (Site == null)
-                {
-                    return null;
-                }
-
-                return Site.Container;
-            }
-        }
+        public IContainer Container => Site?.Container;
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="UiElement"/> is in design mode.
         /// </summary>
         /// <value><c>true</c> if in design mode; otherwise, <c>false</c>.</value>
         [XmlIgnore]
-        protected bool DesignMode
-        {
-            get
-            {
-                if (Site == null)
-                {
-                    return false;
-                }
-
-                return Site.DesignMode;
-            }
-        }
+        protected bool DesignMode => Site?.DesignMode ?? false;
 
         /// <summary>
         /// Occurs when the BackgroundColour property was changed.
@@ -219,13 +180,10 @@ namespace SokobanCLI.Ui.UiElements
 
             Id = Guid.NewGuid().ToString();
 
-            Children = new List<UiElement>();
+            Children = [];
         }
 
-        ~UiElement()
-        {
-            Dispose();
-        }
+        ~UiElement() => Dispose();
 
         /// <summary>
         /// Loads the content.
@@ -270,9 +228,10 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <param name="spriteBatch">Sprite batch.</param>
         public virtual void Draw(AsciiSpriteBatch spriteBatch)
-        {
-            Children.Where(e => e.Visible).ToList().ForEach(e => e.Draw(spriteBatch));
-        }
+            => Children
+                .Where(e => e.Visible)
+                .ToList()
+                .ForEach(e => e.Draw(spriteBatch));
 
         /// <summary>
         /// Disposes of this <see cref="UiElement"/>.
@@ -332,17 +291,13 @@ namespace SokobanCLI.Ui.UiElements
         /// Registers the events.
         /// </summary>
         protected virtual void RegisterEvents()
-        {
-            InputManager.Instance.KeyboardKeyPressed += OnInputManagerKeyboardKeyPressed;
-        }
+            => InputManager.Instance.KeyboardKeyPressed += OnInputManagerKeyboardKeyPressed;
 
         /// <summary>
         /// Unregisters the events.
         /// </summary>
         protected virtual void UnregisterEvents()
-        {
-            InputManager.Instance.KeyboardKeyPressed -= OnInputManagerKeyboardKeyPressed;
-        }
+            => InputManager.Instance.KeyboardKeyPressed -= OnInputManagerKeyboardKeyPressed;
 
         /// <summary>
         /// Raises the events.
@@ -392,15 +347,7 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <returns>The service.</returns>
         /// <param name="service">Service.</param>
-        protected virtual object GetService(Type service)
-        {
-            if (Site == null)
-            {
-                return null;
-            }
-
-            return Site.GetService(service);
-        }
+        protected virtual object GetService(Type service) => Site?.GetService(service);
 
         /// <summary>
         /// Returns a <see cref="string"/> that represents the current <see cref="UiElement"/>.
@@ -408,7 +355,7 @@ namespace SokobanCLI.Ui.UiElements
         /// <returns>A <see cref="string"/> that represents the current <see cref="UiElement"/>.</returns>
         public override string ToString()
         {
-            if (Site == null)
+            if (Site is null)
             {
                 return GetType().FullName;
             }
@@ -422,9 +369,7 @@ namespace SokobanCLI.Ui.UiElements
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         protected virtual void OnBackgroundColourChanged(object sender, EventArgs e)
-        {
-            BackgroundColourChanged?.Invoke(sender, e);
-        }
+            => BackgroundColourChanged?.Invoke(sender, e);
 
         /// <summary>
         /// Fired by the Disposed event.
@@ -432,9 +377,7 @@ namespace SokobanCLI.Ui.UiElements
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         protected virtual void OnDisposed(object sender, EventArgs e)
-        {
-            Disposed?.Invoke(sender, e);
-        }
+            => Disposed?.Invoke(sender, e);
 
         /// <summary>
         /// Raised by the ForegroundColourChanged event.
@@ -442,9 +385,7 @@ namespace SokobanCLI.Ui.UiElements
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         protected virtual void OnForegroundColourChanged(object sender, EventArgs e)
-        {
-            ForegroundColourChanged?.Invoke(sender, e);
-        }
+            => ForegroundColourChanged?.Invoke(sender, e);
 
         /// <summary>
         /// Raised by the LocationChanged event.
@@ -452,9 +393,7 @@ namespace SokobanCLI.Ui.UiElements
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         protected virtual void OnLocationChanged(object sender, EventArgs e)
-        {
-            LocationChanged?.Invoke(this, e);
-        }
+            => LocationChanged?.Invoke(this, e);
 
         /// <summary>
         /// Raised by the SizeChanged event.
@@ -462,9 +401,7 @@ namespace SokobanCLI.Ui.UiElements
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         protected virtual void OnSizeChanged(object sender, EventArgs e)
-        {
-            SizeChanged?.Invoke(this, e);
-        }
+            => SizeChanged?.Invoke(this, e);
 
         /// <summary>
         /// Raised by the KeyPressed event.
@@ -472,14 +409,11 @@ namespace SokobanCLI.Ui.UiElements
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         protected virtual void OnKeyPressed(object sender, ConsoleKeyEventArgs e)
-        {
-            KeyPressed?.Invoke(sender, e);
-        }
+            => KeyPressed?.Invoke(sender, e);
 
         void OnInputManagerKeyboardKeyPressed(object sender, ConsoleKeyEventArgs e)
         {
-            if (!Enabled || !Visible ||
-                !CanRaiseEvents || !InputFocus)
+            if (!Enabled || !Visible || !CanRaiseEvents || !InputFocus)
             {
                 return;
             }

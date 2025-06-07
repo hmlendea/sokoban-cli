@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading;
 using SokobanCLI.Graphics;
 using SokobanCLI.Ui.UiElements;
 
@@ -12,7 +12,7 @@ namespace SokobanCLI.Ui
     public class UiManager
     {
         static volatile UiManager instance;
-        static object syncRoot = new object();
+        static readonly Lock syncRoot = new();
 
         /// <summary>
         /// Gets or sets the GUI elements.
@@ -32,10 +32,7 @@ namespace SokobanCLI.Ui
                 {
                     lock (syncRoot)
                     {
-                        if (instance == null)
-                        {
-                            instance = new UiManager();
-                        }
+                        instance ??= new UiManager();
                     }
                 }
 
@@ -46,19 +43,13 @@ namespace SokobanCLI.Ui
         /// <summary>
         /// Initializes a new instance of the <see cref="UiManager"/> class.
         /// </summary>
-        public UiManager()
-        {
-            UiElements = new List<UiElement>();
-        }
+        public UiManager() => UiElements = [];
 
 
         /// <summary>
         /// Loads the content.
         /// </summary>
-        public void LoadContent()
-        {
-            UiElements.ToList().ForEach(w => w.LoadContent());
-        }
+        public void LoadContent() => UiElements.ToList().ForEach(w => w.LoadContent());
 
         /// <summary>
         /// Unloads the content.
@@ -102,9 +93,6 @@ namespace SokobanCLI.Ui
         /// Focuses the input on the specified element.
         /// </summary>
         /// <param name="element">Element.</param>
-        public void FocusElement(UiElement element)
-        {
-            FocusElement(element.Id);
-        }
+        public void FocusElement(UiElement element) => FocusElement(element.Id);
     }
 }

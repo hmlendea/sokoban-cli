@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading;
 using SokobanCLI.Input.Events;
 
 namespace SokobanCLI.Input
@@ -13,9 +13,9 @@ namespace SokobanCLI.Input
         /// Occurs when a keyboard key was pressed.
         /// </summary>
         public event ConsoleKeyEventHandler KeyboardKeyPressed;
-        
+
         static volatile InputManager instance;
-        static object syncRoot = new object();
+        static readonly Lock syncRoot = new();
 
         /// <summary>
         /// Gets the instance.
@@ -29,10 +29,7 @@ namespace SokobanCLI.Input
                 {
                     lock (syncRoot)
                     {
-                        if (instance == null)
-                        {
-                            instance = new InputManager();
-                        }
+                        instance ??= new InputManager();
                     }
                 }
 

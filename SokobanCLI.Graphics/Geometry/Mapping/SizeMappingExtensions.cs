@@ -12,7 +12,7 @@ namespace SokobanCLI.Graphics.Geometry.Mapping
         /// <param name="source">Source <see cref="SystemSize"/>.</param>
         /// <returns>The <see cref="Size2D"/>.</returns>
         public static Size2D ToSize2D(this SystemSize source)
-        => new Size2D(source.Width, source.Height);
+        => new(source.Width, source.Height);
 
         // >>> TO SYSTEM
 
@@ -22,6 +22,6 @@ namespace SokobanCLI.Graphics.Geometry.Mapping
         /// <param name="source">Source <see cref="Size2D"/>.</param>
         /// <returns>The <see cref="SystemSize"/>.</returns>
         public static SystemSize ToSystemPoint(this Size2D source)
-        => new SystemSize(source.Width, source.Height);
+        => new(source.Width, source.Height);
     }
 }

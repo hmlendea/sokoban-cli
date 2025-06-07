@@ -93,8 +93,6 @@ namespace SokobanCLI.Ui.UiElements
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         protected virtual void OnActivated(object sender, EventArgs e)
-        {
-            Activated?.Invoke(this, null);
-        }
+            => Activated?.Invoke(this, null);
     }
 }

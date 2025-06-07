@@ -28,7 +28,7 @@ namespace SokobanCLI.Ui.UiElements
         {
             base.OnActivated(sender, e);
 
-            string[] args = new string[0];
+            string[] args = [];
 
             if (!string.IsNullOrWhiteSpace(LinkArgs))
             {

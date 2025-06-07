@@ -12,7 +12,7 @@ namespace SokobanCLI.Graphics.Geometry.Mapping
         /// <param name="source">Source <see cref="SystemRectangle"/>.</param>
         /// <returns>The <see cref="Rectangle2D"/>.</returns>
         public static Rectangle2D ToRectangle2D(this SystemRectangle source)
-        => new Rectangle2D(source.X, source.Y, source.Width, source.Height);
+        => new(source.X, source.Y, source.Width, source.Height);
 
         // >>> TO SYSTEM
 
@@ -22,6 +22,6 @@ namespace SokobanCLI.Graphics.Geometry.Mapping
         /// <param name="source">Source <see cref="Rectangle2D"/>.</param>
         /// <returns>The <see cref="SystemRectangle"/>.</returns>
         public static SystemRectangle ToSystemRectangle(this Rectangle2D source)
-        => new SystemRectangle(source.X, source.Y, source.Width, source.Height);
+        => new(source.X, source.Y, source.Width, source.Height);
     }
 }

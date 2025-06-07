@@ -172,8 +172,6 @@ namespace SokobanCLI.Ui.Screens
         }
 
         void OnGamePlayerMoved(object sender, PlayerMovementEventArgs e)
-        {
-            ScreenManager.Instance.Draw(GraphicsManager.Instance.SpriteBatch);
-        }
+            => ScreenManager.Instance.Draw(GraphicsManager.Instance.SpriteBatch);
     }
 }

@@ -18,10 +18,7 @@ namespace SokobanCLI.Common.Helpers
         /// <summary>
         /// Initializes a new instance of the <see cref="T:XmlManager"/> class.
         /// </summary>
-        public XmlManager()
-        {
-            Type = typeof(T);
-        }
+        public XmlManager() => Type = typeof(T);
 
         /// <summary>
         /// Load the specified path.
@@ -34,7 +31,7 @@ namespace SokobanCLI.Common.Helpers
 
             using (TextReader reader = new StreamReader(path))
             {
-                XmlSerializer xml = new XmlSerializer(Type);
+                XmlSerializer xml = new(Type);
                 instance = (T)xml.Deserialize(reader);
             }
 
@@ -49,11 +46,9 @@ namespace SokobanCLI.Common.Helpers
         /// <param name="obj">Object.</param>
         public void Save(string path, object obj)
         {
-            using (TextWriter writer = new StreamWriter(path))
-            {
-                XmlSerializer xml = new XmlSerializer(Type);
-                xml.Serialize(writer, obj);
-            }
+            using TextWriter writer = new StreamWriter(path);
+            XmlSerializer xml = new(Type);
+            xml.Serialize(writer, obj);
         }
     }
 }

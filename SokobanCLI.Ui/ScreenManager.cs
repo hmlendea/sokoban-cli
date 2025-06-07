@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Xml.Serialization;
 
 using SokobanCLI.Common.Helpers;
@@ -15,7 +16,7 @@ namespace SokobanCLI.Ui
     public class ScreenManager
     {
         static volatile ScreenManager instance;
-        static object syncRoot = new object();
+        static readonly Lock syncRoot = new();
 
         Screen currentScreen, newScreen;
 
@@ -35,7 +36,7 @@ namespace SokobanCLI.Ui
                     {
                         if (instance == null)
                         {
-                            XmlManager<ScreenManager> xmlManager = new XmlManager<ScreenManager>();
+                            XmlManager<ScreenManager> xmlManager = new();
                             instance = xmlManager.Load(Path.Combine("Screens", $"{nameof(ScreenManager)}.xml"));
                         }
                     }

@@ -31,8 +31,6 @@ namespace SokobanCLI
                 Update();
                 Draw();
             }
-
-            UnloadContent();
         }
 
         /// <summary>
@@ -48,15 +46,6 @@ namespace SokobanCLI
 
             ScreenManager.Instance.LoadContent();
             InputManager.Instance.KeyboardKeyPressed += delegate { ScreenManager.Instance.Draw(spriteBatch); };
-        }
-
-        /// <summary>
-        /// Unloads the content.
-        /// </summary>
-        static void UnloadContent()
-        {
-            ScreenManager.Instance.UnloadContent();
-            GraphicsManager.Instance.UnloadContent();
         }
 
         /// <summary>
