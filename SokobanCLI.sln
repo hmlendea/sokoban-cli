@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanCLI.Models", "Sokoba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanCLI.GameLogic", "SokobanCLI.GameLogic\SokobanCLI.GameLogic.csproj", "{48FE1072-51BC-43F0-B485-B73AEA520000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanCLI.Ui", "SokobanCLI.Ui\SokobanCLI.Ui.csproj", "{F1250888-F04B-4603-870D-D8408200170C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanCLI.Ui", "UI\SokobanCLI.Ui.csproj", "{F1250888-F04B-4603-870D-D8408200170C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanCLI.Graphics", "SokobanCLI.Graphics\SokobanCLI.Graphics.csproj", "{A58957BE-6BAF-46AF-B20D-0489C5C85950}"
 EndProject

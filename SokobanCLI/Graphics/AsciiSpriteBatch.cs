@@ -145,6 +145,11 @@ namespace SokobanCLI.Graphics
                     int destX = sprite.Location.X + x;
                     int destY = sprite.Location.Y + y;
 
+                    if (destX < 0 || destX >= Size.Width || destY < 0 || destY >= Size.Height)
+                    {
+                        continue;
+                    }
+
                     CharArray[destX, destY] = lines[row][col];
                     BackgroundColourArray[destX, destY] = sprite.BackgroundColour;
                     ForegroundColourArray[destX, destY] = sprite.ForegroundColour;
