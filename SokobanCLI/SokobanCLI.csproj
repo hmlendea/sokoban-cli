@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SokobanCLI.GameLogic\SokobanCLI.GameLogic.csproj" />
-    <ProjectReference Include="..\SokobanCLI.Graphics\SokobanCLI.Graphics.csproj" />
-    <ProjectReference Include="..\SokobanCLI.Input\SokobanCLI.Input.csproj" />
-    <ProjectReference Include="..\SokobanCLI.Models\SokobanCLI.Models.csproj" />
-    <ProjectReference Include="..\SokobanCLI.Ui\SokobanCLI.Ui.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +34,10 @@
     <None Update="Screens\GameScreen.xml"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
     <None Update="Screens\ScreenManager.xml"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
     <None Update="Screens\TitleScreen.xml"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuciDAL" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
