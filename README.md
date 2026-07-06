@@ -1,6 +1,9 @@
 # SokobanCLI
 
-[![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/fund.html) [![Build Status](https://github.com/hmlendea/sokoban-cli/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hmlendea/sokoban-cli/actions/workflows/dotnet.yml) [![Latest GitHub release](https://img.shields.io/github/v/release/hmlendea/sokoban-cli)](https://github.com/hmlendea/sokoban-cli/releases/latest)
+[![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
+[![Latest Release](https://img.shields.io/github/v/release/hmlendea/sokoban-cli)](https://github.com/hmlendea/sokoban-cli/releases/latest)
+[![Build Status](https://github.com/hmlendea/sokoban-cli/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hmlendea/sokoban-cli/actions/workflows/dotnet.yml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://gnu.org/licenses/gpl-3.0)
 
 **SokobanCLI** is a text-based version of the classic Sokoban game that runs directly in the terminal.
 
