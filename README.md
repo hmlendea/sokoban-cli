@@ -11,7 +11,7 @@ Push every box onto a goal tile to clear the level. The fewer moves, the better.
 
 ## Features
 
-- 21 hand-crafted levels (0 – 20)
+- 21 levels (0 – 20)
 - Full box-pushing mechanics — boxes can only be pushed onto empty tiles or goal positions
 - Move counter per level
 - ASCII colour rendering (walls, boxes, goals, and solved boxes each have distinct colours)
