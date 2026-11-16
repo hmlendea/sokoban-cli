@@ -112,13 +112,21 @@ SokobanCLI is a single-project console application whose static composition root
 
 See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome. Please:
-- Keep changes cross-platform
-- Keep the existing public API intact unless a breaking change is intentional
-- Keep pull requests focused and consistent with the existing code style
-- Update documentation when behaviour changes
+You are welcome to submit any suggestion, feedback, or modification to this project.
+
+When doing so, please:
+- Maintain cross-platform compatibility
+- Preserve the existing public contract unless a breaking change is intentional
+- Submit focused pull requests that conform to the existing code style
+- Maintain your branch synchronised with `master`
+- Revise the documentation when functionality changes
+- Properly test all modifications, including edge cases and error conditions
+- Include tests for additional or modified functionality
+- Raise a new [issue](https://github.com/hmlendea/sokoban-cli/issues) for problems or suggestions
+
+See the [Contributing Guidelines](./CONTRIBUTING.md) for details on how to report issues, suggest enhancements, and submit changes.
 
 ## Support
 
