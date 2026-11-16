@@ -119,6 +119,25 @@ SokobanCLI is a single-project console application whose static composition root
 
 See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
 
+## 📚 Documentation
+
+A structured knowledge base under [`docs/`](./docs) complements the architecture documentation with component deep dives, execution flows, invariants, and maintenance guidance.
+
+| Resource | Description |
+|----------|-------------|
+| [`docs/INDEX.md`](./docs/INDEX.md) | Navigation hub for the whole documentation set, with a catalogue and reading paths. |
+| [`docs/quick-start.md`](./docs/quick-start.md) | Build, run, and play in the fewest steps. |
+| [`docs/architecture.md`](./docs/architecture.md) | Layering, composition strategy, and boundary enforcement in depth. |
+| [`docs/behaviour/play-a-level.md`](./docs/behaviour/play-a-level.md) | What the player observes from key press to level completion. |
+| [`docs/behaviour/navigate-screens.md`](./docs/behaviour/navigate-screens.md) | Title menu, focus, activation, and screen transitions. |
+| [`docs/components/`](./docs/components) | Per-component deep dives for the composition root, game logic, models, graphics, input, screens, and UI elements. |
+| [`docs/flows/`](./docs/flows) | End-to-end execution flows for startup and rendering, player movement, screen navigation, and level advancement. |
+| [`docs/invariants.md`](./docs/invariants.md) | Conditions that must remain true, including the test-enforced conventions. |
+| [`docs/testing.md`](./docs/testing.md) | Unit and architecture test strategy, coverage, and known gaps. |
+| [`docs/change-guide.md`](./docs/change-guide.md) | How to modify common areas safely, with the rules that will fail. |
+| [`docs/troubleshooting.md`](./docs/troubleshooting.md) | Evidenced failure modes and their resolutions. |
+| [`docs/faq.md`](./docs/faq.md) | Frequently asked questions grounded in the implementation. |
+
 ## 🤝 Contributing
 
 You are welcome to submit any suggestion, feedback, or modification to this project.
