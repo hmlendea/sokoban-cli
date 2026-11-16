@@ -2,19 +2,21 @@
 
 using SokobanCLI.GameLogic.Events;
 using SokobanCLI.GameLogic.Managers;
-using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Input.Events;
-using SokobanCLI.Ui.UiElements;
+using SokobanCLI.UI.UiElements;
 
-namespace SokobanCLI.Ui.Screens
+namespace SokobanCLI.UI.Screens
 {
     /// <summary>
     /// Game screen.
     /// </summary>
-    public class GameScreen : Screen
+    public sealed class GameScreen : Screen, IGameScreen
     {
+        private IGameManager game;
+
         /// <summary>
         /// Gets or sets the worldmap.
         /// </summary>
@@ -45,8 +47,6 @@ namespace SokobanCLI.Ui.Screens
         /// <value>The game controls.</value>
         public UiText GameControls { get; set; }
 
-        IGameManager game;
-
         /// <summary>
         /// Loads the content.
         /// </summary>
@@ -68,7 +68,7 @@ namespace SokobanCLI.Ui.Screens
             UiManager.Instance.UiElements.Add(GameControlsLabel);
             UiManager.Instance.UiElements.Add(GameControls);
 
-            Worldmap.AssociateGameManager(ref game);
+            Worldmap.AssociateGameManager(game);
 
             SetChildrenProperties();
 
@@ -152,7 +152,7 @@ namespace SokobanCLI.Ui.Screens
             base.OnKeyPressed(sender, e);
         }
 
-        void SetChildrenProperties()
+        private void SetChildrenProperties()
         {
             GameDetailsLabel.Location = new Point2D(0, Worldmap.ClientRectangle.Bottom + 1);
             GameDetailsLabel.Size = new Size2D(GameDetailsLabel.Text.Length, 1);
@@ -167,11 +167,11 @@ namespace SokobanCLI.Ui.Screens
             GameControls.Size = new Size2D(GraphicsManager.Instance.Resolution.Width, 1);
 
             GameDetails.Text = $"Level: {game.World.Level}" + Environment.NewLine +
-                               $"Player coordinates: {game.World.PlayerPosition.X},{game.World.PlayerPosition.Y}" + Environment.NewLine +
-                               $"Moves: {game.World.Moves}";
+                                $"Player coordinates: {game.World.PlayerPosition.X},{game.World.PlayerPosition.Y}" + Environment.NewLine +
+                                $"Moves: {game.World.Moves}";
         }
 
-        void OnGamePlayerMoved(object sender, PlayerMovementEventArgs e)
+        private void OnGamePlayerMoved(object sender, PlayerMovementEventArgs e)
             => ScreenManager.Instance.Draw(GraphicsManager.Instance.SpriteBatch);
     }
 }

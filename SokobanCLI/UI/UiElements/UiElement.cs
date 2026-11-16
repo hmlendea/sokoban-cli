@@ -9,13 +9,19 @@ using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Input;
 using SokobanCLI.Input.Events;
 
-namespace SokobanCLI.Ui.UiElements
+namespace SokobanCLI.UI.UiElements
 {
     /// <summary>
     /// GUI Element.
     /// </summary>
-    public class UiElement : IComponent, IDisposable
+    public class UiElement : IComponent, IDisposable, IUiElement
     {
+        private ConsoleColor oldBackgroundColour;
+        private ConsoleColor oldForegroundColour;
+        private Point2D oldLocation;
+        private Size2D oldSize;
+        private float opacity;
+
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -46,8 +52,8 @@ namespace SokobanCLI.Ui.UiElements
         /// <value>The opacity.</value>
         public float Opacity
         {
-            get => _opacity;
-            set => _opacity = Math.Max(0.0f, Math.Min(value, 1.0f));
+            get => opacity;
+            set => opacity = Math.Max(0.0f, Math.Min(value, 1.0f));
         }
 
         /// <summary>
@@ -66,27 +72,27 @@ namespace SokobanCLI.Ui.UiElements
         /// Gets or sets a value indicating whether this <see cref="UiElement"/> is enabled.
         /// </summary>
         /// <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
-        public bool Enabled { get; set; }
+        public bool IsEnabled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="UiElement"/> is visible.
         /// </summary>
         /// <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
-        public bool Visible { get; set; }
+        public bool IsVisible { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="UiElement"/> is hovered.
         /// </summary>
         /// <value><c>true</c> if hovered; otherwise, <c>false</c>.</value>
         [XmlIgnore]
-        public bool Hovered { get; set; }
+        public bool IsHovered { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="UiElement"/> has input focus.
         /// </summary>
         /// <value><c>true</c> if it has input focus; otherwise, <c>false</c>.</value>
         [XmlIgnore]
-        public bool InputFocus { get; set; }
+        public bool HasInputFocus { get; set; }
 
         /// <summary>
         /// Gets or sets the children GUI elements.
@@ -128,7 +134,7 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <value><c>true</c> if in design mode; otherwise, <c>false</c>.</value>
         [XmlIgnore]
-        protected bool DesignMode => Site?.DesignMode ?? false;
+        protected bool IsDesignMode => Site is not null && Site.DesignMode;
 
         /// <summary>
         /// Occurs when the BackgroundColour property was changed.
@@ -160,19 +166,13 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         public event EventHandler SizeChanged;
 
-        ConsoleColor _oldBackgroundColour;
-        ConsoleColor _oldForegroundColour;
-        Point2D _oldLocation;
-        Size2D _oldSize;
-        float _opacity;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UiElement"/> class.
         /// </summary>
         public UiElement()
         {
-            Enabled = true;
-            Visible = true;
+            IsEnabled = true;
+            IsVisible = true;
             Opacity = 1.0f;
 
             BackgroundColour = ConsoleColor.Black;
@@ -220,7 +220,7 @@ namespace SokobanCLI.Ui.UiElements
             RaiseEvents();
             SetChildrenProperties();
 
-            Children.Where(e => e.Enabled).ToList().ForEach(e => e.Update(gameTime));
+            Children.Where(e => e.IsEnabled).ToList().ForEach(e => e.Update(gameTime));
         }
 
         /// <summary>
@@ -229,7 +229,7 @@ namespace SokobanCLI.Ui.UiElements
         /// <param name="spriteBatch">Sprite batch.</param>
         public virtual void Draw(AsciiSpriteBatch spriteBatch)
             => Children
-                .Where(e => e.Visible)
+                .Where(e => e.IsVisible)
                 .ToList()
                 .ForEach(e => e.Draw(spriteBatch));
 
@@ -274,8 +274,8 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         public virtual void Show()
         {
-            Enabled = true;
-            Visible = true;
+            IsEnabled = true;
+            IsVisible = true;
         }
 
         /// <summary>
@@ -283,8 +283,8 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         public virtual void Hide()
         {
-            Enabled = false;
-            Visible = false;
+            IsEnabled = false;
+            IsVisible = false;
         }
 
         /// <summary>
@@ -309,22 +309,22 @@ namespace SokobanCLI.Ui.UiElements
                 return;
             }
 
-            if (_oldBackgroundColour != BackgroundColour)
+            if (oldBackgroundColour != BackgroundColour)
             {
                 OnBackgroundColourChanged(this, null);
             }
 
-            if (_oldForegroundColour != ForegroundColour)
+            if (oldForegroundColour != ForegroundColour)
             {
                 OnForegroundColourChanged(this, null);
             }
 
-            if (_oldLocation != Location)
+            if (oldLocation != Location)
             {
                 OnLocationChanged(this, null);
             }
 
-            if (_oldSize != Size)
+            if (oldSize != Size)
             {
                 OnSizeChanged(this, null);
             }
@@ -335,11 +335,11 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         protected virtual void SetChildrenProperties()
         {
-            _oldBackgroundColour = BackgroundColour;
-            _oldForegroundColour = ForegroundColour;
+            oldBackgroundColour = BackgroundColour;
+            oldForegroundColour = ForegroundColour;
 
-            _oldLocation = Location;
-            _oldSize = Size;
+            oldLocation = Location;
+            oldSize = Size;
         }
 
         /// <summary>
@@ -411,9 +411,9 @@ namespace SokobanCLI.Ui.UiElements
         protected virtual void OnKeyPressed(object sender, ConsoleKeyEventArgs e)
             => KeyPressed?.Invoke(sender, e);
 
-        void OnInputManagerKeyboardKeyPressed(object sender, ConsoleKeyEventArgs e)
+        private void OnInputManagerKeyboardKeyPressed(object sender, ConsoleKeyEventArgs e)
         {
-            if (!Enabled || !Visible || !CanRaiseEvents || !InputFocus)
+            if (!IsEnabled || !IsVisible || !CanRaiseEvents || !HasInputFocus)
             {
                 return;
             }

@@ -1,19 +1,19 @@
 ﻿using System;
 
-using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
 
-namespace SokobanCLI.Ui.UiElements
+namespace SokobanCLI.UI.UiElements
 {
     /// <summary>
     /// World map UI element.
     /// </summary>
-    public class UiWorldmap : UiElement
+    public sealed class UiWorldmap : UiElement, IUiWorldmap
     {
-        IGameManager game;
+        private IGameManager game;
 
-        UiText text;
+        private UiText text;
 
         /// <summary>
         /// Loads the content.
@@ -84,10 +84,10 @@ namespace SokobanCLI.Ui.UiElements
         /// Associates the game manager.
         /// </summary>
         /// <param name="game">Game.</param>
-        public void AssociateGameManager(ref IGameManager game)
+        public void AssociateGameManager(IGameManager game)
             => this.game = game;
 
-        char GetWallShape(int x, int y)
+        private char GetWallShape(int x, int y)
         {
             char c = '?';
 

@@ -2,17 +2,17 @@
 using System.Linq;
 using System.Threading;
 using SokobanCLI.Graphics;
-using SokobanCLI.Ui.UiElements;
+using SokobanCLI.UI.UiElements;
 
-namespace SokobanCLI.Ui
+namespace SokobanCLI.UI
 {
     /// <summary>
     /// GUI manager.
     /// </summary>
-    public class UiManager
+    public sealed class UiManager : IUiManager
     {
-        static volatile UiManager instance;
-        static readonly Lock syncRoot = new();
+        private static volatile UiManager instance;
+        private static readonly Lock syncRoot = new();
 
         /// <summary>
         /// Gets or sets the GUI elements.
@@ -45,7 +45,6 @@ namespace SokobanCLI.Ui
         /// </summary>
         public UiManager() => UiElements = [];
 
-
         /// <summary>
         /// Loads the content.
         /// </summary>
@@ -54,7 +53,7 @@ namespace SokobanCLI.Ui
         /// <summary>
         /// Unloads the content.
         /// </summary>
-        public virtual void UnloadContent()
+        public void UnloadContent()
         {
             UiElements.ForEach(w => w.UnloadContent());
             UiElements.Clear();
@@ -64,20 +63,18 @@ namespace SokobanCLI.Ui
         /// Updates the content.
         /// </summary>
         /// <param name="gameTime">Game time.</param>
-        public virtual void Update(float gameTime)
+        public void Update(float gameTime)
         {
             UiElements.RemoveAll(e => e.IsDisposed);
-            UiElements.Where(e => e.Enabled).ToList().ForEach(e => e.Update(gameTime));
+            UiElements.Where(e => e.IsEnabled).ToList().ForEach(e => e.Update(gameTime));
         }
 
         /// <summary>
         /// Draws the content.
         /// </summary>
         /// <param name="spriteBatch">Sprite batch.</param>
-        public virtual void Draw(AsciiSpriteBatch spriteBatch)
-        {
-            UiElements.Where(e => e.Visible).ToList().ForEach(e => e.Draw(spriteBatch));
-        }
+        public void Draw(AsciiSpriteBatch spriteBatch)
+            => UiElements.Where(e => e.IsVisible).ToList().ForEach(e => e.Draw(spriteBatch));
 
         /// <summary>
         /// Focuses the input on the element with the specified identifier.
@@ -85,8 +82,12 @@ namespace SokobanCLI.Ui
         /// <param name="id">Element identifier.</param>
         public void FocusElement(string id)
         {
-            UiElements.ForEach(e => e.InputFocus = false);
-            UiElements.FirstOrDefault(e => e.Id == id).InputFocus = true;
+            UiElements.ForEach(e => e.HasInputFocus = false);
+            UiElement element = UiElements.FirstOrDefault(e => e.Id == id);
+            if (element is not null)
+            {
+                element.HasInputFocus = true;
+            }
         }
 
         /// <summary>

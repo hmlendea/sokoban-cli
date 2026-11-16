@@ -7,15 +7,10 @@ namespace SokobanCLI.Input
     /// <summary>
     /// Input manager.
     /// </summary>
-    public class InputManager
+    public sealed class InputManager : IInputManager
     {
-        /// <summary>
-        /// Occurs when a keyboard key was pressed.
-        /// </summary>
-        public event ConsoleKeyEventHandler KeyboardKeyPressed;
-
-        static volatile InputManager instance;
-        static readonly Lock syncRoot = new();
+        private static volatile InputManager instance;
+        private static readonly Lock syncRoot = new();
 
         /// <summary>
         /// Gets the instance.
@@ -38,6 +33,11 @@ namespace SokobanCLI.Input
         }
 
         /// <summary>
+        /// Occurs when a keyboard key was pressed.
+        /// </summary>
+        public event ConsoleKeyEventHandler KeyboardKeyPressed;
+
+        /// <summary>
         /// Updates the content.
         /// </summary>
         public void Update()
@@ -50,7 +50,7 @@ namespace SokobanCLI.Input
             CheckKeyboardKeyPressed();
         }
 
-        void CheckKeyboardKeyPressed()
+        private void CheckKeyboardKeyPressed()
         {
             ConsoleKey key = Console.ReadKey().Key;
 

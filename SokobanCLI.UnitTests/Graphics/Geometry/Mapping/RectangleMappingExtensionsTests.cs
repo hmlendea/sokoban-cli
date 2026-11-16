@@ -10,7 +10,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry.Mapping
     [TestFixture]
     public class RectangleMappingExtensionsTests
     {
-        // ── ToRectangle2D ────────────────────────────────────────
 
         [Test]
         public void GivenSystemRectangle_WhenCallingToRectangle2D_ThenReturnsMatchingRectangle2D()
@@ -35,7 +34,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry.Mapping
             Assert.That(result.IsEmpty);
         }
 
-        // ── ToSystemRectangle ────────────────────────────────────
 
         [Test]
         public void GivenRectangle2D_WhenCallingToSystemRectangle_ThenReturnsMatchingSystemRectangle()

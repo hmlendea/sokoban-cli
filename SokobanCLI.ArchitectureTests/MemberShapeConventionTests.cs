@@ -28,6 +28,13 @@ namespace SokobanCLI.ArchitectureTests
             {
                 foreach (MethodDeclarationSyntax method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
                 {
+                    // An expression-bodied method already satisfies the rule.
+                    if (method.Body is null && method.ExpressionBody is not null)
+                    {
+                        matched += 1;
+                        continue;
+                    }
+
                     if (method.Body is null || method.Body.Statements.Count != 1)
                     {
                         continue;

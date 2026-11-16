@@ -58,7 +58,7 @@ namespace SokobanCLI.ArchitectureTests
 
         private static readonly IObjectProvider<IType> UiTypes = Types()
             .That()
-            .ResideInNamespaceMatching("SokobanCLI\\.Ui.*");
+            .ResideInNamespaceMatching("SokobanCLI\\.UI.*");
 
         private static readonly IObjectProvider<IType> CompositionRootTypes = Types()
             .That()

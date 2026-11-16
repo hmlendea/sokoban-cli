@@ -7,7 +7,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
     [TestFixture]
     public class Scale2DTests
     {
-        // ── Constructor ──────────────────────────────────────────
 
         [Test]
         public void GivenZeroValues_WhenConstructing_ThenIsEmpty()
@@ -54,7 +53,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(scale.Vertical, Is.EqualTo(7f));
         }
 
-        // ── Static properties ────────────────────────────────────
 
         [Test]
         public void GivenEmptyProperty_WhenAccessed_ThenReturnsZeroScale()
@@ -74,7 +72,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(one.Vertical, Is.EqualTo(1f));
         }
 
-        // ── Equals ──────────────────────────────────────────────
 
         [Test]
         public void GivenTwoScalesWithSameValues_WhenCallingEquals_ThenReturnsTrue()
@@ -112,7 +109,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(a != b);
         }
 
-        // ── Operators ────────────────────────────────────────────
 
         [Test]
         public void GivenTwoScales_WhenAdding_ThenReturnsSumScale()

@@ -5,14 +5,14 @@ using System.Xml.Serialization;
 
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Input.Events;
-using SokobanCLI.Ui.UiElements;
+using SokobanCLI.UI.UiElements;
 
-namespace SokobanCLI.Ui.Screens
+namespace SokobanCLI.UI.Screens
 {
     /// <summary>
     /// Menu screen.
     /// </summary>
-    public class MenuScreen : Screen
+    public class MenuScreen : Screen, IMenuScreen
     {
         /// <summary>
         /// Gets or sets the axis.
@@ -46,7 +46,7 @@ namespace SokobanCLI.Ui.Screens
         /// <value>The items.</value>
         [XmlIgnore]
         public List<UiMenuItem> Items =>
-            Links.Select(x => (UiMenuItem)x).Concat(Actions.Select(x => (UiMenuItem)x)).ToList();
+            Links.Select(x => x as UiMenuItem).Concat(Actions.Select(x => x as UiMenuItem)).ToList();
 
         /// <summary>
         /// Gets the item number.
@@ -106,12 +106,12 @@ namespace SokobanCLI.Ui.Screens
             base.Update(gameTime);
         }
 
-        void AlignMenuItems()
+        private void AlignMenuItems()
         {
             Size2D dimensions = Size2D.Empty;
 
             Items.ForEach(item => dimensions += new Size2D(item.Size.Width + Spacing / 2,
-                                                           item.Size.Height + Spacing / 2));
+                                                            item.Size.Height + Spacing / 2));
 
             dimensions = new((ScreenManager.Instance.Size.Width - dimensions.Width) / 2,
                             (ScreenManager.Instance.Size.Height - dimensions.Height) / 2);
@@ -128,7 +128,7 @@ namespace SokobanCLI.Ui.Screens
                 }
 
                 dimensions += new Size2D(item.Size.Width + Spacing / 2,
-                                         item.Size.Height + Spacing / 2);
+                                        item.Size.Height + Spacing / 2);
             }
         }
 

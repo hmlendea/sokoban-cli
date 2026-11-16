@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace SokobanCLI.Ui.UiElements
+namespace SokobanCLI.UI.UiElements
 {
     /// <summary>
     /// Menu action UI element.
     /// </summary>
-    public class UiMenuAction : UiMenuItem
+    public sealed class UiMenuAction : UiMenuItem
     {
         /// <summary>
         /// Gets or sets the action.

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace SokobanCLI.Ui.UiElements
+namespace SokobanCLI.UI.UiElements
 {
     /// <summary>
     /// Menu link GUI element
     /// </summary>
-    public class UiMenuLink : UiMenuItem
+    public sealed class UiMenuLink : UiMenuItem
     {
         /// <summary>
         /// Gets or sets the link identifier.

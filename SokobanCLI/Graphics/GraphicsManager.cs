@@ -7,10 +7,12 @@ namespace SokobanCLI.Graphics
     /// <summary>
     /// Graphics Manager.
     /// </summary>
-    public class GraphicsManager
+    public sealed class GraphicsManager : IGraphicsManager
     {
-        static volatile GraphicsManager instance;
-        static readonly Lock syncRoot = new();
+        private static volatile GraphicsManager instance;
+        private static readonly Lock syncRoot = new();
+
+        private AsciiSpriteBatch drawnData;
 
         /// <summary>
         /// Gets the instance.
@@ -43,8 +45,6 @@ namespace SokobanCLI.Graphics
         /// </summary>
         /// <value>The resolution.</value>
         public Size2D Resolution => new(Console.WindowWidth, Console.WindowHeight);
-
-        AsciiSpriteBatch drawnData;
 
         /// <summary>
         /// Loads the content.
@@ -96,7 +96,6 @@ namespace SokobanCLI.Graphics
                     drawnData.CharArray[x, y] = SpriteBatch.CharArray[x, y];
                     drawnData.BackgroundColourArray[x, y] = SpriteBatch.BackgroundColourArray[x, y];
                     drawnData.ForegroundColourArray[x, y] = SpriteBatch.ForegroundColourArray[x, y];
-
                 }
             }
 

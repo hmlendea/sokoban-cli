@@ -268,6 +268,12 @@ namespace SokobanCLI.ArchitectureTests
                         continue;
                     }
 
+                    // Destructors cannot declare an accessibility modifier in C#.
+                    if (member is DestructorDeclarationSyntax)
+                    {
+                        continue;
+                    }
+
                     SyntaxTokenList? modifiers = GetModifiers(member);
 
                     if (modifiers is null)
@@ -671,6 +677,13 @@ namespace SokobanCLI.ArchitectureTests
 
         private static int GetMemberKindRank(MemberDeclarationSyntax member)
         {
+            // EventFieldDeclarationSyntax derives from BaseFieldDeclarationSyntax, so events must be
+            // ranked before fields to keep the prescribed kind order intact.
+            if (member is EventFieldDeclarationSyntax || member is EventDeclarationSyntax)
+            {
+                return 2;
+            }
+
             if (member is BaseFieldDeclarationSyntax)
             {
                 return 0;
@@ -679,11 +692,6 @@ namespace SokobanCLI.ArchitectureTests
             if (member is BasePropertyDeclarationSyntax)
             {
                 return 1;
-            }
-
-            if (member is EventFieldDeclarationSyntax || member is EventDeclarationSyntax)
-            {
-                return 2;
             }
 
             if (member is ConstructorDeclarationSyntax)

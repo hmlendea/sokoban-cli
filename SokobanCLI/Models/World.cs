@@ -4,7 +4,7 @@ using SokobanCLI.Graphics.Geometry;
 
 namespace SokobanCLI.Models
 {
-    public class World
+    public sealed class World
     {
         public readonly Tile[,] Tiles;
 

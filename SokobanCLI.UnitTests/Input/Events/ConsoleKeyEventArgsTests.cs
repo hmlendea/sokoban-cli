@@ -9,7 +9,6 @@ namespace SokobanCLI.UnitTests.Input.Events
     [TestFixture]
     public class ConsoleKeyEventArgsTests
     {
-        // ── Constructor ──────────────────────────────────────────
 
         [Test]
         public void GivenKey_WhenConstructing_ThenKeyIsSet()

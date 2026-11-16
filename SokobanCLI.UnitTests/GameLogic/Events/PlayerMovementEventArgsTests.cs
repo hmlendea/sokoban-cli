@@ -8,7 +8,6 @@ namespace SokobanCLI.UnitTests.GameLogic.Events
     [TestFixture]
     public class PlayerMovementEventArgsTests
     {
-        // ── Constructor ──────────────────────────────────────────
 
         [Test]
         public void GivenPlayerLocation_WhenConstructing_ThenPlayerLocationIsSet()

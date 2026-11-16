@@ -1,11 +1,10 @@
 ﻿using SokobanCLI.GameLogic.Events;
-using SokobanCLI.GameLogic.Managers.Interfaces;
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Models;
 
 namespace SokobanCLI.GameLogic.Managers
 {
-    public class GameManager : IGameManager
+    public sealed class GameManager : IGameManager
     {
         public World World { get; private set; }
 

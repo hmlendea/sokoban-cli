@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using SokobanCLI.Graphics.Enumerations;
 using SokobanCLI.Graphics.Geometry;
 
 namespace SokobanCLI.Graphics
@@ -10,7 +9,7 @@ namespace SokobanCLI.Graphics
     /// <summary>
     /// Sprite batch.
     /// </summary>
-    public class AsciiSpriteBatch
+    public sealed class AsciiSpriteBatch : IAsciiSpriteBatch
     {
         /// <summary>
         /// Gets the size.
@@ -85,12 +84,12 @@ namespace SokobanCLI.Graphics
         /// <summary>
         /// Unloads the content.
         /// </summary>
-        public virtual void UnloadContent() { }
+        public void UnloadContent() { }
 
         /// <summary>
         /// Updates the content.
         /// </summary>
-        public virtual void Update()
+        public void Update()
         {
             if (GraphicsManager.Instance.Resolution == Size)
             {
@@ -103,7 +102,7 @@ namespace SokobanCLI.Graphics
         /// <summary>
         /// Draws the content.
         /// </summary>
-        public virtual void Draw(AsciiSprite sprite)
+        public void Draw(AsciiSprite sprite)
         {
             List<string> lines = sprite.Text.Split('\n').ToList();
             int firstRow = 0;
