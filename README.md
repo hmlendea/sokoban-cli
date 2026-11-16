@@ -106,6 +106,12 @@ SokobanCLI/
 └── UI/                 # Screen manager, UI elements (text, menu, worldmap)
 ```
 
+## 🏗️ Architecture
+
+SokobanCLI is a single-project console application whose static composition root wires singleton managers around a layered model, game-logic, rendering, input, and UI structure.
+
+See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
+
 ## Contributing
 
 Contributions are welcome. Please:
