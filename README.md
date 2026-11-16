@@ -2,51 +2,101 @@
 [![Latest Release](https://img.shields.io/github/v/release/hmlendea/sokoban-cli)](https://github.com/hmlendea/sokoban-cli/releases/latest)
 [![Build Status](https://github.com/hmlendea/sokoban-cli/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hmlendea/sokoban-cli/actions/workflows/dotnet.yml)
 [![Security Scan](https://github.com/hmlendea/sokoban-cli/actions/workflows/security.yml/badge.svg)](https://github.com/hmlendea/sokoban-cli/actions/workflows/security.yml)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://gnu.org/licenses/gpl-3.0)
+[![License](https://img.shields.io/github/license/hmlendea/sokoban-cli)](https://github.com/hmlendea/sokoban-cli/blob/master/LICENSE)
 
 # SokobanCLI
 
-**SokobanCLI** is a text-based implementation of the classic [Sokoban](https://en.wikipedia.org/wiki/Sokoban) puzzle game that runs entirely in the terminal.
+SokobanCLI is a terminal implementation of the classic Sokoban box-pushing puzzle. Move the player, push every box onto a goal, and clear 21 levels while minimising moves.
 
-Push every box onto a goal tile to clear the level. The fewer moves, the better.
+## 📑 Table of Contents
 
-## Features
+- [Capabilities](#capabilities)
+- [Usage](#usage)
+  - [Keyboard Shortcuts](#keyboard-shortcuts)
+- [Known Limitations](#known-limitations)
+- [System Requirements](#system-requirements)
+- [Installation](#installation)
+  - [Manual Installation](#manual-installation)
+  - [Installation from Source](#installation-from-source)
+  - [Verification](#verification)
+- [Privacy and Data](#privacy-and-data)
+- [Development](#development)
+  - [Requirements](#requirements)
+  - [Setup](#setup)
+  - [Build](#build)
+  - [Run](#run)
+  - [Test](#test)
+  - [Static Analysis](#static-analysis)
+  - [Continuous Integration](#continuous-integration)
+  - [Release](#release)
+  - [Dependencies](#dependencies)
+- [GitHub Actions](#github-actions)
+- [Project Structure](#project-structure)
+  - [Projects and Packages](#projects-and-packages)
+  - [Directories](#directories)
+- [Architecture](#architecture)
+- [Deployment](#deployment)
+- [Documentation](#documentation)
+- [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
+- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [Security](#security)
+- [Support](#support)
+- [Project Engagement](#project-engagement)
+- [License](#license)
 
-- 21 levels (0 – 20)
-- Full box-pushing mechanics — boxes can only be pushed onto empty tiles or goal positions
-- Move counter per level
-- ASCII colour rendering (walls, boxes, goals, and solved boxes each have distinct colours)
-- XML-driven UI screens with a title menu and in-game controls display
-- Settings and progress saved in the local application data directory
+## ✨ Capabilities
 
-## Gameplay
+- Play 21 Sokoban levels numbered 0 through 20 in an interactive terminal.
+- Push boxes onto goals, count accepted moves, and advance automatically after completion.
+- Render walls, boxes, goals, and solved boxes with coloured ASCII characters.
+- Navigate a title menu and an XML-defined game screen.
 
-### Tile legend
+## 🚀 Usage
 
-| Symbol | Colour | Meaning |
-|--------|--------|---------|
-| `█` | Gray | Wall |
-| `O` | Dark Yellow | Box |
-| `+` | Dark Red | Goal |
-| `@` | Dark Green | Box on goal (solved) |
-| ` ` | — | Empty floor / player position |
+Run the game from the project directory so its `Levels/` and `Screens/` content is available:
 
-### Controls
+```bash
+dotnet run --project SokobanCLI
+```
 
-| Key | Action |
-|-----|--------|
-| `W` / `↑` | Move up |
-| `A` / `←` | Move left |
-| `S` / `↓` | Move down |
-| `D` / `→` | Move right |
-| `R` | Restart current level |
-| `Esc` | Quit |
+### Keyboard Shortcuts
 
-## Requirements
+| Shortcut | Action | Context |
+|----------|--------|---------|
+| `W` / `↑` | Move up | Game screen |
+| `A` / `←` | Move left | Game screen |
+| `S` / `↓` | Move down | Game screen |
+| `D` / `→` | Move right | Game screen |
+| `R` | Restart the current level | Game screen |
+| `Enter` or `E` | Activate the highlighted menu entry | Title menu |
+| `Esc` | Return to the title screen | Game screen |
+| `Ctrl+C` | Terminate the process | Any screen |
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+## ⚠️ Known Limitations
 
-## Running from source
+- Progress and move counts are held in memory and are not saved between runs.
+- Selecting the title-menu `Exit` entry does not terminate the process; use `Ctrl+C`.
+- Resizing the terminal while playing can crash the renderer; set the terminal size before launching.
+- Completing level 20 currently attempts to load missing level 21 and terminates with an exception.
+
+## 🖥️ System Requirements
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| .NET | .NET 10 runtime | .NET 10 SDK |
+| Terminal | Interactive terminal with cursor positioning and colour support | Terminal at least 14 rows for the map plus 6 for the details panel |
+
+## 📦 Installation
+
+[![Obtain it from GitHub](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/github.png)](https://github.com/hmlendea/sokoban-cli/releases)
+
+### Manual Installation
+
+Download the archive for your platform from the [latest GitHub release](https://github.com/hmlendea/sokoban-cli/releases/latest). Keep its `Levels/` and `Screens/` directories beside the executable, then launch it from that directory.
+
+### Installation from Source
 
 ```bash
 git clone https://github.com/hmlendea/sokoban-cli.git
@@ -54,12 +104,39 @@ cd sokoban-cli
 dotnet run --project SokobanCLI
 ```
 
-## Development
+### Verification
+
+```bash
+dotnet test SokobanCLI.slnx
+```
+
+## 🛡️ Privacy and Data
+
+SokobanCLI collects no personal data, analytics, or telemetry, and creates no settings, progress, cache, or log files. Gameplay state remains in memory and is discarded when the process exits.
+
+For the detailed description of how the application handles privacy and personal data, see the [Privacy Statement](./PRIVACY.md).
+
+## 🛠️ Development
+
+### Requirements
+
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- An interactive terminal for running the game locally
+
+### Setup
+
+Clone the repository and restore dependencies with the .NET SDK:
+
+```bash
+git clone https://github.com/hmlendea/sokoban-cli.git
+cd sokoban-cli
+dotnet restore
+```
 
 ### Build
 
 ```bash
-dotnet build
+dotnet build SokobanCLI.slnx
 ```
 
 ### Run
@@ -71,53 +148,79 @@ dotnet run --project SokobanCLI
 ### Test
 
 ```bash
-dotnet test
+dotnet test SokobanCLI.slnx
 ```
+
+### Static Analysis
+
+The security workflow checks NuGet packages for known vulnerabilities and runs CodeQL for C#:
+
+```bash
+dotnet list package --vulnerable --include-transitive
+```
+
+### Continuous Integration
+
+The `.NET` workflow restores dependencies, builds the solution, and runs tests on pushes and pull requests targeting `master`. The `Security` workflow audits packages and runs CodeQL on pushes, pull requests, and a weekly schedule.
 
 ### Release
 
-Releases are produced by the `GitHub Release` workflow, which runs when a release is published in the repository. Publish the release with its `v`-prefixed tag, for example `v1.0.0`; the tag supplies the version used for the artefacts.
+Publish a release with a `v`-prefixed tag, for example `v1.0.0`:
 
 ```bash
 gh release create v1.0.0 --generate-notes
 ```
 
-The workflow determines the .NET version from `SokobanCLI/SokobanCLI.csproj`, downloads and executes an external release helper from `https://raw.githubusercontent.com/hmlendea/dotnet-release-scripts/refs/heads/master/dotnet/<version>.sh` to build the self-contained artefacts, and attaches them to the release.
+The `GitHub Release` workflow determines the .NET version from `SokobanCLI/SokobanCLI.csproj`, downloads and executes an external helper from `https://raw.githubusercontent.com/hmlendea/dotnet-release-scripts/refs/heads/master/dotnet/<version>.sh`, and attaches self-contained artefacts to the release. Review the external script before executing or publishing a release.
 
-**Note:** Piping into `bash` is an intensely controversial topic. Please review any external scripts before running them in your environment!
+### Dependencies
 
-## 🛡️ Privacy and Data
-
-SokobanCLI runs entirely on the local machine and collects no personal data, analytics, or telemetry, and it creates no settings, progress, or log files.
-
-For the detailed description of how the application handles privacy and personal data, see the [Privacy Statement](./PRIVACY.md).
+| Package | Version | Scope | Purpose |
+|---------|---------|-------|---------|
+| `NuciDAL` | `3.1.0` | Runtime | XML deserialisation of screen definitions |
+| .NET | `10.0` | Runtime | Console input/output, file access, and application hosting |
 
 ## ⚙️ GitHub Actions
 
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
-| [ .NET ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/dotnet.yml) | Continuous integration | Determines the .NET version from the production project, restores dependencies, builds the solution, and runs the test suite on pushes and pull requests to `master`. |
-| [ Security ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/security.yml) | Security scanning | Sets up the .NET SDK, restores dependencies, checks for vulnerable packages, and runs CodeQL analysis for C#, publishing results to the Security tab on pushes, pull requests, and a weekly schedule. |
-| [ GitHub Release ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/github-release.yml) | Release publishing | Determines the .NET version from the production project, extracts the version from the release tag, builds the self-contained artefacts for every supported runtime identifier through the shared release helper, and attaches them to the published release. |
+| [ .NET ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/dotnet.yml) | Continuous integration | Determines the .NET version, restores dependencies, builds the solution, and runs the test suite on pushes and pull requests to `master`. |
+| [ Security ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/security.yml) | Security scanning | Restores dependencies, checks for vulnerable packages, builds the solution, and runs CodeQL analysis for C# on pushes, pull requests, and a weekly schedule. |
+| [ GitHub Release ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/github-release.yml) | Release publishing | Determines the .NET version, extracts the version from the release tag, builds self-contained artefacts through the shared release helper, and attaches them to the published release. |
 
 ## 🗂️ Project Structure
 
-```
-SokobanCLI/
-├── GameLogic/          # Game rules, player movement, win detection
-├── Graphics/           # ASCII sprite batch renderer and geometry types
-├── Input/              # Keyboard input manager
-├── Levels/             # Level files (0.lvl – 20.lvl)
-├── Models/             # Tile and World data models
-├── Screens/            # XML screen/UI layout definitions
-└── UI/                 # Screen manager, UI elements (text, menu, worldmap)
-```
+SokobanCLI is organised as one production executable and two test projects.
+
+### Projects and Packages
+
+| Project | Type | Purpose |
+|---------|------|---------|
+| `SokobanCLI` | .NET console application | Runs the game |
+| `SokobanCLI.UnitTests` | NUnit test project | Verifies gameplay and geometry behaviour |
+| `SokobanCLI.ArchitectureTests` | NUnit architecture test project | Verifies project, source, naming, layering, and convention rules |
+
+### Directories
+
+| Directory | Purpose |
+|-----------|---------|
+| `SokobanCLI/GameLogic` | Movement, box-pushing, and completion rules |
+| `SokobanCLI/Graphics` | ASCII rendering and geometry |
+| `SokobanCLI/Input` | Keyboard polling |
+| `SokobanCLI/Levels` | 21 level definitions |
+| `SokobanCLI/Screens` | XML screen definitions |
+| `SokobanCLI/UI` | Screens, menus, and UI elements |
+| `docs` | Architecture, behaviour, flow, testing, and maintenance documentation |
 
 ## 🏗️ Architecture
 
 SokobanCLI is a single-project console application whose static composition root wires singleton managers around a layered model, game-logic, rendering, input, and UI structure.
 
 See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
+
+## 🚢 Deployment
+
+SokobanCLI is deployed as a console executable or a self-contained GitHub release artefact. The executable must run with its `Levels/` and `Screens/` directories in the process working directory. There is no service, container, installer, or persistent deployment state.
 
 ## 📚 Documentation
 
@@ -137,6 +240,14 @@ A structured knowledge base under [`docs/`](./docs) complements the architecture
 | [`docs/change-guide.md`](./docs/change-guide.md) | How to modify common areas safely, with the rules that will fail. |
 | [`docs/troubleshooting.md`](./docs/troubleshooting.md) | Evidenced failure modes and their resolutions. |
 | [`docs/faq.md`](./docs/faq.md) | Frequently asked questions grounded in the implementation. |
+
+## 🩺 Troubleshooting
+
+See [Troubleshooting Guide](./docs/troubleshooting.md) for diagnostic procedures and resolutions to recurring problems.
+
+## ❓ FAQ
+
+See the [Frequently Asked Questions](./docs/faq.md) for responses to frequently raised inquiries.
 
 ## 🤝 Contributing
 
@@ -164,11 +275,19 @@ SokobanCLI runs entirely offline and processes no untrusted network input, and o
 
 For information on reporting security vulnerabilities, see the [Security Policy](./SECURITY.md).
 
-## Support
+## 💬 Support
 
-If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding).
+For support, please [open an issue](https://github.com/hmlendea/sokoban-cli/issues).
 
-## License
+## 💝 Project Engagement
 
-Licensed under the GNU General Public License v3.0 or later.
-See [LICENSE](./LICENSE) for details.
+Discovered a problem with SokobanCLI or have a suggestion for it? [Open an issue](https://github.com/hmlendea/sokoban-cli/issues)!
+
+If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding) or starring ⭐️ it on GitHub!
+
+[![Donate](https://raw.githubusercontent.com/hmlendea/readme-assets/master/donate_generic.png)](https://hmlendea.go.ro/funding)
+
+## 📄 License
+
+This project is being distributed under the `GNU General Public License v3.0` or later.
+See [LICENSE](./LICENSE) for additional information.
