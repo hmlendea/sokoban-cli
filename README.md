@@ -134,6 +134,12 @@ When doing so, please:
 
 See the [Contributing Guidelines](./CONTRIBUTING.md) for details on how to report issues, suggest enhancements, and submit changes.
 
+## 🔒 Security
+
+SokobanCLI runs entirely offline and processes no untrusted network input, and only the latest released version receives security maintenance.
+
+For information on reporting security vulnerabilities, see the [Security Policy](./SECURITY.md).
+
 ## Support
 
 If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding).
