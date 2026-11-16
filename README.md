@@ -1,6 +1,7 @@
 [![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
 [![Latest Release](https://img.shields.io/github/v/release/hmlendea/sokoban-cli)](https://github.com/hmlendea/sokoban-cli/releases/latest)
 [![Build Status](https://github.com/hmlendea/sokoban-cli/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hmlendea/sokoban-cli/actions/workflows/dotnet.yml)
+[![Security Scan](https://github.com/hmlendea/sokoban-cli/actions/workflows/security.yml/badge.svg)](https://github.com/hmlendea/sokoban-cli/actions/workflows/security.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://gnu.org/licenses/gpl-3.0)
 
 # SokobanCLI
@@ -90,6 +91,7 @@ This script downloads and executes an external release helper from `https://raw.
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
 | [ .NET ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/dotnet.yml) | Continuous integration | Determines the .NET version from the production project, restores dependencies, builds the solution, and runs the test suite on pushes and pull requests to `master`. |
+| [ Security ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/security.yml) | Security scanning | Sets up the .NET SDK, restores dependencies, checks for vulnerable packages, and runs CodeQL analysis for C#, publishing results to the Security tab on pushes, pull requests, and a weekly schedule. |
 
 ## 🗂️ Project Structure
 
