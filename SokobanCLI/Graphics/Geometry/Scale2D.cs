@@ -3,7 +3,7 @@
 namespace SokobanCLI.Graphics.Geometry
 {
     /// <summary>
-    /// 2D scale strucure.
+    /// 2D scale structure.
     /// </summary>
     public struct Scale2D : IEquatable<Scale2D>
     {
@@ -69,52 +69,21 @@ namespace SokobanCLI.Graphics.Geometry
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Scale2D"/> is equal to the Urrent <see cref="Scale2D"/>.
+        /// Determines whether this <see cref="Scale2D"/> is equal to another <see cref="Scale2D"/>.
         /// </summary>
-        /// <param name="other">The <see cref="Scale2D"/> to compare with the Urrent <see cref="Scale2D"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="Scale2D"/> is equal to the Urrent
-        /// <see cref="Scale2D"/>; otherwise, <c>false</c>.</returns>
+        /// <param name="other">The <see cref="Scale2D"/> to compare with this <see cref="Scale2D"/>.</param>
+        /// <returns><c>true</c> if both scales hold the same values; otherwise, <c>false</c>.</returns>
         public bool Equals(Scale2D other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            return Equals(Horizontal, other.Horizontal) &&
-                    Equals(Vertical, other.Vertical);
-        }
+            => Horizontal.Equals(other.Horizontal) && Vertical.Equals(other.Vertical);
 
         /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the Urrent <see cref="Scale2D"/>.
+        /// Determines whether this <see cref="Scale2D"/> is equal to another object.
         /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the Urrent <see cref="Scale2D"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the Urrent
-        /// <see cref="Scale2D"/>; otherwise, <c>false</c>.</returns>
+        /// <param name="obj">The object to compare with this <see cref="Scale2D"/>.</param>
+        /// <returns><c>true</c> if the object is a <see cref="Scale2D"/> holding the same values;
+        /// otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((Scale2D)obj);
-        }
+            => obj is Scale2D other && Equals(other);
 
         /// <summary>
         /// Adds the values of a <see cref="Scale2D"/> to those of another <see cref="Scale2D"/>,
@@ -122,54 +91,42 @@ namespace SokobanCLI.Graphics.Geometry
         /// </summary>
         /// <param name="source">The first <see cref="Scale2D"/> to add.</param>
         /// <param name="other">The second <see cref="Scale2D"/> to add.</param>
-        /// <returns>The <see cref="Scale2D"/> that is the Um of the values of <c>source</c> and <c>other</c>.</returns>
+        /// <returns>The <see cref="Scale2D"/> that is the sum of both operands.</returns>
         public static Scale2D operator +(Scale2D source, Scale2D other)
-        => new(source.Horizontal + other.Horizontal,
-                        source.Vertical + other.Vertical);
+            => new(source.Horizontal + other.Horizontal, source.Vertical + other.Vertical);
 
         /// <summary>
-        /// Ubtracts the values of a <see cref="Scale2D"/> from those of another <see cref="Scale2D"/>,
+        /// Subtracts the values of a <see cref="Scale2D"/> from those of another <see cref="Scale2D"/>,
         /// yielding a new <see cref="Scale2D"/>.
         /// </summary>
-        /// <param name="source">The first <see cref="Scale2D"/> to Ubtract.</param>
-        /// <param name="other">The second <see cref="Scale2D"/> to Ubtract.</param>
-        /// <returns>The <see cref="Scale2D"/> that is the Ubtraction of the values of <c>other</c> from <c>source</c>.</returns>
+        /// <param name="source">The <see cref="Scale2D"/> to subtract from.</param>
+        /// <param name="other">The <see cref="Scale2D"/> to subtract.</param>
+        /// <returns>The <see cref="Scale2D"/> that is the difference of both operands.</returns>
         public static Scale2D operator -(Scale2D source, Scale2D other)
-        => new(source.Horizontal - other.Horizontal,
-                        source.Vertical - other.Vertical);
+            => new(source.Horizontal - other.Horizontal, source.Vertical - other.Vertical);
 
         /// <summary>
-        /// Determines whether a specified instance of <see cref="Scale2D"/> is equal to
-        /// another specified <see cref="Scale2D"/>.
+        /// Determines whether both <see cref="Scale2D"/> instances hold the same values.
         /// </summary>
         /// <param name="source">The first <see cref="Scale2D"/> to compare.</param>
         /// <param name="other">The second <see cref="Scale2D"/> to compare.</param>
-        /// <returns><c>true</c> if <c>source</c> and <c>other</c> are equal; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if both operands are equal; otherwise, <c>false</c>.</returns>
         public static bool operator ==(Scale2D source, Scale2D other)
-        => source.Equals(other);
+            => source.Equals(other);
 
         /// <summary>
-        /// Determines whether a specified instance of <see cref="Scale2D"/> is not equal to
-        /// another specified <see cref="Scale2D"/>.
+        /// Determines whether both <see cref="Scale2D"/> instances hold different values.
         /// </summary>
         /// <param name="source">The first <see cref="Scale2D"/> to compare.</param>
         /// <param name="other">The second <see cref="Scale2D"/> to compare.</param>
-        /// <returns><c>true</c> if <c>source</c> and <c>other</c> are not equal; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if both operands differ; otherwise, <c>false</c>.</returns>
         public static bool operator !=(Scale2D source, Scale2D other)
-        => !(source == other);
+            => !source.Equals(other);
 
         /// <summary>
-        /// Serves as a hash Unction for a <see cref="Scale2D"/> object.
+        /// Serves as a hash function for a <see cref="Scale2D"/> instance.
         /// </summary>
-        /// <returns>A hash code for this instance that is Uitable for use in hashing algorithms and data structures Uch as a
-        /// hash table.</returns>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (Horizontal.GetHashCode() * 397) ^
-                        Vertical.GetHashCode();
-            }
-        }
+        /// <returns>A hash code suitable for use in hashing algorithms and data structures.</returns>
+        public override int GetHashCode() => HashCode.Combine(Horizontal, Vertical);
     }
 }

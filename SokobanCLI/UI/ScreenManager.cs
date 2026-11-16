@@ -4,6 +4,7 @@ using System.Threading;
 using System.Xml.Serialization;
 
 using NuciDAL.IO;
+
 using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.UI.Screens;
@@ -15,13 +16,15 @@ namespace SokobanCLI.UI
     /// </summary>
     public sealed class ScreenManager : IScreenManager
     {
-        private static volatile ScreenManager instance;
-        private static readonly Lock syncRoot = new();
+        private static readonly Lock SyncRoot = new();
 
-        private readonly XmlFileObject<Screen> xmlScreenManager;
+        private static readonly string[] NoScreenArgs = [];
+
+        private static volatile ScreenManager instance;
+
+        private readonly XmlFileObject<Screen> screenReader;
 
         private Screen currentScreen;
-        private Screen newScreen;
 
         /// <summary>
         /// Gets the instance.
@@ -33,13 +36,9 @@ namespace SokobanCLI.UI
             {
                 if (instance is null)
                 {
-                    lock (syncRoot)
+                    lock (SyncRoot)
                     {
-                        if (instance is null)
-                        {
-                            XmlFileObject<ScreenManager> xmlManager = new();
-                            instance = xmlManager.Read(Path.Combine("Screens", $"{nameof(ScreenManager)}.xml"));
-                        }
+                        instance ??= new ScreenManager();
                     }
                 }
 
@@ -61,12 +60,12 @@ namespace SokobanCLI.UI
         {
             currentScreen = new TitleScreen();
 
-            xmlScreenManager = new XmlFileObject<Screen>
+            screenReader = new XmlFileObject<Screen>
             {
                 Type = currentScreen.Type
             };
 
-            currentScreen = xmlScreenManager.Read(currentScreen.XmlPath);
+            currentScreen = screenReader.Read(currentScreen.XmlPath);
         }
 
         /// <summary>
@@ -104,7 +103,7 @@ namespace SokobanCLI.UI
         /// Changes the screen.
         /// </summary>
         /// <param name="screenName">Screen name.</param>
-        public void ChangeScreens(string screenName) => ChangeScreens(screenName, null);
+        public void ChangeScreens(string screenName) => ChangeScreens(screenName, NoScreenArgs);
 
         /// <summary>
         /// Changes the screen.
@@ -115,20 +114,28 @@ namespace SokobanCLI.UI
         {
             GraphicsManager.Instance.Clear(currentScreen.BackgroundColour);
 
-            newScreen = Activator.CreateInstance(Type.GetType($"{typeof(Screen).Namespace}.{screenName}")!) as Screen;
-
-            xmlScreenManager.Type = newScreen.Type;
-
-            if (File.Exists(currentScreen.XmlPath))
-            {
-                newScreen = xmlScreenManager.Read(newScreen.XmlPath);
-            }
-
-            newScreen.ScreenArgs = screenArgs;
+            Screen newScreen = CreateScreen(screenName, screenArgs);
 
             currentScreen.UnloadContent();
             currentScreen = newScreen;
             currentScreen.LoadContent();
+        }
+
+        private Screen CreateScreen(string screenName, string[] screenArgs)
+        {
+            Type screenType = Type.GetType($"{typeof(Screen).Namespace}.{screenName}")!;
+            Screen screen = (Activator.CreateInstance(screenType) as Screen)!;
+
+            screenReader.Type = screen.Type;
+
+            if (File.Exists(screen.XmlPath))
+            {
+                screen = screenReader.Read(screen.XmlPath);
+            }
+
+            screen.ScreenArgs = screenArgs;
+
+            return screen;
         }
     }
 }

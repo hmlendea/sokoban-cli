@@ -53,52 +53,21 @@ namespace SokobanCLI.Graphics.Geometry
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Size2D"/> is equal to the Urrent <see cref="Size2D"/>.
+        /// Determines whether this <see cref="Size2D"/> is equal to another <see cref="Size2D"/>.
         /// </summary>
-        /// <param name="other">The <see cref="Size2D"/> to compare with the Urrent <see cref="Size2D"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="Size2D"/> is equal to the Urrent <see cref="Size2D"/>;
-        /// otherwise, <c>false</c>.</returns>
+        /// <param name="other">The <see cref="Size2D"/> to compare with this <see cref="Size2D"/>.</param>
+        /// <returns><c>true</c> if both sizes hold the same values; otherwise, <c>false</c>.</returns>
         public bool Equals(Size2D other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            return Equals(Width, other.Width) &&
-                    Equals(Height, other.Height);
-        }
+            => Width == other.Width && Height == other.Height;
 
         /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the Urrent <see cref="Size2D"/>.
+        /// Determines whether this <see cref="Size2D"/> is equal to another object.
         /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the Urrent <see cref="Size2D"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the Urrent <see cref="Size2D"/>;
+        /// <param name="obj">The object to compare with this <see cref="Size2D"/>.</param>
+        /// <returns><c>true</c> if the object is a <see cref="Size2D"/> holding the same values;
         /// otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((Size2D)obj);
-        }
+            => obj is Size2D other && Equals(other);
 
         /// <summary>
         /// Adds the values of a <see cref="Size2D"/> to those of another <see cref="Size2D"/>,
@@ -106,54 +75,42 @@ namespace SokobanCLI.Graphics.Geometry
         /// </summary>
         /// <param name="source">The first <see cref="Size2D"/> to add.</param>
         /// <param name="other">The second <see cref="Size2D"/> to add.</param>
-        /// <returns>The <see cref="Size2D"/> that is the Um of the values of <c>source</c> and <c>other</c>.</returns>
+        /// <returns>The <see cref="Size2D"/> that is the sum of both operands.</returns>
         public static Size2D operator +(Size2D source, Size2D other)
-        => new(source.Width + other.Width,
-                        source.Height + other.Height);
+            => new(source.Width + other.Width, source.Height + other.Height);
 
         /// <summary>
-        /// Ubtracts the values of a <see cref="Size2D"/> from those of another <see cref="Size2D"/>,
+        /// Subtracts the values of a <see cref="Size2D"/> from those of another <see cref="Size2D"/>,
         /// yielding a new <see cref="Size2D"/>.
         /// </summary>
-        /// <param name="source">The first <see cref="Size2D"/> to Ubtract.</param>
-        /// <param name="other">The second <see cref="Size2D"/> to Ubtract.</param>
-        /// <returns>The <see cref="Size2D"/> that is the Ubtraction of the values of <c>other</c> from <c>source</c>.</returns>
+        /// <param name="source">The <see cref="Size2D"/> to subtract from.</param>
+        /// <param name="other">The <see cref="Size2D"/> to subtract.</param>
+        /// <returns>The <see cref="Size2D"/> that is the difference of both operands.</returns>
         public static Size2D operator -(Size2D source, Size2D other)
-        => new(source.Width - other.Width,
-                        source.Height - other.Height);
+            => new(source.Width - other.Width, source.Height - other.Height);
 
         /// <summary>
-        /// Determines whether a specified instance of <see cref="Size2D"/> is equal to
-        /// another specified <see cref="Size2D"/>.
+        /// Determines whether both <see cref="Size2D"/> instances hold the same values.
         /// </summary>
         /// <param name="source">The first <see cref="Size2D"/> to compare.</param>
         /// <param name="other">The second <see cref="Size2D"/> to compare.</param>
-        /// <returns><c>true</c> if <c>source</c> and <c>other</c> are equal; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if both operands are equal; otherwise, <c>false</c>.</returns>
         public static bool operator ==(Size2D source, Size2D other)
-        => source.Equals(other);
+            => source.Equals(other);
 
         /// <summary>
-        /// Determines whether a specified instance of <see cref="Size2D"/> is not equal to
-        /// another specified <see cref="Size2D"/>.
+        /// Determines whether both <see cref="Size2D"/> instances hold different values.
         /// </summary>
         /// <param name="source">The first <see cref="Size2D"/> to compare.</param>
         /// <param name="other">The second <see cref="Size2D"/> to compare.</param>
-        /// <returns><c>true</c> if <c>source</c> and <c>other</c> are not equal; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if both operands differ; otherwise, <c>false</c>.</returns>
         public static bool operator !=(Size2D source, Size2D other)
-        => !(source == other);
+            => !source.Equals(other);
 
         /// <summary>
-        /// Serves as a hash Unction for a <see cref="Size2D"/> object.
+        /// Serves as a hash function for a <see cref="Size2D"/> instance.
         /// </summary>
-        /// <returns>A hash code for this instance that is Uitable for use in hashing algorithms and data structures Uch as a
-        /// hash table.</returns>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (Width.GetHashCode() * 397) ^
-                        Height.GetHashCode();
-            }
-        }
+        /// <returns>A hash code suitable for use in hashing algorithms and data structures.</returns>
+        public override int GetHashCode() => HashCode.Combine(Width, Height);
     }
 }

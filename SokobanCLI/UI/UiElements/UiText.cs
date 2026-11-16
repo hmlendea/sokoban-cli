@@ -41,7 +41,7 @@ namespace SokobanCLI.UI.UiElements
         {
             Text = string.Empty;
 
-            VerticalAlignment = VerticalAlignment.Center;
+            VerticalAlignment = VerticalAlignment.Centre;
             HorizontalAlignment = HorizontalAlignment.Centre;
         }
 

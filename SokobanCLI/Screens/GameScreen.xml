@@ -13,22 +13,22 @@
 	<GameDetailsLabel>
 		<ForegroundColour>Green</ForegroundColour>
 		<Text>Game details</Text>
-		<VerticalAlignment>Left</VerticalAlignment>
+		<HorizontalAlignment>Left</HorizontalAlignment>
 		<VerticalAlignment>Top</VerticalAlignment>
 	</GameDetailsLabel>
 	<GameDetails>
-		<VerticalAlignment>Left</VerticalAlignment>
+		<HorizontalAlignment>Left</HorizontalAlignment>
 		<VerticalAlignment>Top</VerticalAlignment>
 	</GameDetails>
 	<GameControlsLabel>
 		<ForegroundColour>Green</ForegroundColour>
 		<Text>Game controls</Text>
-		<VerticalAlignment>Left</VerticalAlignment>
+		<HorizontalAlignment>Left</HorizontalAlignment>
 		<VerticalAlignment>Top</VerticalAlignment>
 	</GameControlsLabel>
 	<GameControls>
 		<Text>WASD, Arrows, R, ESC</Text>
-		<VerticalAlignment>Left</VerticalAlignment>
+		<HorizontalAlignment>Left</HorizontalAlignment>
 		<VerticalAlignment>Top</VerticalAlignment>
 	</GameControls>
 </GameScreen>

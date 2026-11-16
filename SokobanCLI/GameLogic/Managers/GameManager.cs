@@ -14,101 +14,92 @@ namespace SokobanCLI.GameLogic.Managers
 
         public void Start(int level)
         {
-            IsRunning = true;
             World = new World(level);
+            IsRunning = true;
         }
 
         public void Stop() => IsRunning = false;
 
         public void MovePlayer(int deltaX, int deltaY)
         {
-            if (deltaX == 0 && deltaY == 0)
+            if (!IsRunning || deltaX == 0 && deltaY == 0)
             {
                 return;
             }
 
-            int x = World.PlayerPosition.X + deltaX;
-            int y = World.PlayerPosition.Y + deltaY;
+            Point2D playerPosition = World.PlayerPosition;
+            Point2D targetPosition = playerPosition + new Point2D(deltaX, deltaY);
 
-            bool moved = false;
-
-            if (x < 0 && x >= 14 &&
-                y < 0 && y >= 14)
+            if (!World.Contains(targetPosition))
             {
                 return;
             }
 
-            switch (World.Tiles[x, y].Id)
+            Tile targetTile = World.GetTile(targetPosition.X, targetPosition.Y);
+            bool moved = targetTile.Id is 0 or 3;
+
+            if (targetTile.Id is 2 or 5)
             {
-                case 0:
-                case 3:
-                    moved = true;
-                    break;
-
-                case 2:
-                    if (World.PlayerPosition.X >= 2 && World.PlayerPosition.X <= 12 &&
-                        World.PlayerPosition.Y >= 2 && World.PlayerPosition.Y <= 12)
-                    {
-                        switch (World.Tiles[World.PlayerPosition.X + deltaX * 2, World.PlayerPosition.Y + deltaY * 2].Id)
-                        {
-                            case 0:
-                                World.Tiles[World.PlayerPosition.X + deltaX * 2, World.PlayerPosition.Y + deltaY * 2] = Tiles.ById(2);
-                                World.Tiles[World.PlayerPosition.X + deltaX, World.PlayerPosition.Y + deltaY] = Tiles.ById(0);
-                                moved = true;
-                                break;
-
-                            case 3:
-                                World.Tiles[World.PlayerPosition.X + deltaX * 2, World.PlayerPosition.Y + deltaY * 2] = Tiles.ById(5);
-                                World.Tiles[World.PlayerPosition.X + deltaX, World.PlayerPosition.Y + deltaY] = Tiles.ById(0);
-                                moved = true;
-                                break;
-                        }
-                    }
-                    break;
-                case 5:
-                    if (World.PlayerPosition.X >= 2 && World.PlayerPosition.X <= 12 &&
-                        World.PlayerPosition.Y >= 2 && World.PlayerPosition.Y <= 12)
-                    {
-                        switch (World.Tiles[World.PlayerPosition.X + deltaX * 2, World.PlayerPosition.Y + deltaY * 2].Id)
-                        {
-                            case 0:
-                                World.Tiles[World.PlayerPosition.X + deltaX * 2, World.PlayerPosition.Y + deltaY * 2] = Tiles.ById(2);
-                                World.Tiles[World.PlayerPosition.X + deltaX, World.PlayerPosition.Y + deltaY] = Tiles.ById(3);
-                                moved = true;
-                                break;
-
-                            case 3:
-                                World.Tiles[World.PlayerPosition.X + deltaX * 2, World.PlayerPosition.Y + deltaY * 2] = Tiles.ById(5);
-                                World.Tiles[World.PlayerPosition.X + deltaX, World.PlayerPosition.Y + deltaY] = Tiles.ById(3);
-                                moved = true;
-                                break;
-                        }
-                    }
-                    break;
+                Point2D boxPosition = targetPosition + new Point2D(deltaX, deltaY);
+                moved = TryMoveBox(targetPosition, boxPosition, targetTile.Id == 5);
             }
 
-            if (moved)
+            if (!moved)
             {
-                World.PlayerPosition = new Point2D(x, y);
-                World.Moves += 1;
-
-                PlayerMoved(this, new PlayerMovementEventArgs(World.PlayerPosition));
+                return;
             }
+
+            World.PlayerPosition = targetPosition;
+            World.Moves += 1;
+            PlayerMoved?.Invoke(this, new PlayerMovementEventArgs(targetPosition));
         }
 
         public bool GetCompletion()
         {
-            for (int y = 0; y < World.Size.Height; y++)
+            for (int y = 0; y < World.Size.Height; y += 1)
             {
-                for (int x = 0; x < World.Size.Width; x++)
+                for (int x = 0; x < World.Size.Width; x += 1)
                 {
-                    if (World.Tiles[x, y].Id == 3)
+                    if (World.GetTile(x, y).Id == 3)
                     {
                         return false;
                     }
                 }
             }
 
+            return true;
+        }
+
+        private bool TryMoveBox(Point2D targetPosition, Point2D boxPosition, bool targetIsGoal)
+        {
+            if (!World.Contains(boxPosition))
+            {
+                return false;
+            }
+
+            int destinationId = World.GetTile(boxPosition.X, boxPosition.Y).Id;
+
+            if (destinationId is not 0 and not 3)
+            {
+                return false;
+            }
+
+            int boxId = 2;
+
+            if (destinationId == 3)
+            {
+                boxId = 5;
+            }
+
+            int targetId = 0;
+
+            if (targetIsGoal)
+            {
+                targetId = 3;
+            }
+
+            World.Tiles[boxPosition.X, boxPosition.Y] = Tiles.ById(boxId);
+            World.Tiles[targetPosition.X, targetPosition.Y] = Tiles.ById(targetId);
             return true;
         }
     }

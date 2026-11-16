@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
@@ -50,12 +49,6 @@ namespace SokobanCLI.UI.UiElements
 
         /// <summary>Gets a value indicating whether this element is disposed.</summary>
         bool IsDisposed { get; }
-
-        /// <summary>Gets or sets the site.</summary>
-        ISite Site { get; set; }
-
-        /// <summary>Gets the container.</summary>
-        IContainer Container { get; }
 
         /// <summary>Loads the content.</summary>
         void LoadContent();
