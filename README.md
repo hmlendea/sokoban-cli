@@ -81,7 +81,17 @@ The repository includes `release.sh`, which delegates to the upstream deployment
 bash ./release.sh 1.0.0
 ```
 
-## Project structure
+This script downloads and executes an external release helper from `https://raw.githubusercontent.com/hmlendea/deployment-scripts/master/release/dotnet/10.0.sh`.
+
+**Note:** Piping into `bash` is an intensely controversial topic. Please review any external scripts before running them in your environment!
+
+## ⚙️ GitHub Actions
+
+| Workflow | Purpose | What it does |
+|----------|---------|--------------|
+| [ .NET ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/dotnet.yml) | Continuous integration | Determines the .NET version from the production project, restores dependencies, builds the solution, and runs the test suite on pushes and pull requests to `master`. |
+
+## 🗂️ Project Structure
 
 ```
 SokobanCLI/
@@ -93,16 +103,6 @@ SokobanCLI/
 ├── Screens/            # XML screen/UI layout definitions
 └── UI/                 # Screen manager, UI elements (text, menu, worldmap)
 ```
-
-## Contributing
-
-Contributions are welcome. Please maintain cross-platform compatibility and follow the existing code style.
-
-This script downloads and executes an external release helper from `https://raw.githubusercontent.com/hmlendea/deployment-scripts/master/release/dotnet/10.0.sh`.
-
-**Note:** Piping into `bash` is an intensely controversial topic. Please review any external scripts before running them in your environment!
-
-## Project Structure
 
 ## Contributing
 

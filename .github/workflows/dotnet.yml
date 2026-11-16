@@ -12,14 +12,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v7
+
+    - name: Determine the .NET version
+      id: dotnet
+      run: |
+        TARGET_FRAMEWORK="$(sed -n 's|.*<TargetFramework>\(.*\)</TargetFramework>.*|\1|p' SokobanCLI/SokobanCLI.csproj | head -n 1)"
+
+        if [[ -z "${TARGET_FRAMEWORK}" ]]; then
+          echo 'ERROR: Could not determine the target framework from SokobanCLI/SokobanCLI.csproj.' >&2
+          exit 1
+        fi
+
+        DOTNET_VERSION="${TARGET_FRAMEWORK#net}"
+        echo "version=${DOTNET_VERSION}" >> "$GITHUB_OUTPUT"
+
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 10.0.x
+        dotnet-version: ${{ steps.dotnet.outputs.version }}.x
+
     - name: Restore dependencies
       run: dotnet restore
+
     - name: Build
       run: dotnet build --no-restore
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
