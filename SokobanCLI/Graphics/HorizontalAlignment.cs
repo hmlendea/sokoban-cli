@@ -1,9 +1,12 @@
 ﻿namespace SokobanCLI.Graphics
 {
+    /// <summary>
+    /// Horizontal placement of a sprite within its bounds.
+    /// </summary>
     public enum HorizontalAlignment
     {
-        Top,
+        Left,
         Centre,
-        Bottom
+        Right
     }
 }

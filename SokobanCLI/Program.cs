@@ -1,13 +1,15 @@
 ﻿using System;
 
 using SokobanCLI.GameLogic.Managers;
-using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.Graphics;
 using SokobanCLI.Input;
 using SokobanCLI.UI;
 
 namespace SokobanCLI
 {
+    /// <summary>
+    /// Application entry point and composition root.
+    /// </summary>
     public static class Program
     {
         private static AsciiSpriteBatch spriteBatch;
@@ -25,7 +27,6 @@ namespace SokobanCLI
             LoadContent();
             GraphicsManager.Instance.Clear(ConsoleColor.Black);
 
-            // TODO: Have an end to this
             while (true)
             {
                 Update();
@@ -45,7 +46,7 @@ namespace SokobanCLI
             GraphicsManager.Instance.SpriteBatch = spriteBatch;
 
             ScreenManager.Instance.LoadContent();
-            InputManager.Instance.KeyboardKeyPressed += delegate { ScreenManager.Instance.Draw(spriteBatch); };
+            InputManager.Instance.KeyboardKeyPressed += (sender, e) => ScreenManager.Instance.Draw(spriteBatch);
         }
 
         /// <summary>

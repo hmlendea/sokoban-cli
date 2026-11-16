@@ -3,7 +3,7 @@
 namespace SokobanCLI.Graphics.Geometry
 {
     /// <summary>
-    /// 2D rectangle structure
+    /// 2D rectangle structure.
     /// </summary>
     public struct Rectangle2D : IEquatable<Rectangle2D>
     {
@@ -13,10 +13,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <value>The location.</value>
         public Point2D Location
         {
-            get
-            {
-                return new Point2D(X, Y);
-            }
+            get => new(X, Y);
             set
             {
                 X = value.X;
@@ -30,10 +27,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <value>The size.</value>
         public Size2D Size
         {
-            get
-            {
-                return new Size2D(Width, Height);
-            }
+            get => new(Width, Height);
             set
             {
                 Width = value.Width;
@@ -137,119 +131,73 @@ namespace SokobanCLI.Graphics.Geometry
         /// <returns><c>true</c> if the specified point is inside the rectangle area;
         /// otherwise, <c>false</c>.</returns>
         public bool Contains(Point2D point)
-        => Contains(point.X, point.Y);
+            => Contains(point.X, point.Y);
 
         /// <summary>
-        /// Checks whether the specified <see cref="Rectangle2D"/> Ully contains another <see cref="Rectangle2D"/>.
+        /// Checks whether this <see cref="Rectangle2D"/> fully contains another <see cref="Rectangle2D"/>.
         /// </summary>
         /// <param name="rectangle">The rectangle.</param>
         /// <returns><c>true</c> if the specified rectangle is inside the rectangle area;
         /// otherwise, <c>false</c>.</returns>
         public bool Contains(Rectangle2D rectangle)
-        => Contains(rectangle.Location) &&
-            Contains(rectangle.Right, rectangle.Bottom);
+            => Contains(rectangle.Location) &&
+                Contains(rectangle.Right, rectangle.Bottom);
 
         /// <summary>
-        /// Checks whether the specified <see cref="Rectangle2D"/> contains a set of coordinates.
+        /// Checks whether this <see cref="Rectangle2D"/> contains a set of coordinates.
         /// </summary>
         /// <param name="x">The X-axis coordinate.</param>
-        /// <param name="x">The Y-axis coordinate.</param>
-        /// <returns><c>true</c> if the specified set of coordinates are inside the rectangle area;
+        /// <param name="y">The Y-axis coordinate.</param>
+        /// <returns><c>true</c> if the specified set of coordinates is inside the rectangle area;
         /// otherwise, <c>false</c>.</returns>
         public bool Contains(int x, int y)
-        {
-            if (Left <= x && Right >= x && Top <= y && Bottom >= y)
-            {
-                return true;
-            }
-
-            return false;
-        }
+            => Left <= x &&
+                Right >= x &&
+                Top <= y &&
+                Bottom >= y;
 
         /// <summary>
-        /// Determines whether the specified <see cref="Rectangle2D"/> is equal to the Urrent <see cref="Rectangle2D"/>.
+        /// Determines whether this <see cref="Rectangle2D"/> is equal to another <see cref="Rectangle2D"/>.
         /// </summary>
-        /// <param name="other">The <see cref="Rectangle2D"/> to compare with the Urrent <see cref="Rectangle2D"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="Rectangle2D"/> is equal to the Urrent
-        /// <see cref="Rectangle2D"/>; otherwise, <c>false</c>.</returns>
+        /// <param name="other">The <see cref="Rectangle2D"/> to compare with this <see cref="Rectangle2D"/>.</param>
+        /// <returns><c>true</c> if both rectangles hold the same location and size; otherwise, <c>false</c>.</returns>
         public bool Equals(Rectangle2D other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            return Equals(X, other.X) &&
-                    Equals(Y, other.Y) &&
-                    Equals(Width, other.Width) &&
-                    Equals(Height, other.Height);
-        }
+            => X == other.X &&
+                Y == other.Y &&
+                Width == other.Width &&
+                Height == other.Height;
 
         /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the Urrent <see cref="Rectangle2D"/>.
+        /// Determines whether this <see cref="Rectangle2D"/> is equal to another object.
         /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the Urrent <see cref="Rectangle2D"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the Urrent
-        /// <see cref="Rectangle2D"/>; otherwise, <c>false</c>.</returns>
+        /// <param name="obj">The object to compare with this <see cref="Rectangle2D"/>.</param>
+        /// <returns><c>true</c> if the object is a <see cref="Rectangle2D"/> holding the same location and size;
+        /// otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((Rectangle2D)obj);
-        }
+            => obj is Rectangle2D other && Equals(other);
 
         /// <summary>
-        /// Determines whether a specified instance of <see cref="Rectangle2D"/> is equal to
-        /// another specified <see cref="Rectangle2D"/>.
+        /// Determines whether both <see cref="Rectangle2D"/> instances hold the same location and size.
         /// </summary>
         /// <param name="source">The first <see cref="Rectangle2D"/> to compare.</param>
         /// <param name="other">The second <see cref="Rectangle2D"/> to compare.</param>
-        /// <returns><c>true</c> if <c>source</c> and <c>other</c> are equal; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if both operands are equal; otherwise, <c>false</c>.</returns>
         public static bool operator ==(Rectangle2D source, Rectangle2D other)
-        => source.Equals(other);
+            => source.Equals(other);
 
         /// <summary>
-        /// Determines whether a specified instance of <see cref="Rectangle2D"/> is not equal
-        /// to another specified <see cref="Rectangle2D"/>.
+        /// Determines whether both <see cref="Rectangle2D"/> instances hold a different location or size.
         /// </summary>
         /// <param name="source">The first <see cref="Rectangle2D"/> to compare.</param>
         /// <param name="other">The second <see cref="Rectangle2D"/> to compare.</param>
-        /// <returns><c>true</c> if <c>source</c> and <c>other</c> are not equal; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if both operands differ; otherwise, <c>false</c>.</returns>
         public static bool operator !=(Rectangle2D source, Rectangle2D other)
-        => !(source == other);
+            => !source.Equals(other);
 
         /// <summary>
-        /// Serves as a hash Unction for a <see cref="Rectangle2D"/> object.
+        /// Serves as a hash function for a <see cref="Rectangle2D"/> instance.
         /// </summary>
-        /// <returns>A hash code for this instance that is Uitable for use in hashing algorithms and data structures Uch as a
-        /// hash table.</returns>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (X.GetHashCode() * 397) ^
-                        Y.GetHashCode() ^
-                        Width.GetHashCode() ^
-                        Height.GetHashCode();
-            }
-        }
+        /// <returns>A hash code suitable for use in hashing algorithms and data structures.</returns>
+        public override int GetHashCode() => HashCode.Combine(X, Y, Width, Height);
     }
 }

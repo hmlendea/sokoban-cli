@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Xml.Serialization;
 
@@ -14,7 +13,7 @@ namespace SokobanCLI.UI.UiElements
     /// <summary>
     /// GUI Element.
     /// </summary>
-    public class UiElement : IComponent, IDisposable, IUiElement
+    public class UiElement : IDisposable, IUiElement
     {
         private ConsoleColor oldBackgroundColour;
         private ConsoleColor oldForegroundColour;
@@ -109,32 +108,11 @@ namespace SokobanCLI.UI.UiElements
         public bool IsDisposed { get; private set; }
 
         /// <summary>
-        /// Gets or sets the site.
-        /// </summary>
-        /// <value>The site.</value>
-        [XmlIgnore]
-        public ISite Site { get; set; }
-
-        /// <summary>
         /// Gets a value indicating whether this <see cref="UiElement"/> can raise events.
         /// </summary>
         /// <value><c>true</c> if can raise events; otherwise, <c>false</c>.</value>
         [XmlIgnore]
         protected virtual bool CanRaiseEvents => true;
-
-        /// <summary>
-        /// Gets the container.
-        /// </summary>
-        /// <value>The container.</value>
-        [XmlIgnore]
-        public IContainer Container => Site?.Container;
-
-        /// <summary>
-        /// Gets a value indicating whether this <see cref="UiElement"/> is in design mode.
-        /// </summary>
-        /// <value><c>true</c> if in design mode; otherwise, <c>false</c>.</value>
-        [XmlIgnore]
-        protected bool IsDesignMode => Site is not null && Site.DesignMode;
 
         /// <summary>
         /// Occurs when the BackgroundColour property was changed.
@@ -182,8 +160,6 @@ namespace SokobanCLI.UI.UiElements
 
             Children = [];
         }
-
-        ~UiElement() => Dispose();
 
         /// <summary>
         /// Loads the content.
@@ -238,35 +214,19 @@ namespace SokobanCLI.UI.UiElements
         /// </summary>
         public virtual void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-
-            Children.ForEach(c => c.Dispose());
-        }
-
-        /// <summary>
-        /// Disposes of this <see cref="UiElement"/>.
-        /// </summary>
-        protected void Dispose(bool disposing)
-        {
-            if (!disposing)
+            if (IsDisposed)
             {
                 return;
             }
 
             IsDisposed = true;
 
-            lock (this)
-            {
-                if (Site is not null && Site.Container is not null)
-                {
-                    Site.Container.Remove(this);
-                }
+            UnloadContent();
+            OnDisposed(this, EventArgs.Empty);
 
-                UnloadContent();
+            Children.ForEach(child => child.Dispose());
 
-                OnDisposed(this, EventArgs.Empty);
-            }
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -340,27 +300,6 @@ namespace SokobanCLI.UI.UiElements
 
             oldLocation = Location;
             oldSize = Size;
-        }
-
-        /// <summary>
-        /// Gets the service.
-        /// </summary>
-        /// <returns>The service.</returns>
-        /// <param name="service">Service.</param>
-        protected virtual object GetService(Type service) => Site?.GetService(service);
-
-        /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="UiElement"/>.
-        /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="UiElement"/>.</returns>
-        public override string ToString()
-        {
-            if (Site is null)
-            {
-                return GetType().FullName;
-            }
-
-            return $"{Site.Name} [{GetType().FullName}]";
         }
 
         /// <summary>

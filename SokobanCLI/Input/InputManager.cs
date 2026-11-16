@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+
 using SokobanCLI.Input.Events;
 
 namespace SokobanCLI.Input
@@ -9,8 +10,9 @@ namespace SokobanCLI.Input
     /// </summary>
     public sealed class InputManager : IInputManager
     {
+        private static readonly Lock SyncRoot = new();
+
         private static volatile InputManager instance;
-        private static readonly Lock syncRoot = new();
 
         /// <summary>
         /// Gets the instance.
@@ -22,7 +24,7 @@ namespace SokobanCLI.Input
             {
                 if (instance is null)
                 {
-                    lock (syncRoot)
+                    lock (SyncRoot)
                     {
                         instance ??= new InputManager();
                     }
@@ -47,12 +49,12 @@ namespace SokobanCLI.Input
                 return;
             }
 
-            CheckKeyboardKeyPressed();
+            ExposePressedKey();
         }
 
-        private void CheckKeyboardKeyPressed()
+        private void ExposePressedKey()
         {
-            ConsoleKey key = Console.ReadKey().Key;
+            ConsoleKey key = Console.ReadKey(true).Key;
 
             KeyboardKeyPressed?.Invoke(this, new ConsoleKeyEventArgs(key));
         }

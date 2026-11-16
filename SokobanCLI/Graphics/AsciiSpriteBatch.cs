@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using SokobanCLI.Graphics.Geometry;
 
@@ -104,34 +102,34 @@ namespace SokobanCLI.Graphics
         /// </summary>
         public void Draw(AsciiSprite sprite)
         {
-            List<string> lines = sprite.Text.Split('\n').ToList();
+            string[] lines = sprite.Text.Split('\n');
             int firstRow = 0;
 
-            switch (sprite.HorizontalAlignment)
+            switch (sprite.VerticalAlignment)
             {
-                case HorizontalAlignment.Centre:
-                    firstRow = (sprite.Size.Height - lines.Count) / 2;
+                case VerticalAlignment.Centre:
+                    firstRow = (sprite.Size.Height - lines.Length) / 2;
                     break;
 
-                case HorizontalAlignment.Bottom:
-                    firstRow = sprite.Size.Height - lines.Count;
+                case VerticalAlignment.Bottom:
+                    firstRow = sprite.Size.Height - lines.Length;
                     break;
             }
 
-            int lastRow = firstRow + lines.Count;
+            int lastRow = firstRow + lines.Length;
 
             for (int y = firstRow; y < lastRow; y++)
             {
                 int row = y - firstRow;
                 int firstCol = 0;
 
-                switch (sprite.VerticalAlignment)
+                switch (sprite.HorizontalAlignment)
                 {
-                    case VerticalAlignment.Center:
+                    case HorizontalAlignment.Centre:
                         firstCol = (sprite.Size.Width - lines[row].Length) / 2;
                         break;
 
-                    case VerticalAlignment.Right:
+                    case HorizontalAlignment.Right:
                         firstCol = sprite.Size.Width - lines[row].Length;
                         break;
                 }
