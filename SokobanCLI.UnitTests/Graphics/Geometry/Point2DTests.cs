@@ -7,7 +7,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
     [TestFixture]
     public class Point2DTests
     {
-        // ── Constructor ──────────────────────────────────────────
 
         [Test]
         public void GivenZeroCoordinates_WhenConstructing_ThenIsEmpty()
@@ -44,7 +43,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(point.Y, Is.EqualTo(8));
         }
 
-        // ── Empty ────────────────────────────────────────────────
 
         [Test]
         public void GivenEmptyProperty_WhenAccessed_ThenReturnsZeroPoint()
@@ -55,7 +53,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(empty.Y, Is.EqualTo(0));
         }
 
-        // ── Equals ──────────────────────────────────────────────
 
         [Test]
         public void GivenTwoPointsWithSameCoordinates_WhenCallingEquals_ThenReturnsTrue()
@@ -93,7 +90,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(a != b);
         }
 
-        // ── Operators ────────────────────────────────────────────
 
         [Test]
         public void GivenTwoPoints_WhenAdding_ThenReturnsSumPoint()

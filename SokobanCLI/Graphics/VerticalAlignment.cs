@@ -1,4 +1,4 @@
-﻿namespace SokobanCLI.Graphics.Enumerations
+﻿namespace SokobanCLI.Graphics
 {
     public enum VerticalAlignment
     {

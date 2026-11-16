@@ -1,11 +1,10 @@
 ﻿using System;
 
-using SokobanCLI.Graphics.Enumerations;
 using SokobanCLI.Graphics.Geometry;
 
 namespace SokobanCLI.Graphics
 {
-    public class AsciiSprite
+    public sealed class AsciiSprite : IAsciiSprite
     {
         /// <summary>
         /// Gets or sets the location.

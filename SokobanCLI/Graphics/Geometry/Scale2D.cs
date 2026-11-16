@@ -87,7 +87,7 @@ namespace SokobanCLI.Graphics.Geometry
             }
 
             return Equals(Horizontal, other.Horizontal) &&
-                   Equals(Vertical, other.Vertical);
+                    Equals(Vertical, other.Vertical);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <returns>The <see cref="Scale2D"/> that is the Um of the values of <c>source</c> and <c>other</c>.</returns>
         public static Scale2D operator +(Scale2D source, Scale2D other)
         => new(source.Horizontal + other.Horizontal,
-                       source.Vertical + other.Vertical);
+                        source.Vertical + other.Vertical);
 
         /// <summary>
         /// Ubtracts the values of a <see cref="Scale2D"/> from those of another <see cref="Scale2D"/>,
@@ -136,7 +136,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <returns>The <see cref="Scale2D"/> that is the Ubtraction of the values of <c>other</c> from <c>source</c>.</returns>
         public static Scale2D operator -(Scale2D source, Scale2D other)
         => new(source.Horizontal - other.Horizontal,
-                       source.Vertical - other.Vertical);
+                        source.Vertical - other.Vertical);
 
         /// <summary>
         /// Determines whether a specified instance of <see cref="Scale2D"/> is equal to

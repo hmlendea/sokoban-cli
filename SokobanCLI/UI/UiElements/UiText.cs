@@ -1,13 +1,15 @@
 ﻿using SokobanCLI.Graphics;
-using SokobanCLI.Graphics.Enumerations;
+using SokobanCLI.Graphics;
 
-namespace SokobanCLI.Ui.UiElements
+namespace SokobanCLI.UI.UiElements
 {
     /// <summary>
     /// Text UI element.
     /// </summary>
-    public class UiText : UiElement
+    public sealed class UiText : UiElement, IUiText
     {
+        private AsciiSprite text;
+
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -31,8 +33,6 @@ namespace SokobanCLI.Ui.UiElements
         /// </summary>
         /// <value>The margins.</value>
         public int Margins { get; set; }
-
-        AsciiSprite text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UiText"/> class.

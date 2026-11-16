@@ -7,7 +7,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
     [TestFixture]
     public class Rectangle2DTests
     {
-        // ── Constructor ──────────────────────────────────────────
 
         [Test]
         public void GivenZeroValues_WhenConstructingWithXYWidthHeight_ThenIsEmpty()
@@ -49,7 +48,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(rect.Height, Is.EqualTo(8));
         }
 
-        // ── Static properties ────────────────────────────────────
 
         [Test]
         public void GivenEmptyProperty_WhenAccessed_ThenReturnsZeroRectangle()
@@ -62,7 +60,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(empty.Height, Is.EqualTo(0));
         }
 
-        // ── Computed properties ──────────────────────────────────
 
         [Test]
         public void GivenRectangle_WhenAccessingLeft_ThenReturnsX()
@@ -112,7 +109,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(rect.Size, Is.EqualTo(new Size2D(10, 5)));
         }
 
-        // ── Equals ──────────────────────────────────────────────
 
         [Test]
         public void GivenTwoRectanglesWithSameValues_WhenCallingEquals_ThenReturnsTrue()
@@ -132,7 +128,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(a.Equals(b), Is.False);
         }
 
-        // ── Contains ────────────────────────────────────────────
 
         [Test]
         public void GivenCoordinatesInsideRectangle_WhenCallingContainsXY_ThenReturnsTrue()

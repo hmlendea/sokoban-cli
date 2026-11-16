@@ -9,7 +9,6 @@ namespace SokobanCLI.UnitTests.Models
     [TestFixture]
     public class TilesTests
     {
-        // ── ById ──────────────────────────────────────────────────
 
         [Test]
         public void GivenId0_WhenCallingById_ThenReturnsEmptyTile()

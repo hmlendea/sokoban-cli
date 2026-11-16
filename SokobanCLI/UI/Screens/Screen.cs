@@ -6,12 +6,12 @@ using SokobanCLI.Graphics;
 using SokobanCLI.Input;
 using SokobanCLI.Input.Events;
 
-namespace SokobanCLI.Ui.Screens
+namespace SokobanCLI.UI.Screens
 {
     /// <summary>
     /// Screen.
     /// </summary>
-    public class Screen
+    public class Screen : IScreen
     {
         /// <summary>
         /// Gets or sets the identifier.

@@ -1,11 +1,11 @@
 ﻿using SokobanCLI.Graphics;
 
-namespace SokobanCLI.Ui.Screens
+namespace SokobanCLI.UI.Screens
 {
     /// <summary>
     /// Title screen.
     /// </summary>
-    public class TitleScreen : MenuScreen
+    public sealed class TitleScreen : MenuScreen, ITitleScreen
     {
         /// <summary>
         /// Loads the content.

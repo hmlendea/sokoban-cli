@@ -10,7 +10,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry.Mapping
     [TestFixture]
     public class SizeMappingExtensionsTests
     {
-        // ── ToSize2D ─────────────────────────────────────────────
 
         [Test]
         public void GivenSystemSize_WhenCallingToSize2D_ThenReturnsMatchingSize2D()
@@ -33,7 +32,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry.Mapping
             Assert.That(result.IsEmpty);
         }
 
-        // ── ToSystemPoint ────────────────────────────────────────
 
         [Test]
         public void GivenSize2D_WhenCallingToSystemPoint_ThenReturnsMatchingSystemSize()

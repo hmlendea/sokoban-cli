@@ -1,22 +1,22 @@
 ﻿using System;
 
 using SokobanCLI.GameLogic.Managers;
-using SokobanCLI.GameLogic.Managers.Interfaces;
+using SokobanCLI.GameLogic.Managers;
 using SokobanCLI.Graphics;
 using SokobanCLI.Input;
-using SokobanCLI.Ui;
+using SokobanCLI.UI;
 
 namespace SokobanCLI
 {
-    class Program
+    public static class Program
     {
-        static AsciiSpriteBatch spriteBatch;
+        private static AsciiSpriteBatch spriteBatch;
 
-        static IGameManager game;
+        private static IGameManager game;
 
-        static float gameTime;
+        private static float gameTime;
 
-        static void Main()
+        private static void Main()
         {
             Console.CursorVisible = false;
 
@@ -36,7 +36,7 @@ namespace SokobanCLI
         /// <summary>
         /// Loads the content.
         /// </summary>
-        static void LoadContent()
+        private static void LoadContent()
         {
             spriteBatch = new AsciiSpriteBatch();
             spriteBatch.LoadContent();
@@ -51,7 +51,7 @@ namespace SokobanCLI
         /// <summary>
         /// Updates the content.
         /// </summary>
-        static void Update()
+        private static void Update()
         {
             spriteBatch.Update();
 
@@ -65,7 +65,7 @@ namespace SokobanCLI
         /// <summary>
         /// Draws the content.
         /// </summary>
-        static void Draw()
+        private static void Draw()
         {
             ScreenManager.Instance.Draw(spriteBatch);
             GraphicsManager.Instance.Draw();

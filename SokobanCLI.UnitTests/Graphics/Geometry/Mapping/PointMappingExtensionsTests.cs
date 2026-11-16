@@ -10,7 +10,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry.Mapping
     [TestFixture]
     public class PointMappingExtensionsTests
     {
-        // ── ToPoint2D ────────────────────────────────────────────
 
         [Test]
         public void GivenSystemPoint_WhenCallingToPoint2D_ThenReturnsMatchingPoint2D()
@@ -33,7 +32,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry.Mapping
             Assert.That(result.IsEmpty);
         }
 
-        // ── ToSystemPoint ────────────────────────────────────────
 
         [Test]
         public void GivenPoint2D_WhenCallingToSystemPoint_ThenReturnsMatchingSystemPoint()

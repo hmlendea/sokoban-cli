@@ -7,7 +7,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
     [TestFixture]
     public class Size2DTests
     {
-        // ── Constructor ──────────────────────────────────────────
 
         [Test]
         public void GivenZeroDimensions_WhenConstructing_ThenIsEmpty()
@@ -44,7 +43,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(size.Height, Is.EqualTo(3));
         }
 
-        // ── Empty ────────────────────────────────────────────────
 
         [Test]
         public void GivenEmptyProperty_WhenAccessed_ThenReturnsZeroSize()
@@ -55,7 +53,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(empty.Height, Is.EqualTo(0));
         }
 
-        // ── Equals ──────────────────────────────────────────────
 
         [Test]
         public void GivenTwoSizesWithSameDimensions_WhenCallingEquals_ThenReturnsTrue()
@@ -93,7 +90,6 @@ namespace SokobanCLI.UnitTests.Graphics.Geometry
             Assert.That(a != b);
         }
 
-        // ── Operators ────────────────────────────────────────────
 
         [Test]
         public void GivenTwoSizes_WhenAdding_ThenReturnsSumSize()

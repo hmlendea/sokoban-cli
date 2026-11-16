@@ -1,7 +1,7 @@
 ﻿using SokobanCLI.GameLogic.Events;
 using SokobanCLI.Models;
 
-namespace SokobanCLI.GameLogic.Managers.Interfaces
+namespace SokobanCLI.GameLogic.Managers
 {
     public interface IGameManager
     {

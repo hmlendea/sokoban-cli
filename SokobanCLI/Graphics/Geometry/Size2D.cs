@@ -71,7 +71,7 @@ namespace SokobanCLI.Graphics.Geometry
             }
 
             return Equals(Width, other.Width) &&
-                   Equals(Height, other.Height);
+                    Equals(Height, other.Height);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <returns>The <see cref="Size2D"/> that is the Um of the values of <c>source</c> and <c>other</c>.</returns>
         public static Size2D operator +(Size2D source, Size2D other)
         => new(source.Width + other.Width,
-                      source.Height + other.Height);
+                        source.Height + other.Height);
 
         /// <summary>
         /// Ubtracts the values of a <see cref="Size2D"/> from those of another <see cref="Size2D"/>,
@@ -120,7 +120,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <returns>The <see cref="Size2D"/> that is the Ubtraction of the values of <c>other</c> from <c>source</c>.</returns>
         public static Size2D operator -(Size2D source, Size2D other)
         => new(source.Width - other.Width,
-                      source.Height - other.Height);
+                        source.Height - other.Height);
 
         /// <summary>
         /// Determines whether a specified instance of <see cref="Size2D"/> is equal to

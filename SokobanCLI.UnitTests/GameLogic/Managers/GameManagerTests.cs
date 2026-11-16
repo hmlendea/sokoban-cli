@@ -26,7 +26,6 @@ namespace SokobanCLI.UnitTests.GameLogic.Managers
             game.Start(0);
         }
 
-        // ── Start ────────────────────────────────────────────────
 
         [Test]
         public void GivenLevel_WhenStarting_ThenIsRunningIsTrue()
@@ -46,7 +45,6 @@ namespace SokobanCLI.UnitTests.GameLogic.Managers
             Assert.That(game.World.Moves, Is.EqualTo(0));
         }
 
-        // ── Stop ─────────────────────────────────────────────────
 
         [Test]
         public void GivenRunningGame_WhenStopping_ThenIsRunningIsFalse()
@@ -56,7 +54,6 @@ namespace SokobanCLI.UnitTests.GameLogic.Managers
             Assert.That(game.IsRunning, Is.False);
         }
 
-        // ── MovePlayer – no movement ─────────────────────────────
 
         [Test]
         public void GivenZeroDeltas_WhenMovingPlayer_ThenPlayerPositionDoesNotChange()
@@ -94,7 +91,6 @@ namespace SokobanCLI.UnitTests.GameLogic.Managers
             Assert.That(game.World.Moves, Is.EqualTo(0));
         }
 
-        // ── MovePlayer – player movement ─────────────────────────
 
         [Test]
         public void GivenEmptyTileAhead_WhenMovingPlayer_ThenPlayerPositionIsUpdated()
@@ -132,7 +128,6 @@ namespace SokobanCLI.UnitTests.GameLogic.Managers
             Assert.That(game.World.Moves, Is.EqualTo(1));
         }
 
-        // ── MovePlayer – box pushing ─────────────────────────────
 
         [Test]
         public void GivenBoxWithEmptyTileBehind_WhenMovingPlayer_ThenBoxIsMoved()
@@ -229,7 +224,6 @@ namespace SokobanCLI.UnitTests.GameLogic.Managers
             Assert.That(game.World.PlayerPosition, Is.EqualTo(positionBefore));
         }
 
-        // ── MovePlayer – event ───────────────────────────────────
 
         [Test]
         public void GivenEmptyTileAhead_WhenMovingPlayer_ThenPlayerMovedEventIsFired()
@@ -247,7 +241,6 @@ namespace SokobanCLI.UnitTests.GameLogic.Managers
                 Times.Once);
         }
 
-        // ── GetCompletion ────────────────────────────────────────
 
         [Test]
         public void GivenRemainingGoalTiles_WhenGettingCompletion_ThenReturnsFalse()

@@ -6,21 +6,22 @@ using System.Xml.Serialization;
 using NuciDAL.IO;
 using SokobanCLI.Graphics;
 using SokobanCLI.Graphics.Geometry;
-using SokobanCLI.Ui.Screens;
+using SokobanCLI.UI.Screens;
 
-namespace SokobanCLI.Ui
+namespace SokobanCLI.UI
 {
     /// <summary>
     /// Screen manager.
     /// </summary>
-    public class ScreenManager
+    public sealed class ScreenManager : IScreenManager
     {
-        static volatile ScreenManager instance;
-        static readonly Lock syncRoot = new();
+        private static volatile ScreenManager instance;
+        private static readonly Lock syncRoot = new();
 
-        Screen currentScreen, newScreen;
+        private readonly XmlFileObject<Screen> xmlScreenManager;
 
-        readonly XmlFileObject<Screen> xmlScreenManager;
+        private Screen currentScreen;
+        private Screen newScreen;
 
         /// <summary>
         /// Gets the instance.
@@ -114,7 +115,7 @@ namespace SokobanCLI.Ui
         {
             GraphicsManager.Instance.Clear(currentScreen.BackgroundColour);
 
-            newScreen = (Screen)Activator.CreateInstance(Type.GetType($"{typeof(Screen).Namespace}.{screenName}"));
+            newScreen = Activator.CreateInstance(Type.GetType($"{typeof(Screen).Namespace}.{screenName}")!) as Screen;
 
             xmlScreenManager.Type = newScreen.Type;
 

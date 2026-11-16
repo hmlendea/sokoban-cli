@@ -3,13 +3,18 @@
 using SokobanCLI.Graphics.Geometry;
 using SokobanCLI.Input.Events;
 
-namespace SokobanCLI.Ui.UiElements
+namespace SokobanCLI.UI.UiElements
 {
     /// <summary>
     /// Menu item GUI element.
     /// </summary>
-    public class UiMenuItem : UiElement
+    public class UiMenuItem : UiElement, IUiMenuItem
     {
+        /// <summary>
+        /// The text UI element.
+        /// </summary>
+        protected UiText text;
+
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -27,11 +32,6 @@ namespace SokobanCLI.Ui.UiElements
         /// Occurs when activated.
         /// </summary>
         public event EventHandler Activated;
-
-        /// <summary>
-        /// The text UI element.
-        /// </summary>
-        protected UiText text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UiMenuItem"/> class.
@@ -67,7 +67,7 @@ namespace SokobanCLI.Ui.UiElements
             text.Location = Location;
             text.Size = Size;
 
-            if (InputFocus)
+            if (HasInputFocus)
             {
                 text.ForegroundColour = HighlightColour;
             }

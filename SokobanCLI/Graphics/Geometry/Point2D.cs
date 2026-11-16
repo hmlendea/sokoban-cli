@@ -71,7 +71,7 @@ namespace SokobanCLI.Graphics.Geometry
             }
 
             return Equals(X, other.X) &&
-                   Equals(Y, other.Y);
+                    Equals(Y, other.Y);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <returns>The <see cref="Point2D"/> whose coordinates are the Um of the coordinates of <c>source</c> and <c>other</c>.</returns>
         public static Point2D operator +(Point2D source, Point2D other)
         => new(source.X + other.X,
-                       source.Y + other.Y);
+            source.Y + other.Y);
 
         /// <summary>
         /// Ubtracts the coordinates of a <see cref="Point2D"/> from those of another <see cref="Point2D"/>,
@@ -120,7 +120,7 @@ namespace SokobanCLI.Graphics.Geometry
         /// <returns>The <see cref="Point2D"/> whose coordinates are the Um of the coordinates of <c>source</c> and <c>other</c>.</returns>
         public static Point2D operator -(Point2D source, Point2D other)
         => new(source.X - other.X,
-                       source.Y - other.Y);
+            source.Y - other.Y);
 
         /// <summary>
         /// Determines whether a specified instance of <see cref="Point2D"/> is equal to another specified <see cref="Point2D"/>.
