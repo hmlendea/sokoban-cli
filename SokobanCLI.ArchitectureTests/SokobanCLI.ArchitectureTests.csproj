@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>SokobanCLI.ArchitectureTests</RootNamespace>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <ExcludeFromCodeCoverage>true</ExcludeFromCodeCoverage>
+    <ArchitectureProductionSourceRoot>$(MSBuildProjectDirectory)/../SokobanCLI</ArchitectureProductionSourceRoot>
+    <ArchitectureSolutionPath>$(MSBuildProjectDirectory)/../SokobanCLI.slnx</ArchitectureSolutionPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+    <PackageReference Include="NUnit" Version="5.0.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="6.3.1" />
+    <PackageReference Include="TngTech.ArchUnitNET.NUnit" Version="0.13.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../SokobanCLI/SokobanCLI.csproj" />
+  </ItemGroup>
+
+  <Target Name="GenerateArchitecturePaths" BeforeTargets="CoreCompile">
+    <WriteLinesToFile
+      File="$(IntermediateOutputPath)ArchitecturePaths.g.cs"
+      Lines="namespace SokobanCLI.ArchitectureTests { internal static class ArchitecturePaths { internal const string ProductionSourceRoot = &quot;$(ArchitectureProductionSourceRoot.Replace('\', '/'))&quot;%3B internal const string SolutionPath = &quot;$(ArchitectureSolutionPath.Replace('\', '/'))&quot;%3B } }"
+      Overwrite="true"
+      Encoding="UTF-8" />
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)ArchitecturePaths.g.cs" />
+    </ItemGroup>
+  </Target>
+
+</Project>

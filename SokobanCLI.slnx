@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="SokobanCLI/SokobanCLI.csproj" />
+  <Project Path="SokobanCLI.ArchitectureTests/SokobanCLI.ArchitectureTests.csproj" />
   <Project Path="SokobanCLI.UnitTests/SokobanCLI.UnitTests.csproj" />
 </Solution>
