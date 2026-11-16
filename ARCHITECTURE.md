@@ -57,7 +57,7 @@ SokobanCLI is a single-process, interactive terminal application that plays the 
 
 The documented audience is a contributor who needs to locate the owner of a behaviour, follow a move from key press to rendered cell, and judge the impact of a change. The architectural interest lies in a small set of boundaries — a composition root, a game-logic manager, an in-memory world model, a diff-based console renderer, a polling input manager, and an XML-driven screen/UI layer — that are enforced by an automated architecture test project rather than by project separation.
 
-Out of scope: installation and usage guidance, which the [README](./README.md) owns, and the external release helper invoked by `release.sh`.
+Out of scope: installation and usage guidance, which the [README](./README.md) owns, and the external release helper invoked by the `.github/workflows/github-release.yml` workflow.
 
 ## 🌐 System Context
 
@@ -329,7 +329,7 @@ flowchart LR
 | Screen definitions | Inbound | `Screens/<TypeName>.xml` deserialised into a `Screen` subclass, including `Link` and `Action` menu entries | `ScreenManager` | A missing file causes the constructed screen defaults to be used; a malformed file raises during `XmlFileObject<T>.Read` |
 | Screen resolution | Internal integration | `Type.GetType("<namespace>.<screenName>")` plus `Activator.CreateInstance` | `ScreenManager` | An unknown screen name yields a null type and a null-pattern dereference; there is no validation or diagnostic |
 | `NuciDAL` XML reader | Inbound library | `XmlFileObject<Screen>` reads screen instances from the file system | `ScreenManager` | Deserialisation faults propagate to the caller; no fallback layout exists |
-| GitHub Actions workflows | Outbound, build-time only | `.github/workflows/dotnet.yml` and `security.yml` build, test, audit packages, and run CodeQL | Repository maintainers | Workflow failures block the pull request but have no runtime effect |
+| GitHub Actions workflows | Outbound, build-time only | `.github/workflows/dotnet.yml` and `security.yml` build, test, audit packages, and run CodeQL; `github-release.yml` builds and publishes release artefacts | Repository maintainers | Workflow failures block the pull request or the release but have no runtime effect |
 
 ## 🔀 Key Processes
 
@@ -541,8 +541,8 @@ SokobanCLI is deployed as a self-contained console application. There is no serv
 | Process topology | One foreground console process with a single unthrottled frame loop | No concurrency, no supervision, and no graceful shutdown path; interruption ends the session |
 | Deployment unit | `dotnet build` or `dotnet publish` output of the single production project, plus copied content directories | Launching the assembly from a different working directory breaks level and screen resolution unless the content directories travel with it |
 | Persistent state | None in the production assembly | Nothing to back up, migrate, or recover; completed-level progress and move counts are lost on exit |
-| Distribution | GitHub release artefacts produced by `release.sh`, which downloads and pipes an external helper script | Release mechanics are owned outside the repository; the helper's version is pinned only by the `10.0` segment in the URL |
-| Continuous integration | `dotnet.yml` restores, builds, and tests on pushes and pull requests to `master`; `security.yml` audits packages and runs CodeQL on a weekly schedule | Quality and security gates exist at repository level; there is no deployment pipeline and no published package |
+| Distribution | GitHub release artefacts produced by `github-release.yml`, which runs on a published release and pipes an external helper script | Release mechanics are owned outside the repository; the helper's version is selected from the production project's target framework |
+| Continuous integration | `dotnet.yml` restores, builds, and tests on pushes and pull requests to `master`; `security.yml` audits packages and runs CodeQL on a weekly schedule; `github-release.yml` builds and publishes release artefacts on a published release | Quality and security gates exist at repository level, and publication follows the release event; no package is published to a registry |
 | Runtime prerequisites | A .NET 10 runtime or SDK and an interactive terminal with keystroke support | No headless or redirected-input operation; `Console.KeyAvailable` and cursor positioning require a real console |
 | Recovery | None | A corrupt level or screen file is not repaired; the operator must restore the file and relaunch |
 
@@ -662,10 +662,10 @@ Compatibility requirements:
 | Architecture and convention tests | `SokobanCLI.ArchitectureTests` |
 | Solution definition | `SokobanCLI.slnx` |
 | Continuous integration and security scanning | `.github/workflows` |
-| Release entry point | `release.sh` |
+| Release entry point | `.github/workflows/github-release.yml` |
 
 ## 📚 Related Documentation
 
 - [README.md](./README.md) defines the project description, features, gameplay controls, requirements, usage, and development commands that this document intentionally does not repeat.
 - [LICENSE](./LICENSE) states the GNU General Public License v3.0 terms under which the project is distributed.
-- [`.github/workflows`](./.github/workflows) contains the continuous-integration and security-scanning definitions referenced by the deployment and verification sections.
+- [`.github/workflows`](./.github/workflows) contains the continuous-integration, security-scanning, and release definitions referenced by the deployment and verification sections.

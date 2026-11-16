@@ -76,13 +76,13 @@ dotnet test
 
 ### Release
 
-The repository includes `release.sh`, which delegates to the upstream deployment script used by the project maintainer.
+Releases are produced by the `GitHub Release` workflow, which runs when a release is published in the repository. Publish the release with its `v`-prefixed tag, for example `v1.0.0`; the tag supplies the version used for the artefacts.
 
 ```bash
-bash ./release.sh 1.0.0
+gh release create v1.0.0 --generate-notes
 ```
 
-This script downloads and executes an external release helper from `https://raw.githubusercontent.com/hmlendea/deployment-scripts/master/release/dotnet/10.0.sh`.
+The workflow determines the .NET version from `SokobanCLI/SokobanCLI.csproj`, downloads and executes an external release helper from `https://raw.githubusercontent.com/hmlendea/dotnet-release-scripts/refs/heads/master/dotnet/<version>.sh` to build the self-contained artefacts, and attaches them to the release.
 
 **Note:** Piping into `bash` is an intensely controversial topic. Please review any external scripts before running them in your environment!
 
@@ -98,6 +98,7 @@ For the detailed description of how the application handles privacy and personal
 |----------|---------|--------------|
 | [ .NET ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/dotnet.yml) | Continuous integration | Determines the .NET version from the production project, restores dependencies, builds the solution, and runs the test suite on pushes and pull requests to `master`. |
 | [ Security ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/security.yml) | Security scanning | Sets up the .NET SDK, restores dependencies, checks for vulnerable packages, and runs CodeQL analysis for C#, publishing results to the Security tab on pushes, pull requests, and a weekly schedule. |
+| [ GitHub Release ](https://github.com/hmlendea/sokoban-cli/blob/master/.github/workflows/github-release.yml) | Release publishing | Determines the .NET version from the production project, extracts the version from the release tag, builds the self-contained artefacts for every supported runtime identifier through the shared release helper, and attaches them to the published release. |
 
 ## 🗂️ Project Structure
 
